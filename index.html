@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMedixLink - Medical Technology Bridge for Tanzania</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====== CSS STYLES ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .section-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .data-table tr:hover {
+            background: var(--light);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #0da271;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section a {
+            color: var(--light-gray);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 0.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Loading & Messages */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid var(--danger);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--card-shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-bridge-medical"></i>
+                <h1>TechMedixLink</h1>
+            </div>
+            <p class="tagline">Bridging Medical Technology between Nations and Tanzania</p>
+            <p>Connecting Tanzanian healthcare with international medical innovation</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" onclick="showSection('devices')"><i class="fas fa-stethoscope"></i> Medical Devices</a></li>
+                <li><a href="#" onclick="showSection('providers')"><i class="fas fa-hospital"></i> Healthcare Providers</a></li>
+                <li><a href="#" onclick="showSection('request')"><i class="fas fa-file-medical"></i> Submit Request</a></li>
+                <li><a href="#" onclick="showSection('api-status')"><i class="fas fa-server"></i> API Status</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                <button class="btn" onclick="loadAllData()">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-stethoscope"></i>
+                    <h3 id="deviceCount">0</h3>
+                    <p>Medical Devices Available</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hospital"></i>
+                    <h3 id="providerCount">0</h3>
+                    <p>Healthcare Providers</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 id="certifiedCount">0</h3>
+                    <p>TMDA Certified Devices</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3 id="localSupportCount">0</h3>
+                    <p>Devices with Local Support</p>
+                </div>
+            </div>
+
+            <!-- Recent Devices -->
+            <div class="section-header">
+                <h3><i class="fas fa-list"></i> Recent Medical Devices</h3>
+                <a href="#" onclick="showSection('devices')" class="btn btn-secondary">View All</a>
+            </div>
+            <div id="recentDevices" class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading devices...</p>
+            </div>
+        </section>
+
+        <!-- Medical Devices Section -->
+        <section id="devices" class="section" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-stethoscope"></i> Medical Devices Catalog</h2>
+                <div>
+                    <select id="deviceFilter" class="form-control" style="width: auto; display: inline-block;" onchange="filterDevices()">
+                        <option value="all">All Devices</option>
+                        <option value="certified">TMDA Certified Only</option>
+                        <option value="local">Local Support Available</option>
+                        <option value="diagnostic">Diagnostic Equipment</option>
+                        <option value="therapeutic">Therapeutic Equipment</option>
+                    </select>
+                </div>
+            </div>
+            <div id="devicesList" class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading medical devices...</p>
+            </div>
+        </section>
+
+        <!-- Healthcare Providers Section -->
+        <section id="providers" class="section" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-hospital"></i> Healthcare Providers</h2>
+                <div>
+                    <select id="regionFilter" class="form-control" style="width: auto; display: inline-block;" onchange="filterProviders()">
+                        <option value="all">All Regions</option>
+                        <option value="Dar es Salaam">Dar es Salaam</option>
+                        <option value="Kilimanjaro">Kilimanjaro</option>
+                        <option value="Mbeya">Mbeya</option>
+                        <option value="Mwanza">Mwanza</option>
+                        <option value="Tanga">Tanga</option>
+                        <option value="Morogoro">Morogoro</option>
+                        <option value="Pwani">Pwani</option>
+                    </select>
+                </div>
+            </div>
+            <div id="providersList" class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading healthcare providers...</p>
+            </div>
+        </section>
+
+        <!-- Submit Request Section -->
+        <section id="request" class="section" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-file-medical"></i> Submit Service Request</h2>
+            </div>
+            
+            <div class="message" id="requestMessage"></div>
+            
+            <form id="requestForm" onsubmit="submitRequest(event)">
+                <div class="form-group">
+                    <label for="providerSelect"><i class="fas fa-hospital"></i> Healthcare Provider *</label>
+                    <select id="providerSelect" class="form-control" required>
+                        <option value="">Select a hospital/clinic</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="deviceSelect"><i class="fas fa-stethoscope"></i> Medical Device *</label>
+                    <select id="deviceSelect" class="form-control" required>
+                        <option value="">Select a medical device</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity"><i class="fas fa-boxes"></i> Quantity *</label>
+                    <input type="number" id="quantity" class="form-control" min="1" max="100" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes"><i class="fas fa-notes-medical"></i> Additional Notes</label>
+                    <textarea id="notes" class="form-control" rows="4" placeholder="Please provide any specific requirements or urgency..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn">
+                        <i class="fas fa-paper-plane"></i> Submit Request
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                        <i class="fas fa-redo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- API Status Section -->
+        <section id="api-status" class="section" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-server"></i> API Status</h2>
+                <button class="btn" onclick="checkAPIStatus()">
+                    <i class="fas fa-sync-alt"></i> Check Status
+                </button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-globe"></i>
+                    <h3 id="apiHealth">Checking...</h3>
+                    <p>API Health Status</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-database"></i>
+                    <h3 id="dbStatus">Checking...</h3>
+                    <p>Database Connection</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h3 id="uptime">0</h3>
+                    <p>Uptime (seconds)</p>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3><i class="fas fa-plug"></i> Available Endpoints</h3>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="endpointsList">
+                    <tr><td colspan="4" class="loading">Loading endpoints...</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TechMedixLink</h3>
+                <p>Bridging medical technology between developed nations and Tanzania's healthcare system.</p>
+                <p>Empowering Tanzanian healthcare with innovative medical solutions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#" onclick="showSection('devices')"><i class="fas fa-stethoscope"></i> Medical Devices</a>
+                <a href="#" onclick="showSection('providers')"><i class="fas fa-hospital"></i> Healthcare Providers</a>
+                <a href="#" onclick="showSection('request')"><i class="fas fa-file-medical"></i> Submit Request</a>
+            </div>
+            <div class="footer-section">
+                <h3>API Information</h3>
+                <p><i class="fas fa-server"></i> Backend: Railway</p>
+                <p><i class="fas fa-database"></i> Database: Supabase</p>
+                <p><i class="fas fa-code"></i> Status: <span id="footerStatus">Online</span></p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2024 TechMedixLink - Medical Technology Bridge for Tanzania. All data is simulated for demonstration.</p>
+            <p>This platform connects Tanzanian healthcare providers with international medical technology solutions.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ====== JAVASCRIPT ======
+        const API_BASE_URL = 'https://techmedixlink-api-production.up.railway.app';
+        let allDevices = [];
+        let allProviders = [];
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+            checkAPIStatus();
+        });
+
+        // Navigation functions
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('navLinks').classList.remove('active');
+            
+            // Load data for the section if needed
+            if (sectionId === 'devices' && allDevices.length === 0) {
+                loadDevices();
+            } else if (sectionId === 'providers' && allProviders.length === 0) {
+                loadProviders();
+            } else if (sectionId === 'request') {
+                loadFormData();
+            }
+        }
+
+        // Load all data for dashboard
+        async function loadAllData() {
+            await loadDevices();
+            await loadProviders();
+            updateDashboardStats();
+        }
+
+        // Load medical devices
+        async function loadDevices() {
+            const container = document.getElementById('devicesList');
+            container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i><p>Loading medical devices...</p></div>';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/devices`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    allDevices = data.devices;
+                    displayDevices(allDevices);
+                    updateDeviceSelect(data.devices);
+                    updateDashboardStats();
+                }
+            } catch (error) {
+                container.innerHTML = `<div class="message error"><i class="fas fa-exclamation-circle"></i> Error loading devices: ${error.message}</div>`;
+            }
+        }
+
+        // Display devices in table
+        function displayDevices(devices) {
+            const container = document.getElementById('devicesList');
+            
+            if (devices.length === 0) {
+                container.innerHTML = '<div class="message"><i class="fas fa-info-circle"></i> No devices found</div>';
+                return;
+            }
+            
+            let html = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Device Name</th>
+                            <th>Manufacturer</th>
+                            <th>Type</th>
+                            <th>Price (USD)</th>
+                            <th>TMDA Certified</th>
+                            <th>Local Support</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            devices.forEach(device => {
+                html += `
+                    <tr>
+                        <td><strong>${device.name}</strong></td>
+                        <td>${device.manufacturer}</td>
+                        <td>${device.device_type}</td>
+                        <td>$${device.price_usd.toLocaleString()}</td>
+                        <td><span class="badge ${device.tz_certified ? 'badge-success' : 'badge-warning'}">
+                            ${device.tz_certified ? '✅ Certified' : '⏳ Pending'}
+                        </span></td>
+                        <td><span class="badge ${device.local_support ? 'badge-success' : 'badge-danger'}">
+                            ${device.local_support ? '✅ Available' : '❌ Not Available'}
+                        </span></td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            container.innerHTML = html;
+            
+            // Update recent devices on dashboard
+            updateRecentDevices(devices.slice(0, 5));
+        }
+
+        // Filter devices
+        function filterDevices() {
+            const filter = document.getElementById('deviceFilter').value;
+            let filteredDevices = allDevices;
+            
+            switch(filter) {
+                case 'certified':
+                    filteredDevices = allDevices.filter(d => d.tz_certified);
+                    break;
+                case 'local':
+                    filteredDevices = allDevices.filter(d => d.local_support);
+                    break;
+                case 'diagnostic':
+                    filteredDevices = allDevices.filter(d => 
+                        d.device_type && d.device_type.toLowerCase().includes('diagnostic'));
+                    break;
+                case 'therapeutic':
+                    filteredDevices = allDevices.filter(d => 
+                        d.device_type && d.device_type.toLowerCase().includes('therapeutic'));
+                    break;
+            }
+            
+            displayDevices(filteredDevices);
+        }
+
+        // Load healthcare providers
+        async function loadProviders() {
+            const container = document.getElementById('providersList');
+            container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i><p>Loading healthcare providers...</p></div>';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/providers`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    allProviders = data.providers;
+                    displayProviders(allProviders);
+                    updateProviderSelect(data.providers);
+                }
+            } catch (error) {
+                container.innerHTML = `<div class="message error"><i class="fas fa-exclamation-circle"></i> Error loading providers: ${error.message}</div>`;
+            }
+        }
+
+        // Display providers
+        function displayProviders(providers) {
+            const container = document.getElementById('providersList');
+            
+            if (providers.length === 0) {
+                container.innerHTML = '<div class="message"><i class="fas fa-info-circle"></i> No providers found</div>';
+                return;
+            }
+            
+            let html = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Hospital/Clinic</th>
+                            <th>Location</th>
+                            <th>Region</th>
+                            <th>Facility Type</th>
+                            <th>Contact Person</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            providers.forEach(provider => {
+                html += `
+                    <tr>
+                        <td><strong>${provider.name}</strong></td>
+                        <td>${provider.location}</td>
+                        <td>${provider.region}</td>
+                        <td>${provider.facility_type}</td>
+                        <td>${provider.contact_person}</td>
+                        <td><a href="tel:${provider.phone}">${provider.phone}</a></td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // Filter providers by region
+        function filterProviders() {
+            const region = document.getElementById('regionFilter').value;
+            let filteredProviders = allProviders;
+            
+            if (region !== 'all') {
+                filteredProviders = allProviders.filter(p => p.region === region);
+            }
+            
+            displayProviders(filteredProviders);
+        }
+
+        // Update dashboard statistics
+        function updateDashboardStats() {
+            // Device count
+            document.getElementById('deviceCount').textContent = allDevices.length;
+            
+            // Provider count
+            document.getElementById('providerCount').textContent = allProviders.length;
+            
+            // Certified devices count
+            const certifiedCount = allDevices.filter(d => d.tz_certified).length;
+            document.getElementById('certifiedCount').textContent = certifiedCount;
+            
+            // Local support count
+            const localSupportCount = allDevices.filter(d => d.local_support).length;
+            document.getElementById('localSupportCount').textContent = localSupportCount;
+        }
+
+        // Update recent devices on dashboard
+        function updateRecentDevices(devices) {
+            const container = document.getElementById('recentDevices');
+            
+            if (devices.length === 0) {
+                container.innerHTML = '<div class="message"><i class="fas fa-info-circle"></i> No devices available</div>';
+                return;
+            }
+            
+            let html = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>Manufacturer</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            devices.forEach(device => {
+                html += `
+                    <tr>
+                        <td><strong>${device.name}</strong></td>
+                        <td>${device.manufacturer}</td>
+                        <td>$${device.price_usd.toLocaleString()}</td>
+                        <td><span class="badge ${device.tz_certified ? 'badge-success' : 'badge-warning'}">
+                            ${device.tz_certified ? 'Certified' : 'Pending'}
+                        </span></td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // Load form dropdowns
+        async function loadFormData() {
+            if (allDevices.length === 0) await loadDevices();
+            if (allProviders.length === 0) await loadProviders();
+            
+            updateDeviceSelect(allDevices);
+            updateProviderSelect(allProviders);
+        }
+
+        // Update device dropdown
+        function updateDeviceSelect(devices) {
+            const select = document.getElementById('deviceSelect');
+            select.innerHTML = '<option value="">Select a medical device</option>';
+            
+            devices.forEach(device => {
+                const option = document.createElement('option');
+                option.value = device.id;
+                option.textContent = `${device.name} - $${device.price_usd.toLocaleString()} (${device.manufacturer})`;
+                select.appendChild(option);
+            });
+        }
+
+        // Update provider dropdown
+        function updateProviderSelect(providers) {
+            const select = document.getElementById('providerSelect');
+            select.innerHTML = '<option value="">Select a hospital/clinic</option>';
+            
+            providers.forEach(provider => {
+                const option = document.createElement('option');
+                option.value = provider.id;
+                option.textContent = `${provider.name} - ${provider.location}, ${provider.region}`;
+                select.appendChild(option);
+            });
+        }
+
+        // Submit request form
+        async function submitRequest(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('requestForm');
+            const messageDiv = document.getElementById('requestMessage');
+            
+            const requestData = {
+                provider_id: document.getElementById('providerSelect').value,
+                device_id: document.getElementById('deviceSelect').value,
+                quantity: parseInt(document.getElementById('quantity').value),
+                notes: document.getElementById('notes').value
+            };
+            
+            // Show loading
+            messageDiv.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i><p>Submitting request...</p></div>';
+            messageDiv.className = 'message';
+            messageDiv.style.display = 'block';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/requests`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${data.message}`;
+                    messageDiv.className = 'message success';
+                    form.reset();
+                } else {
+                    messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${data.error || data.message}`;
+                    messageDiv.className = 'message error';
+                }
+            } catch (error) {
+                messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Network error: ${error.message}`;
+                messageDiv.className = 'message error';
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('requestForm').reset();
+            document.getElementById('requestMessage').style.display = 'none';
+        }
+
+        // Check API status
+        async function checkAPIStatus() {
+            const endpoints = [
+                { name: 'Health Check', url: '/api/health', method: 'GET' },
+                { name: 'Database Test', url: '/api/test-db', method: 'GET' },
+                { name: 'Medical Devices', url: '/api/devices', method: 'GET' },
+                { name: 'Healthcare Providers', url: '/api/providers', method: 'GET' },
+                { name: 'Submit Request', url: '/api/requests', method: 'POST' }
+            ];
+            
+            const tableBody = document.getElementById('endpointsList');
+            tableBody.innerHTML = '';
+            
+            // Check each endpoint
+            for (const endpoint of endpoints) {
+                const row = tableBody.insertRow();
+                
+                // Method cell
+                const methodCell = row.insertCell();
+                methodCell.innerHTML = `<span class="badge ${endpoint.method === 'GET' ? 'badge-success' : 'badge-warning'}">${endpoint.method}</span>`;
+                
+                // Endpoint cell
+                const endpointCell = row.insertCell();
+                endpointCell.textContent = endpoint.url;
+                
+                // Description cell
+                const descCell = row.insertCell();
+                descCell.textContent = endpoint.name;
+                
+                // Status cell
+                const statusCell = row.insertCell();
+                statusCell.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+                
+                try {
+                    if (endpoint.method === 'GET') {
+                        const response = await fetch(API_BASE_URL + endpoint.url);
+                        const data = await response.json();
+                        statusCell.innerHTML = `<span class="badge badge-success"><i class="fas fa-check"></i> Online</span>`;
+                        
+                        // Update health status
+                        if (endpoint.url === '/api/health') {
+                            document.getElementById('apiHealth').textContent = data.status;
+                            document.getElementById('uptime').textContent = Math.floor(data.uptime);
+                            document.getElementById('footerStatus').textContent = 'Online';
+                        }
+                        
+                        if (endpoint.url === '/api/test-db') {
+                            document.getElementById('dbStatus').textContent = data.message.includes('successful') ? 'Connected' : 'Error';
+                        }
+                    } else {
+                        // For POST endpoints, just mark as available
+                        statusCell.innerHTML = `<span class="badge badge-warning"><i class="fas fa-code"></i> Available</span>`;
+                    }
+                } catch (error) {
+                    statusCell.innerHTML = `<span class="badge badge-danger"><i class="fas fa-times"></i> Offline</span>`;
+                    
+                    if (endpoint.url === '/api/health') {
+                        document.getElementById('apiHealth').textContent = 'Offline';
+                        document.getElementById('footerStatus').textContent = 'Offline';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
