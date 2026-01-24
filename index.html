@@ -2036,253 +2036,1095 @@
     </div>
 
     <script>
-        // ====== MOBILE ENHANCEMENTS ======
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let isDragging = false;
-        let startY = 0;
-        let currentY = 0;
-        let pullStartY = 0;
-        let isPulling = false;
+    // ====== API CONFIGURATION ======
+    const API_BASE_URL = 'https://techmedixlink-api-production.up.railway.app';
+    let allDevices = [];
+    let allProviders = [];
+    let currentDeleteId = null;
+    let currentDeleteType = null;
 
-        // ====== API CONFIGURATION ======
-        const API_BASE_URL = 'https://techmedixlink-api-production.up.railway.app';
-        let allDevices = [];
-        let allProviders = [];
-        let currentDeleteId = null;
-        let currentDeleteType = null;
-        let isEditing = false;
-        let currentSection = 'hero';
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        updateNavBadges();
+        loadAllData();
+        showSection('hero');
+        checkApiStatus();
+        
+        // Set up auto-refresh every 5 minutes
+        setInterval(() => {
+            if (!document.hidden) {
+                loadAllData();
+            }
+        }, 300000);
+    });
 
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            initMobileEnhancements();
-            updateNavBadges();
-            loadAllData();
-            showSection('hero');
-            checkApiStatus();
-            setupServiceWorker();
-            
-            // Set up auto-refresh every 5 minutes
-            setInterval(() => {
-                if (!document.hidden && navigator.onLine) {
-                    loadAllData();
-                }
-            }, 300000);
+    // Mobile menu functions
+    function toggleMobileMenu() {
+        const overlay = document.getElementById('mobileOverlay');
+        overlay.classList.toggle('active');
+    }
+
+    // Navigation functions
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('section[id]').forEach(section => {
+            section.classList.add('hidden');
         });
-
-        // ====== MOBILE ENHANCEMENT FUNCTIONS ======
-        function initMobileEnhancements() {
-            // Touch gestures for navigation
-            document.addEventListener('touchstart', handleTouchStart, { passive: false });
-            document.addEventListener('touchmove', handleTouchMove, { passive: false });
-            document.addEventListener('touchend', handleTouchEnd);
+        
+        // Show selected section
+        document.getElementById(sectionId).classList.remove('hidden');
+        
+        // Update active nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        if (sectionId !== 'hero') {
+            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeLink) activeLink.classList.add('active');
             
-            // Pull to refresh
-            const mainContent = document.querySelector('.main-content');
-            mainContent.addEventListener('touchstart', handlePullStart, { passive: true });
-            mainContent.addEventListener('touchmove', handlePullMove, { passive: false });
-            mainContent.addEventListener('touchend', handlePullEnd);
-            
-            // Show swipe indicator on mobile
-            if (window.innerWidth <= 768) {
-                setTimeout(() => {
-                    document.getElementById('swipeIndicator').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('swipeIndicator').style.display = 'none';
-                    }, 3000);
-                }, 1000);
-            }
-            
-            // Back to top button
-            window.addEventListener('scroll', handleScroll);
-            
-            // Offline detection
-            window.addEventListener('online', handleOnline);
-            window.addEventListener('offline', handleOffline);
+            const mobileLink = document.querySelector(`.mobile-nav-link[onclick*="${sectionId}"]`);
+            if (mobileLink) mobileLink.classList.add('active');
         }
-
-        function handleTouchStart(event) {
-            touchStartX = event.touches[0].clientX;
-            startY = event.touches[0].clientY;
+        
+        // Load data for the section if needed
+        if (sectionId === 'devices') {
+            loadDevices();
+        } else if (sectionId === 'providers') {
+            loadProviders();
+        } else if (sectionId === 'request') {
+            loadFormData();
+        } else if (sectionId === 'analytics') {
+            loadAnalytics();
         }
+    }
 
-        function handleTouchMove(event) {
-            if (!touchStartX) return;
-            
-            touchEndX = event.touches[0].clientX;
-            const diffX = touchStartX - touchEndX;
-            
-            // Prevent vertical scroll when horizontal swipe is detected
-            if (Math.abs(diffX) > Math.abs(event.touches[0].clientY - startY)) {
-                event.preventDefault();
-            }
+    // Update navigation badges
+    function updateNavBadges() {
+        document.getElementById('deviceBadge').textContent = allDevices.length || '0';
+        document.getElementById('providerBadge').textContent = allProviders.length || '0';
+        document.getElementById('mobileDeviceBadge').textContent = allDevices.length || '0';
+        document.getElementById('mobileProviderBadge').textContent = allProviders.length || '0';
+    }
+
+    // Load all data
+    async function loadAllData() {
+        try {
+            await Promise.all([loadDevices(), loadProviders()]);
+            updateDashboardStats();
+            updateNavBadges();
+            showSuccess('Data refreshed successfully');
+        } catch (error) {
+            console.error('Error loading data:', error);
+            showError('Failed to refresh data. Please check API connection.');
         }
+    }
 
-        function handleTouchEnd() {
-            if (!touchStartX || !touchEndX) return;
-            
-            const diffX = touchStartX - touchEndX;
-            const minSwipeDistance = 50;
-            
-            if (Math.abs(diffX) > minSwipeDistance) {
-                const sections = ['hero', 'dashboard', 'devices', 'providers', 'request', 'analytics'];
-                const currentIndex = sections.indexOf(currentSection);
-                
-                if (diffX > 0 && currentIndex < sections.length - 1) {
-                    // Swipe left - go to next section
-                    showSection(sections[currentIndex + 1]);
-                } else if (diffX < 0 && currentIndex > 0) {
-                    // Swipe right - go to previous section
-                    showSection(sections[currentIndex - 1]);
-                }
-                
-                // Haptic feedback for mobile
-                if (navigator.vibrate) {
-                    navigator.vibrate(50);
-                }
-            }
-            
-            touchStartX = 0;
-            touchEndX = 0;
-        }
-
-        function handlePullStart(event) {
-            pullStartY = event.touches[0].clientY;
-            isPulling = true;
-        }
-
-        function handlePullMove(event) {
-            if (!isPulling || !pullStartY) return;
-            
-            currentY = event.touches[0].clientY;
-            const pullDistance = currentY - pullStartY;
-            
-            if (pullDistance > 0 && window.scrollY === 0) {
-                event.preventDefault();
-                const pullIndicator = document.getElementById('pullToRefresh');
-                pullIndicator.style.opacity = Math.min(pullDistance / 100, 1);
-            }
-        }
-
-        function handlePullEnd() {
-            if (!isPulling) return;
-            
-            const pullIndicator = document.getElementById('pullToRefresh');
-            const pullDistance = currentY - pullStartY;
-            
-            if (pullDistance > 100 && window.scrollY === 0) {
-                pullIndicator.classList.add('active');
-                loadAllData().finally(() => {
-                    setTimeout(() => {
-                        pullIndicator.classList.remove('active');
-                        pullIndicator.style.opacity = '0';
-                    }, 1000);
-                });
+    // Check API status
+    async function checkApiStatus() {
+        const statusElement = document.getElementById('footerStatus');
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/health`);
+            if (response.ok) {
+                const data = await response.json();
+                statusElement.textContent = 'Online';
+                statusElement.style.color = 'var(--success-green)';
             } else {
-                pullIndicator.style.opacity = '0';
+                throw new Error('API not responding');
             }
-            
-            isPulling = false;
-            pullStartY = 0;
-            currentY = 0;
+        } catch (error) {
+            console.error('API status check failed:', error);
+            statusElement.textContent = 'Offline';
+            statusElement.style.color = 'var(--error-red)';
         }
+    }
 
-        function handleScroll() {
-            const backToTop = document.getElementById('backToTop');
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-
-        function handleOnline() {
-            document.getElementById('offlineNotice').classList.remove('active');
-            showSuccess('You are back online');
-        }
-
-        function handleOffline() {
-            document.getElementById('offlineNotice').classList.add('active');
-        }
-
-        async function setupServiceWorker() {
-            if ('serviceWorker' in navigator) {
-                try {
-                    await navigator.serviceWorker.register('/sw.js');
-                    console.log('Service Worker registered');
-                } catch (error) {
-                    console.log('Service Worker registration failed:', error);
-                }
-            }
-        }
-
-        // ====== CORE FUNCTIONS ======
-        function toggleMobileMenu() {
-            const overlay = document.getElementById('mobileOverlay');
-            overlay.classList.toggle('active');
+    // ====== DEVICE API FUNCTIONS ======
+    async function loadDevices() {
+        const container = document.getElementById('devicesList');
+        const recentContainer = document.getElementById('recentDevices');
+        
+        // Show loading state
+        if (container) container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading medical devices...</p></div>';
+        if (recentContainer) recentContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading recent devices...</p></div>';
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/devices`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+            const data = await response.json();
             
-            // Haptic feedback for mobile
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-        }
-
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('section[id]').forEach(section => {
-                section.classList.add('hidden');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.remove('hidden');
-            currentSection = sectionId;
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            if (sectionId !== 'hero') {
-                const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
-                if (activeLink) activeLink.classList.add('active');
+            if (data.success) {
+                allDevices = data.devices || [];
+                displayDevices(allDevices);
+                updateDeviceSelect(allDevices);
+                updateDashboardStats();
                 
-                const mobileLink = document.querySelector(`.mobile-nav-link[onclick*="${sectionId}"]`);
-                if (mobileLink) mobileLink.classList.add('active');
+                // Update recent devices
+                updateRecentDevices(allDevices.slice(0, 3));
+            } else {
+                throw new Error(data.error || 'Failed to fetch devices');
             }
+        } catch (error) {
+            console.error('Error loading devices:', error);
+            const errorHtml = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading devices: ' + error.message + '</div>';
+            if (container) container.innerHTML = errorHtml;
+            if (recentContainer) recentContainer.innerHTML = errorHtml;
+        }
+    }
+
+    async function saveDevice(event) {
+        event.preventDefault();
+        
+        const deviceData = {
+            name: document.getElementById('deviceName').value,
+            manufacturer: document.getElementById('deviceManufacturer').value,
+            device_type: document.getElementById('deviceType').value,
+            price_usd: parseFloat(document.getElementById('devicePrice').value),
+            description: document.getElementById('deviceDescription').value,
+            tz_certified: document.getElementById('deviceCertified').checked,
+            local_support: document.getElementById('deviceLocalSupport').checked
+        };
+
+        const deviceId = document.getElementById('deviceId').value;
+        const isEdit = deviceId && deviceId !== '';
+
+        try {
+            const url = isEdit ? 
+                `${API_BASE_URL}/api/devices/${deviceId}` : 
+                `${API_BASE_URL}/api/devices`;
             
-            // Load data for the section if needed
-            if (sectionId === 'devices') {
+            const method = isEdit ? 'PUT' : 'POST';
+            
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(deviceData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to save device');
+            }
+
+            const result = await response.json();
+            
+            if (result.success) {
+                closeModal('device');
+                showSuccess(isEdit ? 'Device updated successfully' : 'Device added successfully');
                 loadDevices();
-            } else if (sectionId === 'providers') {
-                loadProviders();
-            } else if (sectionId === 'request') {
-                loadFormData();
-            } else if (sectionId === 'analytics') {
-                loadAnalytics();
+            } else {
+                throw new Error(result.error || 'Failed to save device');
             }
-            
-            // Close mobile menu if open
-            const overlay = document.getElementById('mobileOverlay');
-            if (overlay.classList.contains('active')) {
-                toggleMobileMenu();
-            }
+        } catch (error) {
+            console.error('Error saving device:', error);
+            showError('Error saving device: ' + error.message);
         }
+    }
 
-        // Rest of the JavaScript functions remain the same as before...
-        // [All existing JavaScript functions from the original code go here]
-        // Due to character limits, I'm showing the structure. The complete enhanced mobile-responsive code
-        // would include all the original JavaScript functions with mobile optimizations.
+    async function deleteDevice(deviceId) {
+        if (!confirm('Are you sure you want to delete this device?')) return;
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/devices/${deviceId}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to delete device');
+            }
+
+            const result = await response.json();
+            
+            if (result.success) {
+                showSuccess('Device deleted successfully');
+                loadDevices();
+            } else {
+                throw new Error(result.error || 'Failed to delete device');
+            }
+        } catch (error) {
+            console.error('Error deleting device:', error);
+            showError('Error deleting device: ' + error.message);
+        }
+    }
+
+    function editDevice(deviceId) {
+        const device = allDevices.find(d => d.id === deviceId);
+        if (!device) return;
+
+        document.getElementById('deviceModalTitle').textContent = 'Edit Medical Device';
+        document.getElementById('deviceId').value = device.id;
+        document.getElementById('deviceName').value = device.name;
+        document.getElementById('deviceManufacturer').value = device.manufacturer;
+        document.getElementById('deviceType').value = device.device_type;
+        document.getElementById('devicePrice').value = device.price_usd;
+        document.getElementById('deviceDescription').value = device.description || '';
+        document.getElementById('deviceCertified').checked = device.tz_certified || false;
+        document.getElementById('deviceLocalSupport').checked = device.local_support || false;
+
+        showModal('device');
+    }
+
+    // Display devices
+    function displayDevices(devices) {
+        const container = document.getElementById('devicesList');
+        
+        if (!devices || devices.length === 0) {
+            container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No medical devices found. Add your first device!</div>';
+            return;
+        }
+        
+        // Create mobile-friendly table
+        if (window.innerWidth <= 768) {
+            displayDevicesMobile(devices);
+        } else {
+            displayDevicesDesktop(devices);
+        }
+    }
+
+    function displayDevicesDesktop(devices) {
+        const container = document.getElementById('devicesList');
+        
+        let html = `
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>Manufacturer</th>
+                            <th>Type</th>
+                            <th>Price (USD)</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        devices.forEach(device => {
+            html += `
+                <tr>
+                    <td>
+                        <div style="font-weight: 600;">${escapeHtml(device.name)}</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">${device.description ? escapeHtml(device.description.substring(0, 50)) + '...' : 'No description'}</div>
+                    </td>
+                    <td>${escapeHtml(device.manufacturer)}</td>
+                    <td><span class="badge badge-info">${escapeHtml(device.device_type)}</span></td>
+                    <td><strong>$${device.price_usd?.toLocaleString() || '0'}</strong></td>
+                    <td>
+                        ${device.tz_certified ? 
+                            '<span class="badge badge-success"><i class="fas fa-check"></i> Certified</span>' : 
+                            '<span class="badge badge-warning"><i class="fas fa-clock"></i> Pending</span>'}
+                        ${device.local_support ? 
+                            '<span class="badge badge-success mt-1" style="display: block;"><i class="fas fa-check"></i> Local Support</span>' : 
+                            '<span class="badge badge-warning mt-1" style="display: block;"><i class="fas fa-times"></i> No Support</span>'}
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn edit-btn" onclick="editDevice('${device.id}')" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteDevice('${device.id}')" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="action-btn" onclick="requestDevice('${device.id}')" title="Request">
+                                <i class="fas fa-file-medical"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    }
+
+    function displayDevicesMobile(devices) {
+        const container = document.getElementById('devicesList');
+        
+        let html = '<div class="mobile-cards">';
+        
+        devices.forEach(device => {
+            html += `
+                <div class="mobile-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: 1rem; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-3);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 1rem;">${escapeHtml(device.name)}</div>
+                            <div class="text-muted" style="font-size: 0.75rem;">${escapeHtml(device.manufacturer)}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 700; color: var(--primary-blue);">$${device.price_usd?.toLocaleString() || '0'}</div>
+                            <span class="badge badge-info">${escapeHtml(device.device_type)}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.75rem; font-size: 0.875rem; color: var(--gray-1);">
+                        ${device.description ? escapeHtml(device.description.substring(0, 100)) + '...' : 'No description'}
+                    </div>
+                    
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        ${device.tz_certified ? 
+                            '<span class="badge badge-success"><i class="fas fa-check"></i> Certified</span>' : 
+                            '<span class="badge badge-warning"><i class="fas fa-clock"></i> Pending</span>'}
+                        ${device.local_support ? 
+                            '<span class="badge badge-success"><i class="fas fa-check"></i> Local Support</span>' : 
+                            '<span class="badge badge-warning"><i class="fas fa-times"></i> No Support</span>'}
+                    </div>
+                    
+                    <div class="action-buttons" style="justify-content: space-between;">
+                        <button class="btn btn-secondary btn-sm" onclick="editDevice('${device.id}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteDevice('${device.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                        <button class="btn btn-primary btn-sm" onclick="requestDevice('${device.id}')">
+                            <i class="fas fa-file-medical"></i> Request
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
+    // ====== PROVIDER API FUNCTIONS ======
+    async function loadProviders() {
+        const container = document.getElementById('providersList');
+        container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading healthcare providers...</p></div>';
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/providers`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                allProviders = data.providers || [];
+                displayProviders(allProviders);
+                updateProviderSelect(allProviders);
+                updateRegionFilters(allProviders);
+                updateFacilityFilters(allProviders);
+                updateDashboardStats();
+            } else {
+                throw new Error(data.error || 'Failed to fetch providers');
+            }
+        } catch (error) {
+            console.error('Error loading providers:', error);
+            container.innerHTML = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading providers: ' + error.message + '</div>';
+        }
+    }
+
+    async function saveProvider(event) {
+        event.preventDefault();
+        
+        const providerData = {
+            name: document.getElementById('providerName').value,
+            facility_type: document.getElementById('providerType').value,
+            region: document.getElementById('providerRegion').value,
+            location: document.getElementById('providerLocation').value,
+            contact_person: document.getElementById('providerContact').value,
+            phone: document.getElementById('providerPhone').value
+        };
+
+        const providerId = document.getElementById('providerId').value;
+        const isEdit = providerId && providerId !== '';
+
+        try {
+            const url = isEdit ? 
+                `${API_BASE_URL}/api/providers/${providerId}` : 
+                `${API_BASE_URL}/api/providers`;
+            
+            const method = isEdit ? 'PUT' : 'POST';
+            
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(providerData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to save provider');
+            }
+
+            const result = await response.json();
+            
+            if (result.success) {
+                closeModal('provider');
+                showSuccess(isEdit ? 'Provider updated successfully' : 'Provider added successfully');
+                loadProviders();
+            } else {
+                throw new Error(result.error || 'Failed to save provider');
+            }
+        } catch (error) {
+            console.error('Error saving provider:', error);
+            showError('Error saving provider: ' + error.message);
+        }
+    }
+
+    async function deleteProvider(providerId) {
+        if (!confirm('Are you sure you want to delete this provider?')) return;
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/providers/${providerId}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to delete provider');
+            }
+
+            const result = await response.json();
+            
+            if (result.success) {
+                showSuccess('Provider deleted successfully');
+                loadProviders();
+            } else {
+                throw new Error(result.error || 'Failed to delete provider');
+            }
+        } catch (error) {
+            console.error('Error deleting provider:', error);
+            showError('Error deleting provider: ' + error.message);
+        }
+    }
+
+    function editProvider(providerId) {
+        const provider = allProviders.find(p => p.id === providerId);
+        if (!provider) return;
+
+        document.getElementById('providerModalTitle').textContent = 'Edit Healthcare Provider';
+        document.getElementById('providerId').value = provider.id;
+        document.getElementById('providerName').value = provider.name;
+        document.getElementById('providerType').value = provider.facility_type;
+        document.getElementById('providerRegion').value = provider.region;
+        document.getElementById('providerLocation').value = provider.location;
+        document.getElementById('providerContact').value = provider.contact_person || '';
+        document.getElementById('providerPhone').value = provider.phone || '';
+
+        showModal('provider');
+    }
+
+    // Display providers
+    function displayProviders(providers) {
+        const container = document.getElementById('providersList');
+        
+        if (!providers || providers.length === 0) {
+            container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No healthcare providers found. Add your first provider!</div>';
+            return;
+        }
+        
+        // Create mobile-friendly table
+        if (window.innerWidth <= 768) {
+            displayProvidersMobile(providers);
+        } else {
+            displayProvidersDesktop(providers);
+        }
+    }
+
+    function displayProvidersDesktop(providers) {
+        const container = document.getElementById('providersList');
+        
+        let html = `
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Healthcare Facility</th>
+                            <th>Location</th>
+                            <th>Region</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        providers.forEach(provider => {
+            html += `
+                <tr>
+                    <td>
+                        <div style="font-weight: 600;">${escapeHtml(provider.name)}</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">${provider.contact_person || 'No contact person'}</div>
+                    </td>
+                    <td>${escapeHtml(provider.location)}</td>
+                    <td><span class="badge badge-info">${escapeHtml(provider.region)}</span></td>
+                    <td>${escapeHtml(provider.facility_type)}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn edit-btn" onclick="editProvider('${provider.id}')" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteProvider('${provider.id}')" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="action-btn" onclick="contactProvider('${provider.phone}')" title="Contact">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+        
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    }
+
+    function displayProvidersMobile(providers) {
+        const container = document.getElementById('providersList');
+        
+        let html = '<div class="mobile-cards">';
+        
+        providers.forEach(provider => {
+            html += `
+                <div class="mobile-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: 1rem; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-3);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 1rem;">${escapeHtml(provider.name)}</div>
+                            <div class="text-muted" style="font-size: 0.75rem;">${escapeHtml(provider.contact_person) || 'No contact person'}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="badge badge-info">${escapeHtml(provider.facility_type)}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="font-size: 0.875rem; color: var(--dark-2); margin-bottom: 0.25rem;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary-blue); margin-right: 0.5rem;"></i>
+                            ${escapeHtml(provider.location)}
+                        </div>
+                        <div style="font-size: 0.875rem; color: var(--dark-2);">
+                            <i class="fas fa-globe-africa" style="color: var(--accent-teal); margin-right: 0.5rem;"></i>
+                            <span class="badge badge-info">${escapeHtml(provider.region)}</span>
+                        </div>
+                    </div>
+                    
+                    ${provider.phone ? `
+                    <div style="margin-bottom: 1rem; font-size: 0.875rem; color: var(--gray-1);">
+                        <i class="fas fa-phone" style="margin-right: 0.5rem;"></i>
+                        ${escapeHtml(provider.phone)}
+                    </div>
+                    ` : ''}
+                    
+                    <div class="action-buttons" style="justify-content: space-between;">
+                        <button class="btn btn-secondary btn-sm" onclick="editProvider('${provider.id}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProvider('${provider.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                        ${provider.phone ? `
+                        <button class="btn btn-primary btn-sm" onclick="contactProvider('${provider.phone}')">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
+    // ====== REQUEST API FUNCTIONS ======
+    async function submitRequest(event) {
+        event.preventDefault();
+        
+        const form = document.getElementById('requestForm');
+        const messageDiv = document.getElementById('requestMessage');
+        
+        const requestData = {
+            provider_id: document.getElementById('providerSelect').value,
+            device_id: document.getElementById('deviceSelect').value,
+            quantity: parseInt(document.getElementById('quantity').value) || 1,
+            notes: `Urgency: ${document.getElementById('urgency').value}\n${document.getElementById('notes').value}`
+        };
+        
+        // Show loading
+        messageDiv.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Submitting your request...</p></div>';
+        messageDiv.classList.remove('hidden', 'message-success', 'message-error');
+        messageDiv.classList.add('message-info');
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/requests`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to submit request');
+            }
+
+            const data = await response.json();
+            
+            if (data.success) {
+                messageDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${data.message || 'Request submitted successfully!'}`;
+                messageDiv.classList.remove('message-info');
+                messageDiv.classList.add('message-success');
+                form.reset();
+                document.getElementById('deviceDetails').innerHTML = '';
+                
+                showSuccess('Request submitted successfully! Our team will contact you shortly.');
+                
+                // Update request count
+                updateRequestCount();
+            } else {
+                messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${data.error || data.message || 'Failed to submit request'}`;
+                messageDiv.classList.remove('message-info');
+                messageDiv.classList.add('message-error');
+            }
+        } catch (error) {
+            console.error('Error submitting request:', error);
+            messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${error.message}`;
+            messageDiv.classList.remove('message-info');
+            messageDiv.classList.add('message-error');
+        }
+    }
+
+    async function updateRequestCount() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/stats`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.stats) {
+                    document.getElementById('heroRequests').textContent = data.stats.total_requests || 0;
+                }
+            }
+        } catch (error) {
+            console.error('Error updating request count:', error);
+        }
+    }
+
+    // ====== HELPER FUNCTIONS ======
+    function updateDashboardStats() {
+        // Update hero stats
+        document.getElementById('heroDevices').textContent = allDevices.length;
+        document.getElementById('heroProviders').textContent = allProviders.length;
+        
+        const certifiedCount = allDevices.filter(d => d.tz_certified).length;
+        document.getElementById('heroCertified').textContent = certifiedCount;
+        
+        // Update dashboard stats
+        document.getElementById('statDevices').textContent = allDevices.length;
+        document.getElementById('statProviders').textContent = allProviders.length;
+        document.getElementById('statCertified').textContent = certifiedCount;
+        
+        const localSupportCount = allDevices.filter(d => d.local_support).length;
+        document.getElementById('statLocalSupport').textContent = localSupportCount;
+        
+        // Update trends
+        document.getElementById('deviceTrend').textContent = `${allDevices.length} total`;
+        document.getElementById('providerTrend').textContent = `${allProviders.length} total`;
+        document.getElementById('certifiedTrend').textContent = certifiedCount > 0 ? `${Math.round((certifiedCount / allDevices.length) * 100)}% certified` : 'None certified';
+        document.getElementById('supportTrend').textContent = localSupportCount > 0 ? `${Math.round((localSupportCount / allDevices.length) * 100)}% with support` : 'No support';
+        
+        // Update analytics
+        document.getElementById('analyticsDevices').textContent = allDevices.length;
+        document.getElementById('analyticsProviders').textContent = allProviders.length;
+        document.getElementById('analyticsCertified').textContent = allDevices.length > 0 ? `${Math.round((certifiedCount / allDevices.length) * 100)}%` : '0%';
+        
+        const uniqueRegions = new Set(allProviders.map(p => p.region));
+        document.getElementById('analyticsRegions').textContent = uniqueRegions.size;
+    }
+
+    function updateRecentDevices(devices) {
+        const container = document.getElementById('recentDevices');
+        
+        if (!devices || devices.length === 0) {
+            container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No recent devices available</div>';
+            return;
+        }
+        
+        if (window.innerWidth <= 768) {
+            let html = '<div class="mobile-cards">';
+            
+            devices.forEach(device => {
+                html += `
+                    <div class="mobile-card" style="background: var(--white); border-radius: var(--radius-md); padding: 0.75rem; margin-bottom: 0.75rem; border: 1px solid var(--gray-3);">
+                        <div style="font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem;">${escapeHtml(device.name)}</div>
+                        <div style="font-size: 0.75rem; color: var(--gray-1); margin-bottom: 0.25rem;">${escapeHtml(device.manufacturer)}</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="font-weight: 600; color: var(--primary-blue);">$${device.price_usd?.toLocaleString() || '0'}</div>
+                            ${device.tz_certified ? 
+                                '<span class="badge badge-success" style="font-size: 0.625rem;">Certified</span>' : 
+                                '<span class="badge badge-warning" style="font-size: 0.625rem;">Pending</span>'}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        } else {
+            let html = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>Manufacturer</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            devices.forEach(device => {
+                html += `
+                    <tr>
+                        <td><strong>${escapeHtml(device.name)}</strong></td>
+                        <td>${escapeHtml(device.manufacturer)}</td>
+                        <td>$${device.price_usd?.toLocaleString() || '0'}</td>
+                        <td>${device.tz_certified ? 
+                            '<span class="badge badge-success">Certified</span>' : 
+                            '<span class="badge badge-warning">Pending</span>'}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+    }
+
+    function updateDeviceSelect(devices) {
+        const select = document.getElementById('deviceSelect');
+        if (!select) return;
+        
+        select.innerHTML = '<option value="">Select medical device or technology</option>';
+        
+        devices.forEach(device => {
+            const option = document.createElement('option');
+            option.value = device.id;
+            option.textContent = `${device.name} - $${device.price_usd?.toLocaleString() || '0'} (${device.manufacturer})`;
+            option.dataset.device = JSON.stringify(device);
+            select.appendChild(option);
+        });
+        
+        // Add change listener for device details
+        select.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const detailsDiv = document.getElementById('deviceDetails');
+            if (!detailsDiv) return;
+            
+            if (selectedOption.value) {
+                try {
+                    const device = JSON.parse(selectedOption.dataset.device);
+                    detailsDiv.innerHTML = `
+                        <div style="background: var(--light-1); padding: 0.75rem; border-radius: var(--radius-md); margin-top: 0.5rem;">
+                            <div><strong>Type:</strong> ${escapeHtml(device.device_type)}</div>
+                            <div><strong>TMDA Certified:</strong> ${device.tz_certified ? '✅ Yes' : '⏳ Pending'}</div>
+                            <div><strong>Local Support:</strong> ${device.local_support ? '✅ Available' : '❌ Not Available'}</div>
+                        </div>
+                    `;
+                } catch (error) {
+                    detailsDiv.innerHTML = '';
+                }
+            } else {
+                detailsDiv.innerHTML = '';
+            }
+        });
+    }
+
+    function updateProviderSelect(providers) {
+        const select = document.getElementById('providerSelect');
+        if (!select) return;
+        
+        select.innerHTML = '<option value="">Select your hospital or clinic</option>';
+        
+        providers.forEach(provider => {
+            const option = document.createElement('option');
+            option.value = provider.id;
+            option.textContent = `${provider.name} - ${provider.location}, ${provider.region}`;
+            select.appendChild(option);
+        });
+    }
+
+    function updateRegionFilters(providers) {
+        const select = document.getElementById('regionFilter');
+        if (!select) return;
+        
+        // Clear existing options except first
+        select.innerHTML = '<option value="all">All Regions</option>';
+        
+        const uniqueRegions = [...new Set(providers.map(p => p.region).filter(Boolean))].sort();
+        
+        uniqueRegions.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region;
+            option.textContent = region;
+            select.appendChild(option);
+        });
+    }
+
+    function updateFacilityFilters(providers) {
+        const select = document.getElementById('facilityFilter');
+        if (!select) return;
+        
+        // Clear existing options except first
+        select.innerHTML = '<option value="all">All Types</option>';
+        
+        const uniqueTypes = [...new Set(providers.map(p => p.facility_type).filter(Boolean))].sort();
+        
+        uniqueTypes.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type;
+            select.appendChild(option);
+        });
+    }
+
+    function loadFormData() {
+        if (allDevices.length === 0) loadDevices();
+        if (allProviders.length === 0) loadProviders();
+    }
+
+    // Filter and sort functions
+    function filterDevices() {
+        const filter = document.getElementById('deviceFilter').value;
+        let filteredDevices = allDevices;
+        
+        switch(filter) {
+            case 'certified':
+                filteredDevices = allDevices.filter(d => d.tz_certified);
+                break;
+            case 'local':
+                filteredDevices = allDevices.filter(d => d.local_support);
+                break;
+        }
+        
+        displayDevices(filteredDevices);
+    }
+
+    function sortDevices() {
+        const sortBy = document.getElementById('deviceSort').value;
+        let sortedDevices = [...allDevices];
+        
+        switch(sortBy) {
+            case 'name':
+                sortedDevices.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'price-low':
+                sortedDevices.sort((a, b) => (a.price_usd || 0) - (b.price_usd || 0));
+                break;
+            case 'price-high':
+                sortedDevices.sort((a, b) => (b.price_usd || 0) - (a.price_usd || 0));
+                break;
+            case 'certified':
+                sortedDevices.sort((a, b) => (b.tz_certified - a.tz_certified) || a.name.localeCompare(b.name));
+                break;
+        }
+        
+        displayDevices(sortedDevices);
+    }
+
+    function resetFilters() {
+        document.getElementById('deviceFilter').value = 'all';
+        document.getElementById('deviceSort').value = 'name';
+        displayDevices(allDevices);
+    }
+
+    function filterProviders() {
+        const region = document.getElementById('regionFilter').value;
+        const facilityType = document.getElementById('facilityFilter').value;
+        let filteredProviders = allProviders;
+        
+        if (region !== 'all') {
+            filteredProviders = filteredProviders.filter(p => p.region === region);
+        }
+        
+        if (facilityType !== 'all') {
+            filteredProviders = filteredProviders.filter(p => p.facility_type === facilityType);
+        }
+        
+        displayProviders(filteredProviders);
+    }
+
+    function resetProviderFilters() {
+        document.getElementById('regionFilter').value = 'all';
+        document.getElementById('facilityFilter').value = 'all';
+        displayProviders(allProviders);
+    }
+
+    // Request specific device
+    function requestDevice(deviceId) {
+        showSection('request');
+        setTimeout(() => {
+            const select = document.getElementById('deviceSelect');
+            if (select) {
+                select.value = deviceId;
+                select.dispatchEvent(new Event('change'));
+            }
+        }, 100);
+    }
+
+    function contactProvider(phone) {
+        if (phone) {
+            window.location.href = `tel:${phone}`;
+        } else {
+            showError('No phone number available for this provider');
+        }
+    }
+
+    function resetForm() {
+        const form = document.getElementById('requestForm');
+        const messageDiv = document.getElementById('requestMessage');
+        const detailsDiv = document.getElementById('deviceDetails');
+        
+        if (form) form.reset();
+        if (messageDiv) messageDiv.classList.add('hidden');
+        if (detailsDiv) detailsDiv.innerHTML = '';
+    }
+
+    // Analytics functions
+    async function loadAnalytics() {
+        updateDashboardStats();
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/analytics/regions`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success) {
+                    updateRegionChart(data.regions || []);
+                }
+            }
+        } catch (error) {
+            console.error('Error loading analytics:', error);
+        }
+    }
+
+    function updateRegionChart(regions) {
+        const chartContainer = document.getElementById('regionChart');
+        if (!chartContainer) return;
+        
+        if (regions && regions.length > 0) {
+            let chartHTML = '<div style="padding: 1rem; width: 100%;">';
+            regions.forEach(regionData => {
+                const percentage = regionData.percentage || 0;
+                chartHTML += `
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem; font-size: 0.875rem;">
+                            <span>${escapeHtml(regionData.region)}</span>
+                            <span>${regionData.provider_count} (${percentage.toFixed(1)}%)</span>
+                        </div>
+                        <div style="height: 8px; background: var(--gray-3); border-radius: var(--radius-full); overflow: hidden;">
+                            <div style="height: 100%; width: ${percentage}%; background: linear-gradient(90deg, var(--primary-blue), var(--accent-teal));"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            chartHTML += '</div>';
+            chartContainer.innerHTML = chartHTML;
+        } else {
+            chartContainer.innerHTML = '<p class="text-muted">No regional data available</p>';
+        }
+    }
+
+    function refreshAnalytics() {
+        loadAnalytics();
+        showSuccess('Analytics refreshed');
+    }
+
+    // Modal functions
+    function showModal(type) {
+        const modal = document.getElementById(`${type}Modal`);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeModal(type) {
+        const modal = document.getElementById(`${type}Modal`);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Export providers
+    function exportProviders() {
+        const dataStr = JSON.stringify(allProviders, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        
+        const exportFileDefaultName = `techmedixlink-providers-${new Date().toISOString().split('T')[0]}.json`;
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        
+        showSuccess('Provider list exported successfully');
+    }
+
+    // Utility functions
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Notification functions
+    function showSuccess(message) {
+        createToast(message, 'success');
+    }
+
+    function showError(message) {
+        createToast(message, 'error');
+    }
+
+    function createToast(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `toast message message-${type}`;
+        notification.innerHTML = type === 'success' 
+            ? `<i class="fas fa-check-circle"></i> ${message}`
+            : `<i class="fas fa-exclamation-circle"></i> ${message}`;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // Initialize load all data
+    async function initializeStats() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/stats`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.stats) {
+                    document.getElementById('heroRequests').textContent = data.stats.total_requests || 0;
+                }
+            }
+        } catch (error) {
+            console.error('Error loading stats:', error);
+        }
+    }
+
+    // Call initialization
+    initializeStats();
     </script>
 </body>
 </html>
