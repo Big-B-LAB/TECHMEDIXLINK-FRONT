@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TechMedixLink | Medical Technology Bridge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMedixLink | Medical Technology Bridge Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ====== PROFESSIONAL CSS RESET ====== */
         * {
             margin: 0;
             padding: 0;
@@ -15,7 +14,6 @@
         }
 
         :root {
-            /* Professional Healthcare Color Palette */
             --primary-blue: #0066cc;
             --primary-dark: #004d99;
             --primary-light: #e6f2ff;
@@ -24,8 +22,6 @@
             --warning-orange: #ff9900;
             --error-red: #ff4444;
             --success-green: #00cc66;
-            
-            /* Neutral Palette */
             --dark-1: #1a365d;
             --dark-2: #2d3748;
             --dark-3: #4a5568;
@@ -35,85 +31,40 @@
             --light-1: #edf2f7;
             --light-2: #f7fafc;
             --white: #ffffff;
-            
-            /* Shadows */
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            
-            /* Transitions */
-            --transition-fast: 150ms ease;
-            --transition-normal: 250ms ease;
-            --transition-slow: 350ms ease;
-            
-            /* Border Radius */
             --radius-sm: 4px;
             --radius-md: 8px;
             --radius-lg: 12px;
-            --radius-xl: 16px;
-            --radius-full: 9999px;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--light-2);
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
             color: var(--dark-2);
             line-height: 1.6;
-            font-weight: 400;
             min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ====== TYPOGRAPHY ====== */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            line-height: 1.25;
-            color: var(--dark-1);
-        }
-
-        h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); }
-        h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
-        h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
-        h4 { font-size: clamp(1rem, 2.5vw, 1.25rem); }
-
-        .text-lead {
-            font-size: clamp(1rem, 2vw, 1.125rem);
-            color: var(--dark-3);
-            font-weight: 400;
-        }
-
-        .text-muted {
-            color: var(--gray-1);
-            font-size: 0.875rem;
-        }
-
-        /* ====== LAYOUT CONTAINERS ====== */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* ====== HEADER ====== */
+        /* Header */
         .main-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            padding: 0.75rem 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-3);
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow-lg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
         }
 
         .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
         }
 
         .logo {
@@ -121,21 +72,19 @@
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
-            color: var(--white);
-            flex-shrink: 0;
+            color: var(--primary-blue);
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--white);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-blue);
-            font-size: 1rem;
-            flex-shrink: 0;
+            color: var(--white);
+            font-size: 1.25rem;
         }
 
         .logo-text {
@@ -144,187 +93,70 @@
         }
 
         .logo-title {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            white-space: nowrap;
+            color: var(--primary-blue);
         }
 
         .logo-tagline {
-            font-size: 0.6875rem;
-            opacity: 0.9;
+            font-size: 0.75rem;
+            color: var(--gray-1);
             font-weight: 400;
-            display: none;
         }
 
-        /* ====== MOBILE NAVIGATION ====== */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.25rem;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            transition: var(--transition-fast);
-            flex-shrink: 0;
-        }
-
-        .mobile-menu-btn:active {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(0.95);
-        }
-
-        .main-nav {
-            display: flex;
-        }
-
+        /* Navigation */
         .main-nav ul {
             display: flex;
-            gap: 0.25rem;
+            gap: 0.5rem;
             list-style: none;
         }
 
         .nav-link {
             display: flex;
             align-items: center;
-            gap: 0.375rem;
-            padding: 0.625rem 0.75rem;
-            color: rgba(255, 255, 255, 0.9);
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--dark-2);
             text-decoration: none;
             border-radius: var(--radius-md);
             font-weight: 500;
-            transition: var(--transition-fast);
-            font-size: 0.8125rem;
-            white-space: nowrap;
+            transition: all 0.2s ease;
         }
 
-        .nav-link:active {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            transform: scale(0.98);
+        .nav-link:hover {
+            background: var(--primary-light);
+            color: var(--primary-blue);
         }
 
         .nav-link.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--white);
+            background: var(--primary-light);
+            color: var(--primary-blue);
             font-weight: 600;
         }
 
         .nav-badge {
             background: var(--accent-teal);
             color: var(--white);
-            font-size: 0.6875rem;
-            padding: 0.125rem 0.375rem;
-            border-radius: var(--radius-full);
-            margin-left: 0.125rem;
+            font-size: 0.75rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.25rem;
         }
 
-        /* ====== MOBILE OVERLAY MENU ====== */
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-dark);
-            z-index: 9999;
-            display: none;
-            flex-direction: column;
-            padding: 1rem;
-            overflow-y: auto;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-100%); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .mobile-overlay.active {
-            display: flex;
-        }
-
-        .mobile-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 0.5rem 0;
-        }
-
-        .mobile-close-btn {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            flex-shrink: 0;
-        }
-
-        .mobile-close-btn:active {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(0.95);
-        }
-
-        .mobile-nav {
-            flex: 1;
-        }
-
-        .mobile-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .mobile-nav-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            color: var(--white);
-            text-decoration: none;
-            border-radius: var(--radius-lg);
-            font-size: 1.125rem;
-            transition: var(--transition-fast);
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-nav-link:active {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(0.98);
-        }
-
-        .mobile-nav-link.active {
-            background: rgba(255, 255, 255, 0.15);
-            font-weight: 600;
-        }
-
-        /* ====== HERO SECTION ====== */
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-light) 0%, #e6f0ff 100%);
-            padding: 2rem 0;
-            position: relative;
-            overflow: hidden;
+            padding: 4rem 0;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .hero-title {
+            font-size: 2.5rem;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1rem;
@@ -332,33 +164,30 @@
         }
 
         .hero-subtitle {
-            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            color: var(--dark-3);
+            margin-bottom: 2rem;
+            max-width: 600px;
         }
 
         .hero-actions {
             display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-top: 2rem;
         }
 
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
         .hero-stat {
             text-align: center;
-            padding: 1rem;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
         }
 
         .hero-stat-number {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--primary-blue);
             display: block;
@@ -366,73 +195,65 @@
         }
 
         .hero-stat-label {
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
             color: var(--gray-1);
-            margin-top: 0.375rem;
+            margin-top: 0.5rem;
         }
 
-        /* ====== MAIN CONTENT ====== */
+        /* Main Content */
         .main-content {
-            padding: 1.5rem 0;
-            min-height: 60vh;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
-        /* ====== DASHBOARD ====== */
+        /* Dashboard */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
             background: var(--white);
             border-radius: var(--radius-lg);
-            padding: 1.25rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow-md);
-            transition: var(--transition-normal);
             border: 1px solid var(--gray-3);
             display: flex;
             align-items: center;
             gap: 1rem;
-            cursor: pointer;
-            -webkit-tap-highlight-color: rgba(0, 102, 204, 0.1);
+            transition: transform 0.2s ease;
         }
 
-        .stat-card:active {
+        .stat-card:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
 
         .stat-icon {
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-            flex-shrink: 0;
+            font-size: 1.5rem;
+            background: var(--primary-light);
+            color: var(--primary-blue);
         }
-
-        .stat-icon.blue { background: #e6f2ff; color: var(--primary-blue); }
-        .stat-icon.green { background: #e6fff2; color: var(--success-green); }
-        .stat-icon.teal { background: #e6ffff; color: var(--accent-teal); }
-        .stat-icon.orange { background: #fff5e6; color: var(--warning-orange); }
 
         .stat-content {
             flex: 1;
-            min-width: 0;
         }
 
         .stat-number {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--dark-1);
             line-height: 1;
             margin-bottom: 0.25rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .stat-label {
@@ -441,36 +262,28 @@
             font-weight: 500;
         }
 
-        .stat-trend {
-            font-size: 0.75rem;
-            padding: 0.125rem 0.5rem;
-            border-radius: var(--radius-full);
-            margin-top: 0.25rem;
-            display: inline-block;
-        }
-
-        .trend-up { background: #e6fff2; color: var(--success-green); }
-        .trend-down { background: #ffe6e6; color: var(--error-red); }
-
-        /* ====== DATA CARDS ====== */
+        /* Data Cards */
         .data-card {
             background: var(--white);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md);
             border: 1px solid var(--gray-3);
             overflow: hidden;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .data-card-header {
-            padding: 1.25rem;
+            padding: 1.5rem;
             border-bottom: 1px solid var(--gray-3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .data-card-title {
             display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
+            align-items: center;
+            gap: 1rem;
         }
 
         .data-card-icon {
@@ -482,30 +295,17 @@
             justify-content: center;
             color: var(--primary-blue);
             background: var(--primary-light);
-            flex-shrink: 0;
-            margin-top: 0.25rem;
-        }
-
-        .data-card-actions {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 1rem;
         }
 
         .data-card-body {
-            padding: 1.25rem;
+            padding: 1.5rem;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
-        /* ====== TABLES ====== */
+        /* Tables */
         .data-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            min-width: 600px;
+            border-collapse: collapse;
         }
 
         .data-table thead {
@@ -513,77 +313,57 @@
         }
 
         .data-table th {
-            padding: 0.75rem;
+            padding: 1rem;
             text-align: left;
             font-weight: 600;
             color: var(--dark-2);
             border-bottom: 2px solid var(--gray-3);
-            white-space: nowrap;
             font-size: 0.875rem;
-            position: sticky;
-            top: 0;
         }
 
         .data-table td {
-            padding: 0.75rem;
+            padding: 1rem;
             border-bottom: 1px solid var(--gray-3);
             vertical-align: middle;
-            font-size: 0.875rem;
         }
 
-        .data-table tbody tr {
-            transition: var(--transition-fast);
-        }
-
-        .data-table tbody tr:active {
+        .data-table tbody tr:hover {
             background: var(--primary-light);
         }
 
-        /* ====== BADGES ====== */
+        /* Badges */
         .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: var(--radius-full);
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
         }
 
         .badge-success {
             background: #e6fff2;
             color: var(--success-green);
-            border: 1px solid #b3ffd9;
         }
 
         .badge-warning {
             background: #fff5e6;
             color: var(--warning-orange);
-            border: 1px solid #ffd9b3;
         }
 
-        .badge-info {
-            background: #e6f2ff;
-            color: var(--primary-blue);
-            border: 1px solid #b3d9ff;
-        }
-
-        /* ====== FORMS ====== */
+        /* Forms */
         .form-card {
             background: var(--white);
             border-radius: var(--radius-lg);
-            padding: 1.5rem;
+            padding: 2rem;
             box-shadow: var(--shadow-lg);
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             border: 1px solid var(--gray-3);
         }
 
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-label {
@@ -591,7 +371,6 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: var(--dark-2);
-            font-size: 0.875rem;
         }
 
         .form-control {
@@ -601,8 +380,7 @@
             border-radius: var(--radius-md);
             font-size: 1rem;
             color: var(--dark-2);
-            transition: var(--transition-fast);
-            background: var(--white);
+            transition: border-color 0.2s ease;
         }
 
         .form-control:focus {
@@ -611,52 +389,30 @@
             box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
         }
 
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            background-size: 1rem;
-            padding-right: 2.5rem;
-        }
-
-        /* ====== BUTTONS ====== */
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.875rem 1.25rem;
+            padding: 0.75rem 1.5rem;
             border-radius: var(--radius-md);
             font-weight: 600;
             font-size: 0.875rem;
             text-decoration: none;
             cursor: pointer;
-            transition: var(--transition-fast);
             border: none;
-            outline: none;
-            position: relative;
-            overflow: hidden;
-            min-height: 48px;
-            justify-content: center;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            touch-action: manipulation;
-        }
-
-        .btn:active {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-sm {
-            padding: 0.625rem 0.875rem;
-            font-size: 0.75rem;
-            min-height: 40px;
+            transition: all 0.2s ease;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            background: var(--primary-blue);
             color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-secondary {
@@ -665,30 +421,24 @@
             border: 1px solid var(--gray-3);
         }
 
+        .btn-secondary:hover {
+            background: var(--gray-3);
+        }
+
         .btn-success {
-            background: linear-gradient(135deg, var(--success-green) 0%, #00b36b 100%);
+            background: var(--success-green);
             color: var(--white);
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, var(--error-red) 0%, #cc0000 100%);
-            color: var(--white);
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        /* ====== ACTION BUTTONS ====== */
+        /* Action Buttons */
         .action-buttons {
             display: flex;
             gap: 0.5rem;
-            align-items: center;
         }
 
         .action-btn {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -696,25 +446,16 @@
             border: none;
             background: none;
             cursor: pointer;
-            transition: var(--transition-fast);
             color: var(--gray-1);
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
         }
 
-        .action-btn:active {
+        .action-btn:hover {
             background: var(--light-1);
             color: var(--primary-blue);
         }
 
-        .edit-btn:active {
-            color: var(--success-green);
-        }
-
-        .delete-btn:active {
-            color: var(--error-red);
-        }
-
-        /* ====== MESSAGES ====== */
+        /* Messages */
         .message {
             padding: 1rem;
             border-radius: var(--radius-md);
@@ -722,7 +463,6 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            animation: slideIn 0.3s ease;
         }
 
         .message-success {
@@ -737,156 +477,36 @@
             border: 1px solid #ffb3b3;
         }
 
-        .message-info {
-            background: #e6f2ff;
-            color: var(--primary-blue);
-            border: 1px solid #b3d9ff;
-        }
-
-        /* ====== MODAL ====== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            padding: 1rem;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-1);
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-        }
-
-        .modal-close:active {
-            background: var(--light-1);
-            color: var(--error-red);
-            transform: scale(0.95);
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--gray-3);
-        }
-
-        /* ====== FOOTER ====== */
+        /* Footer */
         .main-footer {
             background: var(--dark-1);
             color: var(--white);
-            padding: 2rem 0;
-            margin-top: 2rem;
+            padding: 3rem 0;
+            margin-top: 4rem;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: var(--gray-2);
-            text-decoration: none;
-            transition: var(--transition-fast);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-links a:active {
-            color: var(--white);
-            transform: translateX(4px);
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
         }
 
         .footer-bottom {
-            padding-top: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
             color: var(--gray-2);
-            font-size: 0.75rem;
-            line-height: 1.6;
+            font-size: 0.875rem;
         }
 
-        /* ====== LOADING STATES ====== */
+        /* Loading */
         .loading {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 3rem;
             color: var(--gray-1);
         }
 
@@ -904,188 +524,69 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ====== UTILITY CLASSES ====== */
-        .hidden { display: none !important; }
-        .text-center { text-align: center; }
-        .mt-1 { margin-top: 0.5rem; }
-        .mt-2 { margin-top: 1rem; }
-        .mt-3 { margin-top: 1.5rem; }
-        .mb-1 { margin-bottom: 0.5rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .mb-3 { margin-bottom: 1.5rem; }
-        .p-2 { padding: 1rem; }
-        .p-3 { padding: 1.5rem; }
-        .w-full { width: 100%; }
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .gap-1 { gap: 0.5rem; }
-        .gap-2 { gap: 1rem; }
-        .gap-3 { gap: 1.5rem; }
+        /* Hidden */
+        .hidden { display: none; }
 
-        /* ====== MOBILE OPTIMIZATIONS ====== */
-        /* Prevent zoom on input focus in mobile */
-        @media screen and (max-width: 768px) {
-            input, select, textarea {
-                font-size: 16px !important; /* Prevents iOS zoom */
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
             }
             
-            .btn {
-                min-height: 44px;
-            }
-        }
-
-        /* Large mobile devices */
-        @media (min-width: 640px) {
-            .container {
-                padding: 0 1.5rem;
+            .hero-title {
+                font-size: 2rem;
             }
             
             .hero-stats {
-                grid-template-columns: repeat(4, 1fr);
+                flex-wrap: wrap;
+                gap: 1rem;
             }
             
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Tablet devices */
-        @media (min-width: 768px) {
-            .mobile-menu-btn {
-                display: none;
-            }
-            
-            .main-nav {
-                display: flex;
-            }
-            
-            .logo-tagline {
-                display: block;
-            }
-            
-            .hero-actions {
-                flex-direction: row;
-            }
-            
-            .btn {
-                width: auto;
-            }
-            
-            .data-card-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .data-card-actions {
-                margin-top: 0;
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        /* Small mobile devices */
-        @media (max-width: 639px) {
-            .main-nav {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: flex;
-            }
-            
-            .hero-actions .btn {
-                width: 100%;
+            .hero-stat-number {
+                font-size: 1.5rem;
             }
             
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
             
+            .data-card-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
             .stat-card {
-                flex-direction: row;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .data-table {
+                font-size: 0.875rem;
             }
             
             .data-table th,
             .data-table td {
                 padding: 0.5rem;
-                font-size: 0.75rem;
-            }
-            
-            .badge {
-                font-size: 0.625rem;
-                padding: 0.125rem 0.375rem;
-            }
-            
-            .modal-footer {
-                flex-direction: column;
-            }
-            
-            .modal-footer .btn {
-                width: 100%;
-            }
-        }
-
-        /* Very small mobile devices */
-        @media (max-width: 375px) {
-            .container {
-                padding: 0 0.75rem;
-            }
-            
-            .logo-title {
-                font-size: 1rem;
-            }
-            
-            .logo-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 0.875rem;
-            }
-            
-            .hero-stat {
-                padding: 0.75rem;
-            }
-            
-            .hero-stat-number {
-                font-size: 1.25rem;
-            }
-            
-            .stat-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
-            .stat-number {
-                font-size: 1.25rem;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --light-2: #1a202c;
-                --light-1: #2d3748;
-                --white: #2d3748;
-                --dark-1: #f7fafc;
-                --dark-2: #e2e8f0;
-                --dark-3: #cbd5e0;
-                --gray-1: #a0aec0;
-                --gray-3: #4a5568;
-            }
-            
-            .data-card, .stat-card, .form-card {
-                border-color: var(--gray-3);
-            }
-            
-            .filter-select, .form-control {
-                background: var(--light-1);
-                color: var(--dark-2);
-                border-color: var(--gray-3);
             }
         }
     </style>
@@ -1093,7 +594,7 @@
 <body>
     <!-- Header -->
     <header class="main-header">
-        <div class="container header-content">
+        <div class="header-content">
             <a href="#" class="logo" onclick="showSection('hero')">
                 <div class="logo-icon">
                     <i class="fas fa-bridge-medical"></i>
@@ -1103,10 +604,6 @@
                     <div class="logo-tagline">Medical Technology Bridge</div>
                 </div>
             </a>
-            
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
             
             <nav class="main-nav">
                 <ul>
@@ -1119,68 +616,36 @@
         </div>
     </header>
 
-    <!-- Mobile Overlay Menu -->
-    <div class="mobile-overlay" id="mobileOverlay">
-        <div class="mobile-header">
-            <a href="#" class="logo" onclick="showSection('hero'); toggleMobileMenu()">
-                <div class="logo-icon">
-                    <i class="fas fa-bridge-medical"></i>
-                </div>
-                <div class="logo-text">
-                    <div class="logo-title">TechMedixLink</div>
-                </div>
-            </a>
-            <button class="mobile-close-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <nav class="mobile-nav">
-            <ul>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('dashboard'); toggleMobileMenu()"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('devices'); toggleMobileMenu()"><i class="fas fa-stethoscope"></i> Medical Devices</a></li>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('providers'); toggleMobileMenu()"><i class="fas fa-hospital"></i> Healthcare Providers</a></li>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('request'); toggleMobileMenu()"><i class="fas fa-file-medical"></i> Submit Request</a></li>
-            </ul>
-        </nav>
-    </div>
-
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Bridging Medical Technology for Tanzania</h1>
-                <p class="hero-subtitle text-lead">
-                    Connecting healthcare providers with international medical innovation. 
-                    Access advanced medical technology across Tanzania.
-                </p>
-                
-                <div class="hero-actions">
-                    <button class="btn btn-primary" onclick="showSection('request')">
-                        <i class="fas fa-file-medical"></i> Submit Request
-                    </button>
-                    <button class="btn btn-secondary" onclick="showSection('dashboard')">
-                        <i class="fas fa-chart-line"></i> View Dashboard
-                    </button>
+        <div class="hero-content">
+            <h1 class="hero-title">Medical Technology Bridge Platform</h1>
+            <p class="hero-subtitle">
+                Connecting healthcare providers with international medical innovation. 
+                Accelerate access to advanced medical technology across Tanzania.
+            </p>
+            
+            <div class="hero-actions">
+                <button class="btn btn-primary" onclick="showSection('request')">
+                    <i class="fas fa-file-medical"></i> Submit Technology Request
+                </button>
+                <button class="btn btn-secondary" onclick="showSection('dashboard')">
+                    <i class="fas fa-chart-line"></i> View Dashboard
+                </button>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number" id="heroDevices">0</span>
+                    <span class="hero-stat-label">Medical Devices</span>
                 </div>
-                
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroDevices">0</span>
-                        <span class="hero-stat-label">Devices</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroProviders">0</span>
-                        <span class="hero-stat-label">Providers</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroCertified">0</span>
-                        <span class="hero-stat-label">Certified</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroRequests">0</span>
-                        <span class="hero-stat-label">Requests</span>
-                    </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" id="heroProviders">0</span>
+                    <span class="hero-stat-label">Healthcare Providers</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" id="heroCertified">0</span>
+                    <span class="hero-stat-label">TMDA Certified</span>
                 </div>
             </div>
         </div>
@@ -1188,238 +653,212 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="container">
-            <!-- Dashboard Section -->
-            <section id="dashboard" class="hidden">
-                <h2 class="mb-3">Dashboard</h2>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="hidden">
+            <h2 style="margin-bottom: 2rem;">Platform Dashboard</h2>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="statDevices">0</div>
+                        <div class="stat-label">Medical Devices</div>
+                    </div>
+                </div>
                 
-                <!-- Stats Grid -->
-                <div class="dashboard-grid">
-                    <div class="stat-card" onclick="showSection('devices')">
-                        <div class="stat-icon blue">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="statProviders">0</div>
+                        <div class="stat-label">Healthcare Providers</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="statCertified">0</div>
+                        <div class="stat-label">TMDA Certified</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <div class="data-card-header">
+                    <div class="data-card-title">
+                        <div class="data-card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h3>Quick Actions</h3>
+                            <p style="color: var(--gray-1); font-size: 0.875rem;">Common platform operations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-card-body">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="showSection('request')">
+                            <i class="fas fa-plus"></i> New Request
+                        </button>
+                        <button class="btn btn-secondary" onclick="showModal('device')">
+                            <i class="fas fa-plus"></i> Add Device
+                        </button>
+                        <button class="btn btn-success" onclick="showModal('provider')">
+                            <i class="fas fa-plus"></i> Add Provider
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medical Devices Section -->
+        <section id="devices" class="hidden">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <div class="data-card-title">
+                        <div class="data-card-icon">
                             <i class="fas fa-stethoscope"></i>
                         </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="statDevices">0</div>
-                            <div class="stat-label">Medical Devices</div>
+                        <div>
+                            <h3>Medical Devices Catalog</h3>
+                            <p style="color: var(--gray-1); font-size: 0.875rem;">Available medical technology</p>
                         </div>
                     </div>
-                    
-                    <div class="stat-card" onclick="showSection('providers')">
-                        <div class="stat-icon green">
+                    <div>
+                        <button class="btn btn-primary" onclick="showSection('request')">
+                            <i class="fas fa-file-medical"></i> Request Device
+                        </button>
+                        <button class="btn btn-secondary" onclick="showModal('device')" style="margin-left: 0.5rem;">
+                            <i class="fas fa-plus"></i> Add Device
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="data-card-body">
+                    <div id="devicesList" class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading medical devices...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Healthcare Providers Section -->
+        <section id="providers" class="hidden">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <div class="data-card-title">
+                        <div class="data-card-icon">
                             <i class="fas fa-hospital"></i>
                         </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="statProviders">0</div>
-                            <div class="stat-label">Healthcare Providers</div>
+                        <div>
+                            <h3>Healthcare Providers</h3>
+                            <p style="color: var(--gray-1); font-size: 0.875rem;">Participating facilities</p>
                         </div>
                     </div>
-                    
-                    <div class="stat-card" onclick="showSection('request')">
-                        <div class="stat-icon teal">
-                            <i class="fas fa-file-medical"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="statRequests">0</div>
-                            <div class="stat-label">Active Requests</div>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card" onclick="showModal('device')">
-                        <div class="stat-icon orange">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number">+</div>
-                            <div class="stat-label">Add New Device</div>
-                        </div>
+                    <div>
+                        <button class="btn btn-primary" onclick="showModal('provider')">
+                            <i class="fas fa-plus"></i> Add Provider
+                        </button>
                     </div>
                 </div>
-
-                <!-- Quick Actions -->
-                <div class="data-card">
-                    <div class="data-card-body">
-                        <h4 class="mb-2">Quick Actions</h4>
-                        <div class="flex gap-2 flex-wrap">
-                            <button class="btn btn-primary" onclick="showSection('request')">
-                                <i class="fas fa-plus"></i> New Request
-                            </button>
-                            <button class="btn btn-secondary" onclick="showModal('device')">
-                                <i class="fas fa-plus"></i> Add Device
-                            </button>
-                            <button class="btn btn-success" onclick="showModal('provider')">
-                                <i class="fas fa-plus"></i> Add Provider
-                            </button>
-                            <button class="btn btn-secondary" onclick="loadAllData()">
-                                <i class="fas fa-sync-alt"></i> Refresh Data
-                            </button>
-                        </div>
+                
+                <div class="data-card-body">
+                    <div id="providersList" class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading healthcare providers...</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Medical Devices Section -->
-            <section id="devices" class="hidden">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <div class="data-card-title">
-                            <div class="data-card-icon">
-                                <i class="fas fa-stethoscope"></i>
-                            </div>
-                            <div>
-                                <h3>Medical Devices</h3>
-                                <p class="text-muted">Available medical technology</p>
-                            </div>
-                        </div>
-                        <div class="data-card-actions">
-                            <button class="btn btn-primary btn-sm" onclick="showSection('request')">
-                                <i class="fas fa-file-medical"></i> Request
-                            </button>
-                            <button class="btn btn-secondary btn-sm" onclick="showModal('device')">
-                                <i class="fas fa-plus"></i> Add
-                            </button>
-                            <button class="btn btn-secondary btn-sm" onclick="loadDevices()">
-                                <i class="fas fa-sync-alt"></i> Refresh
-                            </button>
-                        </div>
+        <!-- Submit Request Section -->
+        <section id="request" class="hidden">
+            <div class="form-card">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="width: 60px; height: 60px; background: var(--primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--primary-blue); font-size: 1.5rem;">
+                        <i class="fas fa-file-medical"></i>
                     </div>
-                    
-                    <div class="data-card-body">
-                        <div id="devicesList" class="loading">
-                            <div class="loading-spinner"></div>
-                            <p>Loading devices...</p>
-                        </div>
-                    </div>
+                    <h2>Medical Technology Request Form</h2>
+                    <p style="color: var(--gray-1); margin-top: 0.5rem;">Submit your request for medical equipment</p>
                 </div>
-            </section>
-
-            <!-- Healthcare Providers Section -->
-            <section id="providers" class="hidden">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <div class="data-card-title">
-                            <div class="data-card-icon">
-                                <i class="fas fa-hospital"></i>
-                            </div>
-                            <div>
-                                <h3>Healthcare Providers</h3>
-                                <p class="text-muted">Participating facilities</p>
-                            </div>
-                        </div>
-                        <div class="data-card-actions">
-                            <button class="btn btn-primary btn-sm" onclick="showModal('provider')">
-                                <i class="fas fa-plus"></i> Add
-                            </button>
-                            <button class="btn btn-secondary btn-sm" onclick="loadProviders()">
-                                <i class="fas fa-sync-alt"></i> Refresh
-                            </button>
-                        </div>
+                
+                <div class="message hidden" id="requestMessage"></div>
+                
+                <form id="requestForm" onsubmit="submitRequest(event)">
+                    <div class="form-group">
+                        <label for="providerSelect" class="form-label">
+                            <i class="fas fa-hospital"></i> Healthcare Facility *
+                        </label>
+                        <select id="providerSelect" class="form-control" required>
+                            <option value="">Select your hospital or clinic</option>
+                        </select>
                     </div>
-                    
-                    <div class="data-card-body">
-                        <div id="providersList" class="loading">
-                            <div class="loading-spinner"></div>
-                            <p>Loading providers...</p>
-                        </div>
+
+                    <div class="form-group">
+                        <label for="deviceSelect" class="form-label">
+                            <i class="fas fa-stethoscope"></i> Medical Technology Requested *
+                        </label>
+                        <select id="deviceSelect" class="form-control" required>
+                            <option value="">Select medical device</option>
+                        </select>
                     </div>
-                </div>
-            </section>
 
-            <!-- Submit Request Section -->
-            <section id="request" class="hidden">
-                <div class="form-card">
-                    <div class="text-center mb-3">
-                        <h2>Request Form</h2>
-                        <p class="text-muted">Submit your medical technology request</p>
+                    <div class="form-group">
+                        <label for="quantity" class="form-label">
+                            <i class="fas fa-boxes"></i> Quantity *
+                        </label>
+                        <input type="number" id="quantity" class="form-control" min="1" max="100" value="1" required>
                     </div>
-                    
-                    <div class="message hidden" id="requestMessage"></div>
-                    
-                    <form id="requestForm" onsubmit="submitRequest(event)">
-                        <div class="form-group">
-                            <label for="providerSelect" class="form-label">
-                                <i class="fas fa-hospital"></i> Healthcare Facility
-                            </label>
-                            <select id="providerSelect" class="form-control form-select" required>
-                                <option value="">Select hospital or clinic</option>
-                            </select>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="deviceSelect" class="form-label">
-                                <i class="fas fa-stethoscope"></i> Medical Technology
-                            </label>
-                            <select id="deviceSelect" class="form-control form-select" required>
-                                <option value="">Select device</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="notes" class="form-label">
+                            <i class="fas fa-notes-medical"></i> Additional Requirements
+                        </label>
+                        <textarea id="notes" class="form-control" rows="3" 
+                                  placeholder="Please provide specific requirements or details..."></textarea>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="quantity" class="form-label">
-                                <i class="fas fa-boxes"></i> Quantity
-                            </label>
-                            <input type="number" id="quantity" class="form-control" min="1" max="100" value="1" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="urgency" class="form-label">
-                                <i class="fas fa-clock"></i> Urgency Level
-                            </label>
-                            <select id="urgency" class="form-control form-select">
-                                <option value="normal">Normal Priority</option>
-                                <option value="high">High Priority</option>
-                                <option value="urgent">Urgent - Critical Need</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="notes" class="form-label">
-                                <i class="fas fa-notes-medical"></i> Additional Details
-                            </label>
-                            <textarea id="notes" class="form-control" rows="3" 
-                                      placeholder="Specific requirements or details..."></textarea>
-                        </div>
-
-                        <div class="form-group flex gap-2" style="margin-top: 2rem;">
-                            <button type="submit" class="btn btn-success flex-1">
-                                <i class="fas fa-paper-plane"></i> Submit
-                            </button>
-                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
-                                <i class="fas fa-redo"></i> Reset
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <button type="submit" class="btn btn-success" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h4 class="footer-section-title">Contact</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:info@techmedixlink.tz"><i class="fas fa-envelope"></i> info@techmedixlink.tz</a></li>
-                        <li><a href="tel:+255222000000"><i class="fas fa-phone"></i> +255 22 200 0000</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="footer-content">
+            <p style="font-size: 1.125rem; margin-bottom: 1rem;">TechMedixLink</p>
+            <p style="color: var(--gray-2); max-width: 600px; margin: 0 auto;">
+                Bridging medical technology between developed nations and Tanzania's healthcare system.
+            </p>
             
             <div class="footer-bottom">
                 <p>© 2024 TechMedixLink - Medical Technology Bridge Platform</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="mailto:info@techmedixlink.tz" style="color: var(--gray-2); text-decoration: none;">info@techmedixlink.tz</a> | 
+                    <a href="tel:+255222000000" style="color: var(--gray-2); text-decoration: none;">+255 22 200 0000</a>
+                </p>
             </div>
         </div>
     </footer>
 
     <!-- Device Modal -->
-    <div class="modal-overlay" id="deviceModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 id="deviceModalTitle">Add Device</h3>
-                <button class="modal-close" onclick="closeModal('device')">
+    <div class="modal-overlay" id="deviceModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 10000;">
+        <div class="form-card" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 id="deviceModalTitle">Add Medical Device</h3>
+                <button onclick="closeModal('device')" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-1);">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -1434,52 +873,23 @@
                     <input type="text" id="deviceManufacturer" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="deviceType" class="form-label">Device Type *</label>
-                    <select id="deviceType" class="form-control form-select" required>
-                        <option value="">Select type</option>
-                        <option value="Diagnostic">Diagnostic Equipment</option>
-                        <option value="Therapeutic">Therapeutic Equipment</option>
-                        <option value="Monitoring">Patient Monitoring</option>
-                        <option value="Surgical">Surgical Equipment</option>
-                        <option value="Laboratory">Laboratory Equipment</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="devicePrice" class="form-label">Price (USD) *</label>
                     <input type="number" id="devicePrice" class="form-control" min="0" step="0.01" required>
                 </div>
-                <div class="form-group">
-                    <label for="deviceDescription" class="form-label">Description</label>
-                    <textarea id="deviceDescription" class="form-control" rows="3" placeholder="Brief description of the device..."></textarea>
-                </div>
-                <div class="flex gap-2">
-                    <div class="form-group flex-1">
-                        <label class="form-label">
-                            <input type="checkbox" id="deviceCertified" class="mr-2">
-                            TMDA Certified
-                        </label>
-                    </div>
-                    <div class="form-group flex-1">
-                        <label class="form-label">
-                            <input type="checkbox" id="deviceLocalSupport" class="mr-2">
-                            Local Support Available
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save Device</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('device')">Cancel</button>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Device</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('device')" style="flex: 1;">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Provider Modal -->
-    <div class="modal-overlay" id="providerModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 id="providerModalTitle">Add Provider</h3>
-                <button class="modal-close" onclick="closeModal('provider')">
+    <div class="modal-overlay" id="providerModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 10000;">
+        <div class="form-card" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 id="providerModalTitle">Add Healthcare Provider</h3>
+                <button onclick="closeModal('provider')" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-1);">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -1490,91 +900,44 @@
                     <input type="text" id="providerName" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="providerType" class="form-label">Facility Type *</label>
-                    <select id="providerType" class="form-control form-select" required>
-                        <option value="">Select type</option>
-                        <option value="Hospital">Hospital</option>
-                        <option value="Clinic">Clinic</option>
-                        <option value="Referral Hospital">Referral Hospital</option>
-                        <option value="Private Hospital">Private Hospital</option>
-                        <option value="Health Center">Health Center</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="providerRegion" class="form-label">Region *</label>
-                    <select id="providerRegion" class="form-control form-select" required>
+                    <select id="providerRegion" class="form-control" required>
                         <option value="">Select region</option>
                         <option value="Dar es Salaam">Dar es Salaam</option>
                         <option value="Kilimanjaro">Kilimanjaro</option>
                         <option value="Mbeya">Mbeya</option>
                         <option value="Mwanza">Mwanza</option>
-                        <option value="Tanga">Tanga</option>
-                        <option value="Morogoro">Morogoro</option>
-                        <option value="Pwani">Pwani</option>
-                        <option value="Arusha">Arusha</option>
-                        <option value="Dodoma">Dodoma</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="providerLocation" class="form-label">Location *</label>
                     <input type="text" id="providerLocation" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label for="providerContact" class="form-label">Contact Person</label>
-                    <input type="text" id="providerContact" class="form-control" placeholder="Name of contact person">
-                </div>
-                <div class="form-group">
-                    <label for="providerPhone" class="form-label">Phone Number</label>
-                    <input type="tel" id="providerPhone" class="form-control" placeholder="Phone number">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Save Provider</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('provider')">Cancel</button>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-success" style="flex: 1;">Save Provider</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('provider')" style="flex: 1;">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        // ====== API CONFIGURATION ======
         const API_BASE_URL = 'https://techmedixlink-api-production.up.railway.app';
         let allDevices = [];
         let allProviders = [];
-        let allRequests = [];
 
-        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            checkApiStatus();
             loadAllData();
             showSection('hero');
-            
-            // Set up auto-refresh every 2 minutes
-            setInterval(() => {
-                if (!document.hidden) {
-                    loadAllData();
-                }
-            }, 120000);
         });
 
-        // Mobile menu functions
-        function toggleMobileMenu() {
-            const overlay = document.getElementById('mobileOverlay');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
-        }
-
-        // Navigation functions
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('section[id]').forEach(section => {
                 section.classList.add('hidden');
             });
-            
-            // Show selected section
             document.getElementById(sectionId).classList.remove('hidden');
             
-            // Update active nav link
-            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
             
@@ -1583,7 +946,6 @@
                 if (activeLink) activeLink.classList.add('active');
             }
             
-            // Load data for the section if needed
             if (sectionId === 'devices') {
                 loadDevices();
             } else if (sectionId === 'providers') {
@@ -1591,225 +953,90 @@
             } else if (sectionId === 'request') {
                 loadFormData();
             }
-            
-            // Close mobile menu if open
-            const overlay = document.getElementById('mobileOverlay');
-            if (overlay.classList.contains('active')) {
-                toggleMobileMenu();
-            }
         }
 
-        // Check API status
-        async function checkApiStatus() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/health`);
-                if (!response.ok) throw new Error('API not responding');
-                console.log('API Status: Online');
-            } catch (error) {
-                console.error('API Status: Offline', error);
-                showError('API Connection Error. Some features may not work.');
-            }
-        }
-
-        // Load all data
         async function loadAllData() {
             try {
-                await Promise.all([
-                    loadDevices(), 
-                    loadProviders(),
-                    loadRequests()
-                ]);
+                await Promise.all([loadDevices(), loadProviders()]);
                 updateDashboardStats();
-                showSuccess('Data loaded successfully');
             } catch (error) {
                 console.error('Failed to load data:', error);
             }
         }
 
-        // ====== DEVICE API FUNCTIONS ======
         async function loadDevices() {
             const container = document.getElementById('devicesList');
-            if (container) {
-                container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading devices...</p></div>';
-            }
+            container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading devices...</p></div>';
             
             try {
                 const response = await fetch(`${API_BASE_URL}/api/devices`);
-                if (!response.ok) throw new Error(`Failed to fetch devices: ${response.status}`);
-                
+                if (!response.ok) throw new Error('Failed to fetch devices');
                 const data = await response.json();
                 allDevices = data.devices || data || [];
-                console.log('Devices loaded:', allDevices.length);
-                
-                if (container) displayDevices(allDevices);
+                displayDevices(allDevices);
                 updateDeviceSelect(allDevices);
                 updateDashboardStats();
             } catch (error) {
-                console.error('Error loading devices:', error);
-                if (container) {
-                    container.innerHTML = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading devices: ' + error.message + '</div>';
-                }
-                // Fallback to demo data if API fails
-                if (allDevices.length === 0) {
-                    allDevices = [
-                        { id: '1', name: 'Digital X-Ray Machine', manufacturer: 'Philips', price_usd: 45000, device_type: 'Diagnostic', tz_certified: true, local_support: true },
-                        { id: '2', name: 'Ultrasound Scanner', manufacturer: 'GE Healthcare', price_usd: 32000, device_type: 'Diagnostic', tz_certified: true, local_support: true },
-                        { id: '3', name: 'ECG Monitor', manufacturer: 'Mindray', price_usd: 8500, device_type: 'Monitoring', tz_certified: false, local_support: true }
-                    ];
-                    if (container) displayDevices(allDevices);
-                    updateDeviceSelect(allDevices);
-                }
+                container.innerHTML = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading devices</div>';
             }
         }
 
         async function saveDevice(event) {
             event.preventDefault();
-            
             const deviceData = {
                 name: document.getElementById('deviceName').value,
                 manufacturer: document.getElementById('deviceManufacturer').value,
-                device_type: document.getElementById('deviceType').value,
-                price_usd: parseFloat(document.getElementById('devicePrice').value),
-                description: document.getElementById('deviceDescription').value || '',
-                tz_certified: document.getElementById('deviceCertified').checked,
-                local_support: document.getElementById('deviceLocalSupport').checked
+                price_usd: parseFloat(document.getElementById('devicePrice').value)
             };
 
-            const deviceId = document.getElementById('deviceId').value;
-            const isEdit = deviceId && deviceId !== '';
-
             try {
-                const url = isEdit ? `${API_BASE_URL}/api/devices/${deviceId}` : `${API_BASE_URL}/api/devices`;
-                const method = isEdit ? 'PUT' : 'POST';
-                
-                const response = await fetch(url, {
-                    method: method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                const response = await fetch(`${API_BASE_URL}/api/devices`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(deviceData)
                 });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Failed to save device: ${response.status} - ${errorText}`);
-                }
-
+                if (!response.ok) throw new Error('Failed to save device');
                 const result = await response.json();
                 
                 if (result.success || result.id) {
                     closeModal('device');
-                    showSuccess(isEdit ? 'Device updated successfully' : 'Device added successfully');
+                    showSuccess('Device added successfully');
                     loadDevices();
-                } else {
-                    throw new Error(result.error || 'Failed to save device');
                 }
             } catch (error) {
-                console.error('Error saving device:', error);
-                showError('Error saving device: ' + error.message);
+                showError('Error saving device');
             }
         }
 
-        async function deleteDevice(deviceId) {
-            if (!confirm('Are you sure you want to delete this device?')) return;
-            
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/devices/${deviceId}`, {
-                    method: 'DELETE'
-                });
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Failed to delete device: ${response.status} - ${errorText}`);
-                }
-
-                const result = await response.json();
-                
-                if (result.success) {
-                    showSuccess('Device deleted successfully');
-                    loadDevices();
-                } else {
-                    throw new Error(result.error || 'Failed to delete device');
-                }
-            } catch (error) {
-                console.error('Error deleting device:', error);
-                showError('Error deleting device: ' + error.message);
-            }
-        }
-
-        function editDevice(deviceId) {
-            const device = allDevices.find(d => d.id === deviceId);
-            if (!device) return;
-
-            document.getElementById('deviceModalTitle').textContent = 'Edit Medical Device';
-            document.getElementById('deviceId').value = device.id;
-            document.getElementById('deviceName').value = device.name || '';
-            document.getElementById('deviceManufacturer').value = device.manufacturer || '';
-            document.getElementById('deviceType').value = device.device_type || '';
-            document.getElementById('devicePrice').value = device.price_usd || 0;
-            document.getElementById('deviceDescription').value = device.description || '';
-            document.getElementById('deviceCertified').checked = device.tz_certified || false;
-            document.getElementById('deviceLocalSupport').checked = device.local_support || false;
-
-            showModal('device');
-        }
-
-        // Display devices
         function displayDevices(devices) {
             const container = document.getElementById('devicesList');
-            if (!container) return;
-            
-            if (!devices || devices.length === 0) {
-                container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No medical devices found. Add your first device!</div>';
+            if (!devices.length) {
+                container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No devices found</div>';
                 return;
             }
             
             let html = `
-                <div style="overflow-x: auto;">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Device</th>
-                                <th>Manufacturer</th>
-                                <th>Type</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>Manufacturer</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
             `;
             
             devices.forEach(device => {
-                const isCertified = device.tz_certified || device.certified;
-                const hasSupport = device.local_support || device.support;
-                
                 html += `
                     <tr>
-                        <td>
-                            <div style="font-weight: 600;">${device.name || 'Unnamed Device'}</div>
-                            <div class="text-muted" style="font-size: 0.75rem;">${(device.description || '').substring(0, 50) + '...'}</div>
-                        </td>
-                        <td>${device.manufacturer || 'Unknown'}</td>
-                        <td><span class="badge badge-info">${device.device_type || 'General'}</span></td>
-                        <td><strong>$${(device.price_usd || 0).toLocaleString()}</strong></td>
-                        <td>
-                            ${isCertified ? 
-                                '<span class="badge badge-success"><i class="fas fa-check"></i> Certified</span>' : 
-                                '<span class="badge badge-warning"><i class="fas fa-clock"></i> Pending</span>'}
-                            <br>
-                            ${hasSupport ? 
-                                '<span class="badge badge-success mt-1" style="display: inline-block;"><i class="fas fa-check"></i> Support</span>' : 
-                                '<span class="badge badge-warning mt-1" style="display: inline-block;"><i class="fas fa-times"></i> No Support</span>'}
-                        </td>
+                        <td><strong>${device.name}</strong></td>
+                        <td>${device.manufacturer}</td>
+                        <td>$${device.price_usd?.toLocaleString() || '0'}</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="action-btn edit-btn" onclick="editDevice('${device.id}')" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="action-btn delete-btn" onclick="deleteDevice('${device.id}')" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
                                 <button class="action-btn" onclick="requestDevice('${device.id}')" title="Request">
                                     <i class="fas fa-file-medical"></i>
                                 </button>
@@ -1819,330 +1046,151 @@
                 `;
             });
             
-            html += '</tbody></table></div>';
+            html += '</tbody></table>';
             container.innerHTML = html;
         }
 
-        // ====== PROVIDER API FUNCTIONS ======
         async function loadProviders() {
             const container = document.getElementById('providersList');
-            if (container) {
-                container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading providers...</p></div>';
-            }
+            container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading providers...</p></div>';
             
             try {
                 const response = await fetch(`${API_BASE_URL}/api/providers`);
-                if (!response.ok) throw new Error(`Failed to fetch providers: ${response.status}`);
-                
+                if (!response.ok) throw new Error('Failed to fetch providers');
                 const data = await response.json();
                 allProviders = data.providers || data || [];
-                console.log('Providers loaded:', allProviders.length);
-                
-                if (container) displayProviders(allProviders);
+                displayProviders(allProviders);
                 updateProviderSelect(allProviders);
                 updateDashboardStats();
             } catch (error) {
-                console.error('Error loading providers:', error);
-                if (container) {
-                    container.innerHTML = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading providers: ' + error.message + '</div>';
-                }
-                // Fallback to demo data if API fails
-                if (allProviders.length === 0) {
-                    allProviders = [
-                        { id: '1', name: 'Muhimbili National Hospital', region: 'Dar es Salaam', location: 'Upanga', facility_type: 'Hospital', contact_person: 'Dr. John Mwita', phone: '+255 22 215 0000' },
-                        { id: '2', name: 'Kilimanjaro Christian Medical Centre', region: 'Kilimanjaro', location: 'Moshi', facility_type: 'Referral Hospital', contact_person: 'Dr. Sarah Kimaro', phone: '+255 27 275 4377' },
-                        { id: '3', name: 'Mbeya Referral Hospital', region: 'Mbeya', location: 'Mbeya City', facility_type: 'Referral Hospital', contact_person: 'Dr. James Mwakyusa', phone: '+255 25 250 3364' }
-                    ];
-                    if (container) displayProviders(allProviders);
-                    updateProviderSelect(allProviders);
-                }
+                container.innerHTML = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading providers</div>';
             }
         }
 
         async function saveProvider(event) {
             event.preventDefault();
-            
             const providerData = {
                 name: document.getElementById('providerName').value,
-                facility_type: document.getElementById('providerType').value,
                 region: document.getElementById('providerRegion').value,
-                location: document.getElementById('providerLocation').value,
-                contact_person: document.getElementById('providerContact').value || '',
-                phone: document.getElementById('providerPhone').value || ''
+                location: document.getElementById('providerLocation').value
             };
 
-            const providerId = document.getElementById('providerId').value;
-            const isEdit = providerId && providerId !== '';
-
             try {
-                const url = isEdit ? `${API_BASE_URL}/api/providers/${providerId}` : `${API_BASE_URL}/api/providers`;
-                const method = isEdit ? 'PUT' : 'POST';
-                
-                const response = await fetch(url, {
-                    method: method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                const response = await fetch(`${API_BASE_URL}/api/providers`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(providerData)
                 });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Failed to save provider: ${response.status} - ${errorText}`);
-                }
-
+                if (!response.ok) throw new Error('Failed to save provider');
                 const result = await response.json();
                 
                 if (result.success || result.id) {
                     closeModal('provider');
-                    showSuccess(isEdit ? 'Provider updated successfully' : 'Provider added successfully');
+                    showSuccess('Provider added successfully');
                     loadProviders();
-                } else {
-                    throw new Error(result.error || 'Failed to save provider');
                 }
             } catch (error) {
-                console.error('Error saving provider:', error);
-                showError('Error saving provider: ' + error.message);
+                showError('Error saving provider');
             }
         }
 
-        async function deleteProvider(providerId) {
-            if (!confirm('Are you sure you want to delete this provider?')) return;
-            
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/providers/${providerId}`, {
-                    method: 'DELETE'
-                });
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Failed to delete provider: ${response.status} - ${errorText}`);
-                }
-
-                const result = await response.json();
-                
-                if (result.success) {
-                    showSuccess('Provider deleted successfully');
-                    loadProviders();
-                } else {
-                    throw new Error(result.error || 'Failed to delete provider');
-                }
-            } catch (error) {
-                console.error('Error deleting provider:', error);
-                showError('Error deleting provider: ' + error.message);
-            }
-        }
-
-        function editProvider(providerId) {
-            const provider = allProviders.find(p => p.id === providerId);
-            if (!provider) return;
-
-            document.getElementById('providerModalTitle').textContent = 'Edit Healthcare Provider';
-            document.getElementById('providerId').value = provider.id;
-            document.getElementById('providerName').value = provider.name || '';
-            document.getElementById('providerType').value = provider.facility_type || '';
-            document.getElementById('providerRegion').value = provider.region || '';
-            document.getElementById('providerLocation').value = provider.location || '';
-            document.getElementById('providerContact').value = provider.contact_person || '';
-            document.getElementById('providerPhone').value = provider.phone || '';
-
-            showModal('provider');
-        }
-
-        // Display providers
         function displayProviders(providers) {
             const container = document.getElementById('providersList');
-            if (!container) return;
-            
-            if (!providers || providers.length === 0) {
-                container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No healthcare providers found. Add your first provider!</div>';
+            if (!providers.length) {
+                container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No providers found</div>';
                 return;
             }
             
             let html = `
-                <div style="overflow-x: auto;">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Healthcare Facility</th>
-                                <th>Location</th>
-                                <th>Region</th>
-                                <th>Type</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Facility</th>
+                            <th>Location</th>
+                            <th>Region</th>
+                        </tr>
+                    </thead>
+                    <tbody>
             `;
             
             providers.forEach(provider => {
                 html += `
                     <tr>
-                        <td>
-                            <div style="font-weight: 600;">${provider.name || 'Unnamed Facility'}</div>
-                            <div class="text-muted" style="font-size: 0.75rem;">${provider.contact_person || 'No contact person'}</div>
-                        </td>
-                        <td>${provider.location || 'Unknown'}</td>
-                        <td><span class="badge badge-info">${provider.region || 'Unknown'}</span></td>
-                        <td>${provider.facility_type || 'Unknown'}</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn edit-btn" onclick="editProvider('${provider.id}')" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="action-btn delete-btn" onclick="deleteProvider('${provider.id}')" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                                <button class="action-btn" onclick="contactProvider('${provider.phone}')" title="Contact">
-                                    <i class="fas fa-phone"></i>
-                                </button>
-                            </div>
-                        </td>
+                        <td><strong>${provider.name}</strong></td>
+                        <td>${provider.location}</td>
+                        <td><span class="badge badge-success">${provider.region}</span></td>
                     </tr>
                 `;
             });
             
-            html += '</tbody></table></div>';
+            html += '</tbody></table>';
             container.innerHTML = html;
-        }
-
-        // ====== REQUEST API FUNCTIONS ======
-        async function loadRequests() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/requests`);
-                if (!response.ok) throw new Error(`Failed to fetch requests: ${response.status}`);
-                
-                const data = await response.json();
-                allRequests = data.requests || data || [];
-                console.log('Requests loaded:', allRequests.length);
-                updateDashboardStats();
-            } catch (error) {
-                console.error('Error loading requests:', error);
-                // Fallback to demo data
-                allRequests = [
-                    { id: '1', provider_id: '1', device_id: '1', quantity: 2, status: 'pending' },
-                    { id: '2', provider_id: '2', device_id: '2', quantity: 1, status: 'approved' }
-                ];
-                updateDashboardStats();
-            }
         }
 
         async function submitRequest(event) {
             event.preventDefault();
-            
-            const form = document.getElementById('requestForm');
             const messageDiv = document.getElementById('requestMessage');
-            
-            const providerSelect = document.getElementById('providerSelect');
-            const deviceSelect = document.getElementById('deviceSelect');
-            
-            if (!providerSelect.value || !deviceSelect.value) {
-                messageDiv.innerHTML = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Please select both provider and device</div>';
-                messageDiv.classList.remove('hidden');
-                return;
-            }
-            
-            const requestData = {
-                provider_id: providerSelect.value,
-                device_id: deviceSelect.value,
-                quantity: parseInt(document.getElementById('quantity').value),
-                urgency: document.getElementById('urgency').value,
-                notes: document.getElementById('notes').value || '',
-                status: 'pending',
-                requested_at: new Date().toISOString()
-            };
-            
-            // Show loading
-            messageDiv.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Submitting your request...</p></div>';
+            messageDiv.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Submitting request...</p></div>';
             messageDiv.classList.remove('hidden', 'message-success', 'message-error');
             messageDiv.classList.add('message-info');
             
             try {
+                const requestData = {
+                    provider_id: document.getElementById('providerSelect').value,
+                    device_id: document.getElementById('deviceSelect').value,
+                    quantity: parseInt(document.getElementById('quantity').value),
+                    notes: document.getElementById('notes').value
+                };
+                
                 const response = await fetch(`${API_BASE_URL}/api/requests`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestData)
                 });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Failed to submit request: ${response.status} - ${errorText}`);
-                }
-
-                const data = await response.json();
+                if (!response.ok) throw new Error('Failed to submit request');
                 
-                if (data.success || data.id) {
-                    messageDiv.innerHTML = `<i class="fas fa-check-circle"></i> Request submitted successfully! Our team will contact you shortly.`;
-                    messageDiv.classList.remove('message-info');
-                    messageDiv.classList.add('message-success');
-                    form.reset();
-                    
-                    showSuccess('Request submitted successfully!');
-                    loadRequests(); // Refresh requests data
-                } else {
-                    messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${data.error || data.message || 'Failed to submit request'}`;
-                    messageDiv.classList.remove('message-info');
-                    messageDiv.classList.add('message-error');
-                }
+                messageDiv.innerHTML = '<i class="fas fa-check-circle"></i> Request submitted successfully!';
+                messageDiv.classList.remove('message-info');
+                messageDiv.classList.add('message-success');
+                document.getElementById('requestForm').reset();
+                showSuccess('Request submitted successfully');
             } catch (error) {
-                console.error('Error submitting request:', error);
-                messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${error.message}`;
+                messageDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error submitting request';
                 messageDiv.classList.remove('message-info');
                 messageDiv.classList.add('message-error');
-                
-                // Fallback: Add to local array if API fails
-                const newRequest = {
-                    id: 'req_' + Date.now(),
-                    ...requestData
-                };
-                allRequests.push(newRequest);
-                updateDashboardStats();
-                showSuccess('Request saved locally. API connection failed.');
             }
         }
 
-        // ====== HELPER FUNCTIONS ======
         function updateDashboardStats() {
-            // Update hero stats
+            const certifiedCount = allDevices.filter(d => d.tz_certified).length;
             document.getElementById('heroDevices').textContent = allDevices.length;
             document.getElementById('heroProviders').textContent = allProviders.length;
-            
-            const certifiedCount = allDevices.filter(d => d.tz_certified || d.certified).length;
             document.getElementById('heroCertified').textContent = certifiedCount;
-            
-            document.getElementById('heroRequests').textContent = allRequests.length;
-            
-            // Update dashboard stats
             document.getElementById('statDevices').textContent = allDevices.length;
             document.getElementById('statProviders').textContent = allProviders.length;
-            document.getElementById('statRequests').textContent = allRequests.length;
+            document.getElementById('statCertified').textContent = certifiedCount;
         }
 
         function updateDeviceSelect(devices) {
             const select = document.getElementById('deviceSelect');
-            if (!select) return;
-            
-            select.innerHTML = '<option value="">Select medical device</option>';
-            
+            select.innerHTML = '<option value="">Select device</option>';
             devices.forEach(device => {
                 const option = document.createElement('option');
                 option.value = device.id;
-                option.textContent = `${device.name} - $${(device.price_usd || 0).toLocaleString()} (${device.manufacturer})`;
+                option.textContent = `${device.name} - $${device.price_usd?.toLocaleString() || '0'}`;
                 select.appendChild(option);
             });
         }
 
         function updateProviderSelect(providers) {
             const select = document.getElementById('providerSelect');
-            if (!select) return;
-            
-            select.innerHTML = '<option value="">Select healthcare facility</option>';
-            
+            select.innerHTML = '<option value="">Select facility</option>';
             providers.forEach(provider => {
                 const option = document.createElement('option');
                 option.value = provider.id;
-                option.textContent = `${provider.name} - ${provider.location}, ${provider.region}`;
+                option.textContent = `${provider.name} - ${provider.location}`;
                 select.appendChild(option);
             });
         }
@@ -2155,57 +1203,27 @@
         function requestDevice(deviceId) {
             showSection('request');
             setTimeout(() => {
-                const select = document.getElementById('deviceSelect');
-                if (select) {
-                    select.value = deviceId;
-                }
+                document.getElementById('deviceSelect').value = deviceId;
             }, 100);
         }
 
-        function contactProvider(phone) {
-            if (phone && phone.trim() !== '') {
-                window.location.href = `tel:${phone}`;
-            } else {
-                showError('No phone number available for this provider');
-            }
-        }
-
-        function resetForm() {
-            const form = document.getElementById('requestForm');
-            if (form) form.reset();
-            
-            const messageDiv = document.getElementById('requestMessage');
-            if (messageDiv) messageDiv.classList.add('hidden');
-        }
-
-        // Modal functions
         function showModal(type) {
             if (type === 'device') {
-                document.getElementById('deviceModalTitle').textContent = 'Add New Medical Device';
+                document.getElementById('deviceModalTitle').textContent = 'Add Device';
                 document.getElementById('deviceForm').reset();
                 document.getElementById('deviceId').value = '';
             } else if (type === 'provider') {
-                document.getElementById('providerModalTitle').textContent = 'Add New Healthcare Provider';
+                document.getElementById('providerModalTitle').textContent = 'Add Provider';
                 document.getElementById('providerForm').reset();
                 document.getElementById('providerId').value = '';
             }
-            
-            const modal = document.getElementById(`${type}Modal`);
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            document.getElementById(`${type}Modal`).style.display = 'flex';
         }
 
         function closeModal(type) {
-            const modal = document.getElementById(`${type}Modal`);
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+            document.getElementById(`${type}Modal`).style.display = 'none';
         }
 
-        // Notification functions
         function showSuccess(message) {
             const notification = document.createElement('div');
             notification.className = 'message message-success';
@@ -2215,20 +1233,9 @@
             notification.style.right = '1rem';
             notification.style.zIndex = '9999';
             notification.style.maxWidth = '300px';
-            notification.style.boxShadow = 'var(--shadow-lg)';
-            notification.style.animation = 'slideIn 0.3s ease';
             
             document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(100%)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
+            setTimeout(() => notification.remove(), 3000);
         }
 
         function showError(message) {
@@ -2240,37 +1247,15 @@
             notification.style.right = '1rem';
             notification.style.zIndex = '9999';
             notification.style.maxWidth = '300px';
-            notification.style.boxShadow = 'var(--shadow-lg)';
-            notification.style.animation = 'slideIn 0.3s ease';
             
             document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(100%)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
+            setTimeout(() => notification.remove(), 3000);
         }
 
         // Close modals when clicking outside
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('modal-overlay')) {
-                event.target.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const overlay = document.getElementById('mobileOverlay');
-            if (overlay && overlay.classList.contains('active') && 
-                !overlay.contains(event.target) && 
-                !event.target.classList.contains('mobile-menu-btn')) {
-                toggleMobileMenu();
+                event.target.style.display = 'none';
             }
         });
     </script>
