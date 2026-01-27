@@ -3,1065 +3,660 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>TechMedixLink | Medical Technology Bridge Platform</title>
+    <title>TechMedixLink | Medical Technology Advisory & Implementation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ====== PROFESSIONAL CSS RESET ====== */
+        /* ====== GLOBAL STYLES ====== */
+        :root {
+            /* Enhanced Healthcare Color Palette */
+            --primary-gradient: linear-gradient(135deg, #0066cc 0%, #00a3e0 100%);
+            --secondary-gradient: linear-gradient(135deg, #00b3b3 0%, #00d4aa 100%);
+            --accent-gradient: linear-gradient(135deg, #8a2be2 0%, #5d00ff 100%);
+            --dark-gradient: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            
+            /* Modern Neutrals */
+            --dark-1: #0a192f;
+            --dark-2: #172a45;
+            --dark-3: #2d4263;
+            --gray-1: #4a5568;
+            --gray-2: #718096;
+            --gray-3: #a0aec0;
+            --light-1: #f0f7ff;
+            --light-2: #ffffff;
+            
+            /* Modern Shadows */
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 15px 50px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 25px 80px rgba(0, 0, 0, 0.2);
+            
+            /* Glass Morphism */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        :root {
-            /* Professional Healthcare Color Palette */
-            --primary-blue: #0066cc;
-            --primary-dark: #004d99;
-            --primary-light: #e6f2ff;
-            --accent-teal: #00b3b3;
-            --accent-green: #00cc88;
-            --warning-orange: #ff9900;
-            --error-red: #ff4444;
-            --success-green: #00cc66;
-            
-            /* Neutral Palette */
-            --dark-1: #1a365d;
-            --dark-2: #2d3748;
-            --dark-3: #4a5568;
-            --gray-1: #718096;
-            --gray-2: #a0aec0;
-            --gray-3: #cbd5e0;
-            --light-1: #edf2f7;
-            --light-2: #f7fafc;
-            --white: #ffffff;
-            
-            /* Shadows */
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            
-            /* Transitions */
-            --transition-fast: 150ms ease;
-            --transition-normal: 250ms ease;
-            --transition-slow: 350ms ease;
-            
-            /* Border Radius */
-            --radius-sm: 4px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --radius-xl: 16px;
-            --radius-full: 9999px;
-            
-            /* Safe areas for mobile */
-            --safe-area-inset-top: env(safe-area-inset-top);
-            --safe-area-inset-bottom: env(safe-area-inset-bottom);
-            --safe-area-inset-left: env(safe-area-inset-left);
-            --safe-area-inset-right: env(safe-area-inset-right);
         }
 
         html {
             scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--light-2);
             color: var(--dark-2);
             line-height: 1.6;
-            font-weight: 400;
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* ====== TYPOGRAPHY ====== */
         h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            line-height: 1.25;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
             color: var(--dark-1);
-            letter-spacing: -0.025em;
         }
 
-        h1 { 
-            font-size: clamp(1.75rem, 5vw, 2.5rem); 
-        }
-        h2 { 
-            font-size: clamp(1.5rem, 4vw, 2rem); 
-        }
-        h3 { 
-            font-size: clamp(1.25rem, 3.5vw, 1.5rem); 
-        }
-        h4 { 
-            font-size: clamp(1.125rem, 3vw, 1.25rem); 
-        }
-
-        .text-lead {
-            font-size: clamp(1rem, 2.5vw, 1.125rem);
-            color: var(--dark-3);
-            font-weight: 400;
-        }
-
-        .text-muted {
-            color: var(--gray-1);
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-        }
-
-        /* ====== LAYOUT CONTAINERS ====== */
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 clamp(1rem, 3vw, 1.5rem);
-            width: 100%;
+            padding: 0 1.5rem;
         }
 
-        /* ====== HEADER ====== */
-        .main-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            padding: 0.75rem 0;
-            position: sticky;
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .text-gradient {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-lead {
+            font-size: 1.125rem;
+            color: var(--gray-1);
+            line-height: 1.7;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mb-5 { margin-bottom: 3rem; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            min-width: 160px;
+            justify-content: center;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
             top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left var(--transition-slow);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--light-2);
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--light-2);
+            color: var(--dark-1);
+            border: 2px solid var(--dark-1);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            background: var(--dark-1);
+            color: var(--light-2);
+        }
+
+        /* ====== CREATIVE HEADER ====== */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
-            box-shadow: var(--shadow-lg);
-            padding-top: calc(0.75rem + var(--safe-area-inset-top));
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            transition: all var(--transition-normal);
+        }
+
+        .header-scrolled {
+            padding: 0.5rem 0;
+            box-shadow: var(--shadow-md);
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
         }
 
-        .logo {
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
             text-decoration: none;
-            color: var(--white);
-            flex: 1;
-            min-width: 0;
         }
 
         .logo-icon {
-            width: clamp(36px, 8vw, 40px);
-            height: clamp(36px, 8vw, 40px);
-            background: var(--white);
-            border-radius: var(--radius-md);
+            width: 48px;
+            height: 48px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-blue);
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            flex-shrink: 0;
+            font-size: 1.5rem;
+            color: var(--light-2);
+            box-shadow: var(--shadow-sm);
         }
 
         .logo-text {
             display: flex;
             flex-direction: column;
-            min-width: 0;
-            overflow: hidden;
         }
 
-        .logo-title {
-            font-size: clamp(1rem, 3.5vw, 1.25rem);
-            font-weight: 700;
+        .logo-main {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-1);
             letter-spacing: -0.5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .logo-tagline {
-            font-size: clamp(0.625rem, 1.5vw, 0.75rem);
-            opacity: 0.9;
-            font-weight: 400;
-            display: none;
+            font-size: 0.75rem;
+            color: var(--gray-2);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* ====== MOBILE NAVIGATION ====== */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            transition: var(--transition-fast);
-            flex-shrink: 0;
-        }
-
-        .mobile-menu-btn:hover,
-        .mobile-menu-btn:active {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .main-nav {
-            display: flex;
-        }
-
+        /* ====== CREATIVE NAVIGATION ====== */
         .main-nav ul {
             display: flex;
-            gap: 0.25rem;
+            gap: 0.5rem;
             list-style: none;
         }
 
         .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem clamp(0.5rem, 1vw, 1rem);
-            color: rgba(255, 255, 255, 0.9);
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-2);
             text-decoration: none;
-            border-radius: var(--radius-md);
+            border-radius: 50px;
             font-weight: 500;
-            transition: var(--transition-fast);
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            white-space: nowrap;
-        }
-
-        .nav-link:hover,
-        .nav-link:active {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-        }
-
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--white);
-            font-weight: 600;
-        }
-
-        .nav-badge {
-            background: var(--accent-teal);
-            color: var(--white);
-            font-size: clamp(0.625rem, 1.5vw, 0.75rem);
-            padding: 0.125rem 0.5rem;
-            border-radius: var(--radius-full);
-            margin-left: 0.25rem;
-            flex-shrink: 0;
-        }
-
-        /* ====== MOBILE OVERLAY MENU ====== */
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-dark);
-            z-index: 9999;
-            display: none;
-            flex-direction: column;
-            padding: calc(1rem + var(--safe-area-inset-top)) 1rem calc(1rem + var(--safe-area-inset-bottom));
-            overflow-y: auto;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .mobile-overlay.active {
-            display: flex;
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .mobile-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 0 0.5rem;
-        }
-
-        .mobile-close-btn {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
+            transition: all var(--transition-fast);
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            transition: var(--transition-fast);
-        }
-
-        .mobile-close-btn:hover,
-        .mobile-close-btn:active {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-nav {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0 0.5rem;
-        }
-
-        .mobile-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
             gap: 0.5rem;
-        }
-
-        .mobile-nav-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            color: var(--white);
-            text-decoration: none;
-            border-radius: var(--radius-md);
-            font-size: clamp(1rem, 3.5vw, 1.125rem);
-            transition: var(--transition-fast);
             position: relative;
         }
 
-        .mobile-nav-link:hover,
-        .mobile-nav-link:active {
-            background: rgba(255, 255, 255, 0.1);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: all var(--transition-normal);
+            transform: translateX(-50%);
         }
 
-        .mobile-nav-link.active {
-            background: rgba(255, 255, 255, 0.15);
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 60%;
+        }
+
+        .nav-link:hover {
+            color: var(--dark-1);
+            background: rgba(0, 102, 204, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--dark-1);
             font-weight: 600;
         }
 
-        /* ====== HERO SECTION ====== */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-1);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* ====== CREATIVE HERO SECTION ====== */
         .hero-section {
-            background: linear-gradient(135deg, var(--primary-light) 0%, #e6f0ff 100%);
-            padding: clamp(2rem, 5vw, 3rem) 0;
+            padding: 10rem 0 5rem;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
             position: relative;
             overflow: hidden;
         }
 
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 102, 204, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(0, 179, 179, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(138, 43, 226, 0.08) 0%, transparent 20%);
+            pointer-events: none;
+        }
+
         .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         .hero-title {
-            font-size: clamp(1.75rem, 6vw, 2.5rem);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            color: var(--dark-1);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 3vw, 1.125rem);
-            color: var(--dark-3);
-            margin-bottom: 1.5rem;
-            max-width: 800px;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
+            font-size: 1.25rem;
+            color: var(--gray-1);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        @media (min-width: 480px) {
-            .hero-stats {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            margin-top: 4rem;
         }
 
         .hero-stat {
-            text-align: center;
-            background: var(--white);
-            padding: 1rem;
+            background: var(--light-2);
+            padding: 1.5rem;
             border-radius: var(--radius-lg);
+            text-align: center;
             box-shadow: var(--shadow-sm);
-            transition: var(--transition-normal);
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .hero-stat:hover {
-            transform: translateY(-2px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-md);
-        }
-
-        .hero-stat-number {
-            font-size: clamp(1.25rem, 4vw, 1.5rem);
-            font-weight: 700;
-            color: var(--primary-blue);
-            display: block;
-            line-height: 1;
-        }
-
-        .hero-stat-label {
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            color: var(--gray-1);
-            margin-top: 0.25rem;
-        }
-
-        /* ====== MAIN CONTENT ====== */
-        .main-content {
-            padding: clamp(1.5rem, 4vw, 2rem) 0;
-            min-height: 60vh;
-        }
-
-        /* ====== DASHBOARD ====== */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 1.25rem;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-normal);
-            border: 1px solid var(--gray-3);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        @media (max-width: 480px) {
-            .stat-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem;
-            }
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .stat-icon {
-            width: clamp(40px, 8vw, 48px);
-            height: clamp(40px, 8vw, 48px);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            flex-shrink: 0;
-        }
-
-        .stat-icon.blue { background: #e6f2ff; color: var(--primary-blue); }
-        .stat-icon.green { background: #e6fff2; color: var(--success-green); }
-        .stat-icon.teal { background: #e6ffff; color: var(--accent-teal); }
-        .stat-icon.orange { background: #fff5e6; color: var(--warning-orange); }
-
-        .stat-content {
-            flex: 1;
         }
 
         .stat-number {
-            font-size: clamp(1.25rem, 4vw, 1.5rem);
-            font-weight: 700;
-            color: var(--dark-1);
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             line-height: 1;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            color: var(--gray-1);
+            color: var(--gray-2);
             font-weight: 500;
         }
 
-        .stat-trend {
-            font-size: clamp(0.625rem, 1.5vw, 0.75rem);
-            padding: 0.125rem 0.5rem;
-            border-radius: var(--radius-full);
-            margin-top: 0.25rem;
-            display: inline-block;
+        /* ====== CORE SOLUTIONS SECTION ====== */
+        .solutions-section {
+            background: var(--light-2);
         }
 
-        .trend-up { background: #e6fff2; color: var(--success-green); }
-        .trend-down { background: #ffe6e6; color: var(--error-red); }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
 
-        /* ====== DATA CARDS ====== */
-        .data-card {
-            background: var(--white);
+        .solution-card {
+            background: var(--light-2);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-3);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--primary-gradient);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .solution-card.software::before {
+            background: var(--primary-gradient);
+        }
+
+        .solution-card.digital::before {
+            background: var(--secondary-gradient);
+        }
+
+        .solution-card.innovation::before {
+            background: var(--accent-gradient);
+        }
+
+        .solution-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--light-2);
+            box-shadow: var(--shadow-md);
+        }
+
+        .software .solution-icon {
+            background: var(--primary-gradient);
+        }
+
+        .digital .solution-icon {
+            background: var(--secondary-gradient);
+        }
+
+        .innovation .solution-icon {
+            background: var(--accent-gradient);
+        }
+
+        .solution-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .solution-features li {
+            padding: 0.5rem 0;
+            color: var(--gray-1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .solution-features li::before {
+            content: '✓';
+            color: #00cc88;
+            font-weight: bold;
+        }
+
+        /* ====== STRATEGIC ADVISORY SECTION ====== */
+        .advisory-section {
+            background: linear-gradient(135deg, #f8faff 0%, #e6f0ff 100%);
+        }
+
+        .advisory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .advisory-card {
+            background: var(--light-2);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .advisory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .advisory-card.featured {
+            transform: scale(1.02);
+        }
+
+        .pillar-header {
+            padding: 2rem 2rem 1.5rem;
+            color: var(--light-2);
+            position: relative;
+        }
+
+        .pillar-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .pillar-tag {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .pillar-content {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .pillar-content h4 {
+            margin-bottom: 1rem;
+            color: var(--dark-1);
+        }
+
+        .pillar-content ul {
+            list-style: none;
             margin-bottom: 1.5rem;
         }
 
-        .data-card-header {
-            padding: clamp(1rem, 2.5vw, 1.25rem);
-            border-bottom: 1px solid var(--gray-3);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .pillar-content li {
+            padding: 0.5rem 0;
+            color: var(--gray-1);
+            position: relative;
+            padding-left: 1.5rem;
         }
 
-        .data-card-title {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .data-card-icon {
-            width: clamp(36px, 7vw, 40px);
-            height: clamp(36px, 7vw, 40px);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .pillar-content li::before {
+            content: '•';
             color: var(--primary-blue);
-            background: var(--primary-light);
-            flex-shrink: 0;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
         }
 
-        .data-card-actions {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            flex-wrap: wrap;
+        /* ====== SERVICE PACKAGES ====== */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .data-card-body {
-            padding: clamp(1rem, 2.5vw, 1.25rem);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* ====== TABLES ====== */
-        .data-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            min-width: 600px;
-        }
-
-        .data-table thead {
-            background: var(--light-1);
-            position: sticky;
-            top: 0;
-        }
-
-        .data-table th {
-            padding: 0.75rem;
-            text-align: left;
-            font-weight: 600;
-            color: var(--dark-2);
-            border-bottom: 2px solid var(--gray-3);
-            white-space: nowrap;
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-        }
-
-        .data-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--gray-3);
-            vertical-align: middle;
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-        }
-
-        .data-table tbody tr {
-            transition: var(--transition-fast);
-        }
-
-        .data-table tbody tr:hover {
-            background: var(--primary-light);
-        }
-
-        /* Mobile table view */
-        @media (max-width: 768px) {
-            .data-table {
-                display: block;
-            }
-            
-            .data-table thead {
-                display: none;
-            }
-            
-            .data-table tbody {
-                display: block;
-            }
-            
-            .data-table tr {
-                display: block;
-                margin-bottom: 1rem;
-                border: 1px solid var(--gray-3);
-                border-radius: var(--radius-md);
-                padding: 1rem;
-                background: var(--white);
-            }
-            
-            .data-table td {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.5rem 0;
-                border-bottom: 1px solid var(--light-1);
-            }
-            
-            .data-table td:before {
-                content: attr(data-label);
-                font-weight: 600;
-                color: var(--dark-2);
-                margin-right: 1rem;
-                flex: 1;
-            }
-            
-            .data-table td:last-child {
-                border-bottom: none;
-                padding-top: 1rem;
-                justify-content: flex-end;
-            }
-        }
-
-        /* ====== BADGES ====== */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: var(--radius-full);
-            font-size: clamp(0.625rem, 1.5vw, 0.75rem);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-
-        .badge-success {
-            background: #e6fff2;
-            color: var(--success-green);
-            border: 1px solid #b3ffd9;
-        }
-
-        .badge-warning {
-            background: #fff5e6;
-            color: var(--warning-orange);
-            border: 1px solid #ffd9b3;
-        }
-
-        .badge-info {
-            background: #e6f2ff;
-            color: var(--primary-blue);
-            border: 1px solid #b3d9ff;
-        }
-
-        /* ====== FILTERS ====== */
-        .filter-bar {
-            background: var(--white);
-            border-radius: var(--radius-md);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-3);
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        @media (min-width: 640px) {
-            .filter-bar {
-                flex-direction: row;
-                align-items: center;
-            }
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            flex: 1;
-            min-width: 0;
-        }
-
-        @media (min-width: 640px) {
-            .filter-group {
-                flex-direction: row;
-                align-items: center;
-            }
-        }
-
-        .filter-label {
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            font-weight: 500;
-            color: var(--dark-2);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .filter-select {
-            padding: 0.5rem;
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-md);
-            background: var(--white);
-            color: var(--dark-2);
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            font-weight: 500;
-            transition: var(--transition-fast);
-            flex: 1;
-            min-width: 120px;
-            width: 100%;
-        }
-
-        @media (min-width: 640px) {
-            .filter-select {
-                width: auto;
-            }
-        }
-
-        .filter-select:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
-        }
-
-        /* ====== FORMS ====== */
-        .form-card {
-            background: var(--white);
+        .package-card {
+            background: var(--light-2);
             border-radius: var(--radius-lg);
-            padding: clamp(1rem, 3vw, 1.5rem);
-            box-shadow: var(--shadow-lg);
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid var(--gray-3);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+            border: 2px solid transparent;
         }
 
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark-2);
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--gray-3);
-            border-radius: var(--radius-md);
-            font-size: clamp(0.875rem, 2.5vw, 1rem);
-            color: var(--dark-2);
-            transition: var(--transition-fast);
-            background: var(--white);
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .form-control:focus {
-            outline: none;
+        .package-card.featured {
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            transform: scale(1.02);
         }
 
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            background-size: 1rem;
-            padding-right: 2.5rem;
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* ====== BUTTONS ====== */
-        .btn {
-            display: inline-flex;
+        .package-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .package-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark-1);
+            margin-top: 0.5rem;
+        }
+
+        .package-features {
+            padding: 2rem;
+            list-style: none;
+        }
+
+        .package-features li {
+            padding: 0.75rem 0;
+            color: var(--gray-1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: clamp(0.75rem, 2vw, 0.875rem) clamp(1rem, 2.5vw, 1.25rem);
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            border: none;
-            outline: none;
+            gap: 0.75rem;
+        }
+
+        .package-features li::before {
+            content: '✓';
+            color: #00cc88;
+            font-weight: bold;
+        }
+
+        .package-footer {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        /* ====== CTA SECTION ====== */
+        .cta-section {
+            background: var(--dark-gradient);
+            color: var(--light-2);
             position: relative;
             overflow: hidden;
-            min-height: 44px;
-            justify-content: center;
-            flex-shrink: 0;
-            -webkit-user-select: none;
-            user-select: none;
         }
 
-        .btn:active {
-            transform: translateY(1px);
-        }
-
-        .btn-sm {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.75rem;
-            min-height: 36px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-        }
-
-        .btn-primary:hover,
-        .btn-primary:active {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-secondary {
-            background: var(--light-1);
-            color: var(--dark-2);
-            border: 1px solid var(--gray-3);
-        }
-
-        .btn-secondary:hover,
-        .btn-secondary:active {
-            background: var(--gray-3);
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success-green) 0%, #00b36b 100%);
-            color: var(--white);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--error-red) 0%, #cc0000 100%);
-            color: var(--white);
-        }
-
-        .btn-icon {
-            width: 44px;
-            height: 44px;
-            padding: 0;
-            justify-content: center;
-            border-radius: var(--radius-md);
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        /* ====== ACTION BUTTONS ====== */
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .action-btn {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            border: none;
-            background: none;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            color: var(--gray-1);
-            flex-shrink: 0;
-        }
-
-        .action-btn:hover,
-        .action-btn:active {
-            background: var(--light-1);
-            color: var(--primary-blue);
-        }
-
-        .edit-btn:hover,
-        .edit-btn:active {
-            color: var(--success-green);
-        }
-
-        .delete-btn:hover,
-        .delete-btn:active {
-            color: var(--error-red);
-        }
-
-        /* ====== MESSAGES ====== */
-        .message {
-            padding: 1rem;
-            border-radius: var(--radius-md);
-            margin: 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message-success {
-            background: #e6fff2;
-            color: var(--success-green);
-            border: 1px solid #b3ffd9;
-        }
-
-        .message-error {
-            background: #ffe6e6;
-            color: var(--error-red);
-            border: 1px solid #ffb3b3;
-        }
-
-        .message-info {
-            background: #e6f2ff;
-            color: var(--primary-blue);
-            border: 1px solid #b3d9ff;
-        }
-
-        /* Toast Notifications */
-        .toast {
-            position: fixed;
-            top: calc(1rem + var(--safe-area-inset-top));
-            right: 1rem;
-            max-width: min(350px, 90vw);
-            z-index: 10000;
-            animation: slideInRight 0.3s ease;
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* ====== MODAL ====== */
-        .modal-overlay {
-            position: fixed;
+        .cta-section::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            padding: 1rem;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            animation: fadeIn 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230066cc' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: clamp(1rem, 3vw, 1.5rem);
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            animation: scaleIn 0.3s ease;
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-1);
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            transition: var(--transition-fast);
-        }
-
-        .modal-close:hover,
-        .modal-close:active {
-            background: var(--light-1);
-            color: var(--error-red);
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--gray-3);
-        }
-
-        @media (max-width: 480px) {
-            .modal-footer {
-                flex-direction: column;
-            }
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         /* ====== FOOTER ====== */
         .main-footer {
             background: var(--dark-1);
-            color: var(--white);
-            padding: clamp(2rem, 5vw, 3rem) 0 2rem;
-            margin-top: 3rem;
+            color: var(--light-2);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            padding: 3rem 0;
         }
 
-        .footer-section-title {
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .footer-section h4 {
+            color: var(--light-2);
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
         }
 
         .footer-links {
@@ -1069,2062 +664,777 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .footer-links a {
-            color: var(--gray-2);
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: var(--transition-fast);
+            transition: color var(--transition-fast);
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
         }
 
-        .footer-links a:hover,
-        .footer-links a:active {
-            color: var(--white);
+        .footer-links a:hover {
+            color: var(--light-2);
         }
 
         .footer-bottom {
-            padding-top: 2rem;
+            padding: 2rem 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            color: var(--gray-2);
-            font-size: clamp(0.625rem, 1.5vw, 0.75rem);
-        }
-
-        /* ====== LOADING STATES ====== */
-        .loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            color: var(--gray-1);
-            text-align: center;
-        }
-
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--gray-3);
-            border-top-color: var(--primary-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Skeleton loading */
-        .skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            border-radius: var(--radius-md);
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
         }
 
         /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.75rem;
+            }
+            
+            .section-padding {
+                padding: 4rem 0;
+            }
+        }
+
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-            
             .mobile-menu-btn {
-                display: flex;
-            }
-            
-            .main-nav {
-                display: none;
-            }
-            
-            .logo-tagline {
                 display: block;
             }
             
-            .hero-actions {
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--light-2);
+                box-shadow: var(--shadow-xl);
+                transition: right var(--transition-normal);
+                z-index: 1001;
+                padding: 2rem;
+            }
+            
+            .main-nav.active {
+                right: 0;
+            }
+            
+            .main-nav ul {
                 flex-direction: column;
+                gap: 0.5rem;
             }
             
-            .hero-actions .btn {
-                width: 100%;
-                justify-content: center;
+            .hero-title {
+                font-size: 2.25rem;
             }
             
-            .data-card-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
+            .hero-subtitle {
+                font-size: 1.125rem;
             }
             
-            .data-card-actions {
-                width: 100%;
-                justify-content: flex-start;
+            .solutions-grid,
+            .advisory-grid,
+            .packages-grid {
+                grid-template-columns: 1fr;
             }
             
-            .action-buttons {
-                flex-wrap: wrap;
-                justify-content: flex-start;
-            }
-            
-            .action-btn {
-                width: 32px;
-                height: 32px;
-            }
-            
-            .modal {
-                padding: 1rem;
+            .section-padding {
+                padding: 3rem 0;
             }
         }
 
         @media (max-width: 480px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
+            .hero-title {
+                font-size: 2rem;
             }
             
-            .stat-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem;
+            .container {
+                padding: 0 1rem;
             }
             
-            .stat-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
-            
-            .badge {
-                font-size: 0.625rem;
-                padding: 0.125rem 0.375rem;
+        }
+
+        /* ====== ANIMATIONS ====== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         /* ====== UTILITY CLASSES ====== */
-        .hidden { 
-            display: none !important; 
+        .hidden {
+            display: none !important;
         }
-        .text-center { text-align: center; }
-        .mt-1 { margin-top: 0.5rem; }
-        .mt-2 { margin-top: 1rem; }
-        .mt-3 { margin-top: 1.5rem; }
-        .mt-4 { margin-top: 2rem; }
-        .mb-1 { margin-bottom: 0.5rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .mb-3 { margin-bottom: 1.5rem; }
-        .mb-4 { margin-bottom: 2rem; }
-        .p-2 { padding: 1rem; }
-        .p-3 { padding: 1.5rem; }
-        .w-full { width: 100%; }
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
+
+        .visible {
+            display: block !important;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .align-center {
+            align-items: center;
+        }
+
         .gap-1 { gap: 0.5rem; }
         .gap-2 { gap: 1rem; }
         .gap-3 { gap: 1.5rem; }
-        .flex-wrap { flex-wrap: wrap; }
-        .flex-1 { flex: 1; }
-
-        /* ====== SWIPE GESTURES ====== */
-        .swipe-indicator {
-            position: fixed;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            z-index: 1000;
-            animation: bounce 2s infinite;
-            display: none;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        /* ====== PULL TO REFRESH ====== */
-        .pull-to-refresh {
-            position: absolute;
-            top: -60px;
-            left: 0;
-            right: 0;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-blue);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .pull-to-refresh.active {
-            opacity: 1;
-        }
-
-        /* ====== OFFLINE DETECTION ====== */
-        .offline-notice {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--error-red);
-            color: white;
-            text-align: center;
-            padding: 0.5rem;
-            z-index: 10000;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        .offline-notice.active {
-            transform: translateY(0);
-        }
-
-        /* ====== BACK TO TOP ====== */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 1rem;
-            width: 44px;
-            height: 44px;
-            background: var(--primary-blue);
-            color: white;
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            transform: translateY(100%);
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover,
-        .back-to-top:active {
-            background: var(--primary-dark);
-            transform: translateY(-5px);
-        }
-
-        /* ====== SCROLLBAR STYLING ====== */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light-1);
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-3);
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-2);
-        }
+        .gap-4 { gap: 2rem; }
     </style>
 </head>
 <body>
-    <!-- Offline Notice -->
-    <div class="offline-notice" id="offlineNotice">
-        <i class="fas fa-wifi-slash"></i> You're offline. Some features may be unavailable.
-    </div>
-
-    <!-- Swipe Indicator -->
-    <div class="swipe-indicator" id="swipeIndicator">
-        <i class="fas fa-arrow-left"></i> Swipe to navigate <i class="fas fa-arrow-right"></i>
-    </div>
-
-    <!-- Back to Top -->
-    <a href="#" class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </a>
-
     <!-- Header -->
-    <header class="main-header">
+    <header class="main-header" id="mainHeader">
         <div class="container header-content">
-            <a href="#" class="logo" onclick="showSection('hero')">
+            <a href="#hero" class="logo-container">
                 <div class="logo-icon">
                     <i class="fas fa-bridge-medical"></i>
                 </div>
                 <div class="logo-text">
-                    <div class="logo-title">TechMedixLink</div>
-                    <div class="logo-tagline">Medical Technology Bridge</div>
+                    <div class="logo-main">TechMedixLink</div>
+                    <div class="logo-tagline">Medical Technology Advisory & Implementation</div>
                 </div>
             </a>
             
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <nav class="main-nav" aria-label="Main navigation">
+            <nav class="main-nav" id="mainNav">
                 <ul>
-                    <li><a href="#" class="nav-link" onclick="showSection('dashboard')"><i class="fas fa-chart-line"></i> <span class="nav-text">Dashboard</span></a></li>
-                    <li><a href="#" class="nav-link" onclick="showSection('devices')"><i class="fas fa-stethoscope"></i> <span class="nav-text">Devices</span> <span class="nav-badge" id="deviceBadge">0</span></a></li>
-                    <li><a href="#" class="nav-link" onclick="showSection('providers')"><i class="fas fa-hospital"></i> <span class="nav-text">Providers</span> <span class="nav-badge" id="providerBadge">0</span></a></li>
-                    <li><a href="#" class="nav-link" onclick="showSection('request')"><i class="fas fa-file-medical"></i> <span class="nav-text">Request</span></a></li>
-                    <li><a href="#" class="nav-link" onclick="showSection('analytics')"><i class="fas fa-chart-bar"></i> <span class="nav-text">Analytics</span></a></li>
+                    <li><a href="#solutions" class="nav-link">Solutions</a></li>
+                    <li><a href="#advisory" class="nav-link">Advisory</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Mobile Overlay Menu -->
-    <div class="mobile-overlay" id="mobileOverlay">
-        <div class="mobile-header">
-            <a href="#" class="logo" onclick="showSection('hero'); toggleMobileMenu()">
-                <div class="logo-icon">
-                    <i class="fas fa-bridge-medical"></i>
-                </div>
-                <div class="logo-text">
-                    <div class="logo-title">TechMedixLink</div>
-                    <div class="logo-tagline">Medical Technology Bridge</div>
-                </div>
-            </a>
-            <button class="mobile-close-btn" onclick="toggleMobileMenu()" aria-label="Close menu">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <nav class="mobile-nav" aria-label="Mobile navigation">
-            <ul>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('dashboard'); toggleMobileMenu()"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('devices'); toggleMobileMenu()"><i class="fas fa-stethoscope"></i> Medical Devices <span class="nav-badge" id="mobileDeviceBadge">0</span></a></li>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('providers'); toggleMobileMenu()"><i class="fas fa-hospital"></i> Healthcare Providers <span class="nav-badge" id="mobileProviderBadge">0</span></a></li>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('request'); toggleMobileMenu()"><i class="fas fa-file-medical"></i> Submit Request</a></li>
-                <li><a href="#" class="mobile-nav-link" onclick="showSection('analytics'); toggleMobileMenu()"><i class="fas fa-chart-bar"></i> Analytics</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <!-- Pull to Refresh Indicator -->
-    <div class="pull-to-refresh" id="pullToRefresh">
-        <i class="fas fa-sync-alt fa-spin"></i>
-    </div>
-
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Bridging Medical Technology for Tanzania's Healthcare</h1>
+                <h1 class="hero-title">
+                    Transforming Healthcare Through 
+                    <span class="text-gradient">Strategic Technology</span>
+                </h1>
                 <p class="hero-subtitle text-lead">
-                    Connecting Tanzanian healthcare providers with international medical innovation. 
-                    A platform designed to accelerate access to advanced medical technology across Tanzania.
+                    We bridge global medical innovation with local healthcare implementation in Tanzania. 
+                    Strategic advisory, technology transfer, and digital transformation for healthcare systems.
                 </p>
                 
-                <div class="hero-actions">
-                    <button class="btn btn-primary" onclick="showSection('request')">
-                        <i class="fas fa-file-medical"></i> Submit Technology Request
-                    </button>
-                    <button class="btn btn-secondary" onclick="showSection('dashboard')">
-                        <i class="fas fa-chart-line"></i> View Dashboard
-                    </button>
+                <div class="d-flex justify-center gap-2 mb-4">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i> Schedule Consultation
+                    </a>
+                    <a href="#solutions" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i> View Solutions
+                    </a>
                 </div>
                 
                 <div class="hero-stats">
                     <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroDevices">0</span>
-                        <span class="hero-stat-label">Medical Devices</span>
+                        <div class="stat-number" id="statProjects">150+</div>
+                        <div class="stat-label">Healthcare Projects</div>
                     </div>
                     <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroProviders">0</span>
-                        <span class="hero-stat-label">Healthcare Providers</span>
+                        <div class="stat-number" id="statClinics">45+</div>
+                        <div class="stat-label">Digital Clinics</div>
                     </div>
                     <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroCertified">0</span>
-                        <span class="hero-stat-label">TMDA Certified</span>
+                        <div class="stat-number" id="statPartners">28+</div>
+                        <div class="stat-label">Global Partners</div>
                     </div>
                     <div class="hero-stat">
-                        <span class="hero-stat-number" id="heroRequests">0</span>
-                        <span class="hero-stat-label">Active Requests</span>
+                        <div class="stat-number" id="statImpact">98%</div>
+                        <div class="stat-label">Success Rate</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="main-content">
+    <!-- Core Solutions Section -->
+    <section id="solutions" class="section-padding solutions-section">
         <div class="container">
-            <!-- Dashboard Section -->
-            <section id="dashboard" class="hidden">
-                <h2 class="mb-3">Platform Dashboard</h2>
-                
-                <!-- Stats Grid -->
-                <div class="dashboard-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon blue">
-                            <i class="fas fa-stethoscope"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="statDevices">0</div>
-                            <div class="stat-label">Medical Devices</div>
-                            <span class="stat-trend trend-up" id="deviceTrend">Loading...</span>
-                        </div>
+            <div class="text-center mb-5">
+                <h2>Core Solutions</h2>
+                <p class="text-lead">Three pillars of healthcare technology innovation designed for Tanzania's healthcare ecosystem</p>
+            </div>
+            
+            <div class="solutions-grid">
+                <!-- Software Development -->
+                <div class="solution-card software">
+                    <div class="solution-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon green">
-                            <i class="fas fa-hospital"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="statProviders">0</div>
-                            <div class="stat-label">Healthcare Providers</div>
-                            <span class="stat-trend trend-up" id="providerTrend">Loading...</span>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon teal">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="statCertified">0</div>
-                            <div class="stat-label">TMDA Certified</div>
-                            <span class="stat-trend trend-up" id="certifiedTrend">Loading...</span>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon orange">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-number" id="statLocalSupport">0</div>
-                            <div class="stat-label">Local Support Available</div>
-                            <span class="stat-trend trend-up" id="supportTrend">Loading...</span>
-                        </div>
+                    <h3 class="text-center mb-2">Software for Low-Resource Settings</h3>
+                    <p class="text-lead text-center mb-3">
+                        Custom healthcare software solutions designed specifically for resource-conscious environments
+                    </p>
+                    <ul class="solution-features">
+                        <li>EMR/EHR Systems with offline capabilities</li>
+                        <li>Telemedicine platforms optimized for low bandwidth</li>
+                        <li>Supply chain management systems</li>
+                        <li>Healthcare data analytics dashboards</li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="#contact" class="btn btn-primary">Explore Software Solutions</a>
                     </div>
                 </div>
 
-                <!-- Recent Activity -->
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <div class="data-card-title">
-                            <div class="data-card-icon">
-                                <i class="fas fa-history"></i>
-                            </div>
-                            <div>
-                                <h3>Recent Medical Devices</h3>
-                                <p class="text-muted">Latest additions to the medical technology catalog</p>
-                            </div>
-                        </div>
-                        <div class="data-card-actions">
-                            <button class="btn btn-secondary btn-sm" onclick="loadDevices()">
-                                <i class="fas fa-sync-alt"></i> Refresh
-                            </button>
-                        </div>
+                <!-- Digital Clinic -->
+                <div class="solution-card digital float-animation">
+                    <div class="solution-icon">
+                        <i class="fas fa-clinic-medical"></i>
                     </div>
-                    <div class="data-card-body">
-                        <div id="recentDevices" class="loading">
-                            <div class="loading-spinner"></div>
-                            <p>Loading recent devices...</p>
-                        </div>
+                    <h3 class="text-center mb-2">Digital Clinic Platform</h3>
+                    <p class="text-lead text-center mb-3">
+                        Complete digital transformation platform for modern healthcare facilities
+                    </p>
+                    <ul class="solution-features">
+                        <li>Integrated patient management systems</li>
+                        <li>Virtual consultation and telemedicine</li>
+                        <li>Automated appointment scheduling</li>
+                        <li>Electronic billing and insurance integration</li>
+                        <li>Remote patient monitoring</li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="#contact" class="btn btn-primary" style="background: var(--secondary-gradient);">Launch Digital Clinic</a>
                     </div>
                 </div>
 
-                <!-- Quick Actions -->
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <div class="data-card-title">
-                            <div class="data-card-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div>
-                                <h3>Quick Actions</h3>
-                                <p class="text-muted">Common platform operations</p>
-                            </div>
-                        </div>
+                <!-- Innovation Lab -->
+                <div class="solution-card innovation">
+                    <div class="solution-icon">
+                        <i class="fas fa-lightbulb"></i>
                     </div>
-                    <div class="data-card-body">
-                        <div class="flex gap-2 flex-wrap">
-                            <button class="btn btn-primary" onclick="showSection('request')">
-                                <i class="fas fa-plus"></i> Add New Request
-                            </button>
-                            <button class="btn btn-secondary" onclick="showModal('device')">
-                                <i class="fas fa-plus"></i> Add New Device
-                            </button>
-                            <button class="btn btn-success" onclick="showModal('provider')">
-                                <i class="fas fa-plus"></i> Add New Provider
-                            </button>
-                            <button class="btn btn-secondary" onclick="loadAllData()">
-                                <i class="fas fa-sync-alt"></i> Refresh All Data
-                            </button>
-                        </div>
+                    <h3 class="text-center mb-2">Healthcare Innovation Lab</h3>
+                    <p class="text-lead text-center mb-3">
+                        Research and development of cutting-edge medical technology solutions
+                    </p>
+                    <ul class="solution-features">
+                        <li>AI-powered diagnostic tools</li>
+                        <li>Medical IoT device development</li>
+                        <li>Blockchain health records</li>
+                        <li>AR/VR medical training systems</li>
+                        <li>Local innovation incubation</li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="#contact" class="btn btn-primary" style="background: var(--accent-gradient);">Join Innovation Program</a>
                     </div>
                 </div>
-            </section>
-
-            <!-- Medical Devices Section -->
-            <section id="devices" class="hidden">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <div class="data-card-title">
-                            <div class="data-card-icon">
-                                <i class="fas fa-stethoscope"></i>
-                            </div>
-                            <div>
-                                <h3>Medical Devices Catalog</h3>
-                                <p class="text-muted">Advanced medical technology available for Tanzanian healthcare</p>
-                            </div>
-                        </div>
-                        <div class="data-card-actions">
-                            <button class="btn btn-primary btn-sm" onclick="showSection('request')">
-                                <i class="fas fa-file-medical"></i> Request Device
-                            </button>
-                            <button class="btn btn-secondary btn-sm" onclick="showModal('device')">
-                                <i class="fas fa-plus"></i> Add New Device
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Filter Bar -->
-                    <div class="filter-bar">
-                        <div class="filter-group">
-                            <span class="filter-label">Filter by:</span>
-                            <select id="deviceFilter" class="filter-select" onchange="filterDevices()">
-                                <option value="all">All Devices</option>
-                                <option value="certified">TMDA Certified Only</option>
-                                <option value="local">Local Support Available</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <span class="filter-label">Sort by:</span>
-                            <select id="deviceSort" class="filter-select" onchange="sortDevices()">
-                                <option value="name">Device Name</option>
-                                <option value="price-low">Price: Low to High</option>
-                                <option value="price-high">Price: High to Low</option>
-                                <option value="certified">Certification Status</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <button class="btn btn-secondary btn-sm w-full" onclick="resetFilters()">
-                                <i class="fas fa-redo"></i> Reset Filters
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="data-card-body">
-                        <div id="devicesList" class="loading">
-                            <div class="loading-spinner"></div>
-                            <p>Loading medical devices from API...</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Healthcare Providers Section -->
-            <section id="providers" class="hidden">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <div class="data-card-title">
-                            <div class="data-card-icon">
-                                <i class="fas fa-hospital"></i>
-                            </div>
-                            <div>
-                                <h3>Healthcare Providers Network</h3>
-                                <p class="text-muted">Tanzanian healthcare facilities participating in the TechMedixLink platform</p>
-                            </div>
-                        </div>
-                        <div class="data-card-actions">
-                            <button class="btn btn-secondary btn-sm" onclick="exportProviders()">
-                                <i class="fas fa-download"></i> Export List
-                            </button>
-                            <button class="btn btn-primary btn-sm" onclick="showModal('provider')">
-                                <i class="fas fa-plus"></i> Add New Provider
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Filter Bar -->
-                    <div class="filter-bar">
-                        <div class="filter-group">
-                            <span class="filter-label">Region:</span>
-                            <select id="regionFilter" class="filter-select" onchange="filterProviders()">
-                                <option value="all">All Regions</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <span class="filter-label">Facility Type:</span>
-                            <select id="facilityFilter" class="filter-select" onchange="filterProviders()">
-                                <option value="all">All Types</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <button class="btn btn-secondary btn-sm w-full" onclick="resetProviderFilters()">
-                                <i class="fas fa-redo"></i> Reset Filters
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="data-card-body">
-                        <div id="providersList" class="loading">
-                            <div class="loading-spinner"></div>
-                            <p>Loading healthcare providers from API...</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Submit Request Section -->
-            <section id="request" class="hidden">
-                <div class="form-card">
-                    <div class="text-center mb-3">
-                        <div class="data-card-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px;">
-                            <i class="fas fa-file-medical"></i>
-                        </div>
-                        <h2>Medical Technology Request Form</h2>
-                        <p class="text-muted">Submit your request for medical equipment or technology consultation</p>
-                    </div>
-                    
-                    <div class="message hidden" id="requestMessage"></div>
-                    
-                    <form id="requestForm" onsubmit="submitRequest(event)">
-                        <div class="form-group">
-                            <label for="providerSelect" class="form-label">
-                                <i class="fas fa-hospital"></i> Healthcare Facility *
-                            </label>
-                            <select id="providerSelect" class="form-control form-select" required>
-                                <option value="">Select your hospital or clinic</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="deviceSelect" class="form-label">
-                                <i class="fas fa-stethoscope"></i> Medical Technology Requested *
-                            </label>
-                            <select id="deviceSelect" class="form-control form-select" required>
-                                <option value="">Select medical device or technology</option>
-                            </select>
-                            <div class="text-muted mt-1" id="deviceDetails"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="quantity" class="form-label">
-                                <i class="fas fa-boxes"></i> Quantity Needed *
-                            </label>
-                            <input type="number" id="quantity" class="form-control" min="1" max="100" value="1" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="urgency" class="form-label">
-                                <i class="fas fa-clock"></i> Urgency Level
-                            </label>
-                            <select id="urgency" class="form-control form-select">
-                                <option value="normal">Normal Priority</option>
-                                <option value="high">High Priority</option>
-                                <option value="urgent">Urgent - Critical Need</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="notes" class="form-label">
-                                <i class="fas fa-notes-medical"></i> Additional Requirements
-                            </label>
-                            <textarea id="notes" class="form-control" rows="4" 
-                                      placeholder="Please provide specific requirements, installation needs, training requirements, or any other details..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="text-muted">
-                                <i class="fas fa-info-circle"></i> After submission, our team will contact you within 24 hours to discuss the next steps.
-                            </div>
-                        </div>
-
-                        <div class="form-group flex gap-2" style="margin-top: 2rem;">
-                            <button type="submit" class="btn btn-success flex-1">
-                                <i class="fas fa-paper-plane"></i> Submit Request
-                            </button>
-                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
-                                <i class="fas fa-redo"></i> Reset
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Analytics Section -->
-            <section id="analytics" class="hidden">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <div class="data-card-title">
-                            <div class="data-card-icon">
-                                <i class="fas fa-chart-bar"></i>
-                            </div>
-                            <div>
-                                <h3>Platform Analytics</h3>
-                                <p class="text-muted">Data insights and platform performance metrics</p>
-                            </div>
-                        </div>
-                        <div class="data-card-actions">
-                            <button class="btn btn-secondary btn-sm" onclick="refreshAnalytics()">
-                                <i class="fas fa-sync-alt"></i> Refresh
-                            </button>
-                        </div>
-                    </div>
-                    <div class="data-card-body">
-                        <div class="dashboard-grid">
-                            <div class="stat-card">
-                                <div class="stat-icon blue">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number" id="analyticsDevices">0</div>
-                                    <div class="stat-label">Total Devices</div>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon green">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number" id="analyticsProviders">0</div>
-                                    <div class="stat-label">Active Providers</div>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon teal">
-                                    <i class="fas fa-percentage"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number" id="analyticsCertified">0%</div>
-                                    <div class="stat-label">Certification Rate</div>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon orange">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-number" id="analyticsRegions">0</div>
-                                    <div class="stat-label">Regions Covered</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <h4 class="mb-2">Regional Distribution</h4>
-                            <div id="regionChart" style="height: 200px; background: var(--light-1); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
-                                <div class="loading">
-                                    <div class="loading-spinner"></div>
-                                    <p>Loading regional data...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <!-- Strategic Advisory Section -->
+    <section id="advisory" class="section-padding advisory-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Strategic Technology Advisory</h2>
+                <p class="text-lead">Comprehensive medical technology advisory services for healthcare transformation</p>
+            </div>
+
+            <div class="advisory-grid">
+                <!-- Strategy & Governance -->
+                <div class="advisory-card">
+                    <div class="pillar-header" style="background: var(--dark-gradient);">
+                        <div class="pillar-icon">
+                            <i class="fas fa-chess-board"></i>
+                        </div>
+                        <h3>Healthcare Technology Strategy</h3>
+                        <span class="pillar-tag">Strategic Advisory</span>
+                    </div>
+                    <div class="pillar-content">
+                        <h4>System-Level Technology Planning</h4>
+                        <ul>
+                            <li><strong>Digital Transformation Roadmaps</strong> for healthcare facilities</li>
+                            <li><strong>Technology Portfolio Strategy</strong> and investment prioritization</li>
+                            <li><strong>Regulatory Navigation</strong> for medical device compliance</li>
+                            <li><strong>Partnership Architecture</strong> with global technology providers</li>
+                            <li><strong>Healthcare Innovation Ecosystem</strong> development</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Technology Transfer -->
+                <div class="advisory-card featured">
+                    <div class="pillar-header" style="background: var(--primary-gradient);">
+                        <div class="pillar-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>Medical Technology Transfer</h3>
+                        <span class="pillar-tag">Implementation Excellence</span>
+                    </div>
+                    <div class="pillar-content">
+                        <h4>End-to-End Technology Integration</h4>
+                        <ul>
+                            <li><strong>Comprehensive Needs Assessment</strong> and gap analysis</li>
+                            <li><strong>Technology Matching & Sourcing</strong> from global partners</li>
+                            <li><strong>Localization & Context Adaptation</strong> for Tanzanian healthcare</li>
+                            <li><strong>Implementation Management</strong> and rollout supervision</li>
+                            <li><strong>Sustainability Planning</strong> for long-term technology viability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Technical Advisory -->
+                <div class="advisory-card">
+                    <div class="pillar-header" style="background: var(--secondary-gradient);">
+                        <div class="pillar-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Technical & Operational Advisory</h3>
+                        <span class="pillar-tag">Expert Guidance</span>
+                    </div>
+                    <div class="pillar-content">
+                        <h4>Specialized Medical Technology Expertise</h4>
+                        <ul>
+                            <li><strong>Medical Device Selection</strong> and specification guidance</li>
+                            <li><strong>Technology Integration</strong> with existing systems</li>
+                            <li><strong>Workflow Optimization</strong> through technology adoption</li>
+                            <li><strong>Quality Assurance</strong> and performance monitoring</li>
+                            <li><strong>Innovation Program Management</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Packages -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Structured Partnership Models</h2>
+                <p class="text-lead">Flexible engagement models tailored to your healthcare technology needs</p>
+            </div>
+
+            <div class="packages-grid">
+                <!-- Advisory Model -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Advisory & Strategy</h3>
+                        <div class="package-price">Project-Based</div>
+                    </div>
+                    <ul class="package-features">
+                        <li>Technology Assessment & Planning</li>
+                        <li>Investment Strategy Development</li>
+                        <li>Regulatory Compliance Guidance</li>
+                        <li>Vendor Selection Support</li>
+                        <li>Technology Roadmap Creation</li>
+                    </ul>
+                    <div class="package-footer">
+                        <button class="btn btn-secondary" onclick="showContactForm('Advisory')">Request Proposal</button>
+                    </div>
+                </div>
+
+                <!-- Implementation Model -->
+                <div class="package-card featured">
+                    <div class="package-header">
+                        <h3>Complete Implementation</h3>
+                        <div class="package-price">End-to-End</div>
+                    </div>
+                    <ul class="package-features">
+                        <li>Full Technology Transfer Management</li>
+                        <li>Implementation & Rollout Supervision</li>
+                        <li>Training & Capacity Building</li>
+                        <li>Ongoing Support & Optimization</li>
+                        <li>Sustainability Planning</li>
+                    </ul>
+                    <div class="package-footer">
+                        <button class="btn btn-primary" onclick="showContactForm('Implementation')">Schedule Consultation</button>
+                    </div>
+                </div>
+
+                <!-- Retainer Model -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Strategic Partnership</h3>
+                        <div class="package-price">Retainer-Based</div>
+                    </div>
+                    <ul class="package-features">
+                        <li>Ongoing Strategic Advisory</li>
+                        <li>Technology Portfolio Management</li>
+                        <li>Innovation Pipeline Development</li>
+                        <li>Priority Support & Access</li>
+                        <li>Quarterly Strategy Reviews</li>
+                    </ul>
+                    <div class="package-footer">
+                        <button class="btn btn-secondary" onclick="showContactForm('Partnership')">Discuss Partnership</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="section-padding cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="mb-3" style="color: var(--light-2);">Ready to Transform Your Healthcare Technology?</h2>
+                <p class="text-lead mb-4" style="color: rgba(255, 255, 255, 0.9);">
+                    Partner with us to bridge global medical innovation with local healthcare implementation in Tanzania.
+                </p>
+                <div class="d-flex justify-center gap-2">
+                    <button class="btn btn-primary" onclick="showContactForm('General')" style="background: var(--light-2); color: var(--dark-1);">
+                        <i class="fas fa-comment-medical"></i> Start Conversation
+                    </button>
+                    <a href="tel:+255222000000" class="btn btn-secondary" style="background: transparent; border: 2px solid var(--light-2); color: var(--light-2);">
+                        <i class="fas fa-phone"></i> Call Us Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h4 class="footer-section-title">TechMedixLink</h4>
-                    <p style="color: var(--gray-2); margin-bottom: 1.5rem; font-size: 0.875rem;">
-                        Bridging medical technology between developed nations and Tanzania's healthcare system. 
-                        Empowering Tanzanian healthcare with innovative medical solutions.
+                    <div class="logo-container mb-3">
+                        <div class="logo-icon" style="width: 40px; height: 40px;">
+                            <i class="fas fa-bridge-medical"></i>
+                        </div>
+                        <div class="logo-text">
+                            <div class="logo-main">TechMedixLink</div>
+                            <div class="logo-tagline">Medical Technology Advisory</div>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem;">
+                        Strategic partners in healthcare technology transformation, bridging global innovation with local implementation in Tanzania.
                     </p>
-                    <div style="display: flex; gap: 1rem;">
-                        <a href="#" style="color: var(--gray-2); font-size: 1rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: var(--gray-2); font-size: 1rem;"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" style="color: var(--gray-2); font-size: 1rem;"><i class="fab fa-github"></i></a>
+                    <div class="d-flex gap-2">
+                        <a href="#" style="color: rgba(255, 255, 255, 0.7);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: rgba(255, 255, 255, 0.7);"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: rgba(255, 255, 255, 0.7);"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="footer-section-title">Platform</h4>
+                    <h4>Solutions</h4>
                     <ul class="footer-links">
-                        <li><a href="#" onclick="showSection('dashboard')"><i class="fas fa-arrow-right"></i> Dashboard</a></li>
-                        <li><a href="#" onclick="showSection('devices')"><i class="fas fa-arrow-right"></i> Medical Devices</a></li>
-                        <li><a href="#" onclick="showSection('providers')"><i class="fas fa-arrow-right"></i> Healthcare Providers</a></li>
-                        <li><a href="#" onclick="showSection('request')"><i class="fas fa-arrow-right"></i> Submit Request</a></li>
+                        <li><a href="#solutions"><i class="fas fa-arrow-right"></i> Software Development</a></li>
+                        <li><a href="#solutions"><i class="fas fa-arrow-right"></i> Digital Clinic Platform</a></li>
+                        <li><a href="#solutions"><i class="fas fa-arrow-right"></i> Innovation Lab</a></li>
+                        <li><a href="#advisory"><i class="fas fa-arrow-right"></i> Strategic Advisory</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="footer-section-title">Technology</h4>
+                    <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><i class="fas fa-server" style="color: var(--accent-teal);"></i> Backend: Railway</li>
-                        <li><i class="fas fa-database" style="color: var(--accent-teal);"></i> Database: Supabase</li>
-                        <li><i class="fas fa-code" style="color: var(--accent-teal);"></i> API Status: <span id="footerStatus">Checking...</span></li>
-                        <li><i class="fas fa-shield-alt" style="color: var(--accent-teal);"></i> Data Security: HIPAA Compliant</li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Our Team</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Case Studies</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i> Careers</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="footer-section-title">Contact</h4>
+                    <h4>Contact</h4>
                     <ul class="footer-links">
                         <li><a href="mailto:info@techmedixlink.tz"><i class="fas fa-envelope"></i> info@techmedixlink.tz</a></li>
                         <li><a href="tel:+255222000000"><i class="fas fa-phone"></i> +255 22 200 0000</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</li>
-                        <li><a href="#"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                        <li><a href="#contact"><i class="fas fa-calendar-alt"></i> Schedule Meeting</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2024 TechMedixLink - Medical Technology Bridge Platform for Tanzania.</p>
-                <p class="mt-1">This platform connects Tanzanian healthcare providers with international medical technology solutions.</p>
+                <p>© 2024 TechMedixLink. All rights reserved. | Medical Technology Advisory & Implementation</p>
+                <p style="margin-top: 0.5rem; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5);">
+                    Bridging global medical innovation with Tanzanian healthcare implementation.
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Device Modal -->
-    <div class="modal-overlay" id="deviceModal">
+    <!-- Contact Modal -->
+    <div class="modal-overlay hidden" id="contactModal">
         <div class="modal">
             <div class="modal-header">
-                <h3 id="deviceModalTitle">Add New Medical Device</h3>
-                <button class="modal-close" onclick="closeModal('device')">
+                <h3 id="modalTitle">Contact TechMedixLink</h3>
+                <button class="modal-close" onclick="closeContactModal()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <form id="deviceForm" onsubmit="saveDevice(event)">
-                <input type="hidden" id="deviceId">
+            <form id="contactForm" onsubmit="submitContactForm(event)">
+                <input type="hidden" id="serviceType" value="General">
                 <div class="form-group">
-                    <label for="deviceName" class="form-label">Device Name *</label>
-                    <input type="text" id="deviceName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="deviceManufacturer" class="form-label">Manufacturer *</label>
-                    <input type="text" id="deviceManufacturer" class="form-control" required>
+                    <label for="contactName" class="form-label">Full Name *</label>
+                    <input type="text" id="contactName" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="deviceType" class="form-label">Device Type *</label>
-                    <select id="deviceType" class="form-control form-select" required>
-                        <option value="">Select type</option>
-                        <option value="Diagnostic">Diagnostic Equipment</option>
-                        <option value="Therapeutic">Therapeutic Equipment</option>
-                        <option value="Monitoring">Patient Monitoring</option>
-                        <option value="Surgical">Surgical Equipment</option>
-                        <option value="Laboratory">Laboratory Equipment</option>
-                    </select>
+                    <label for="contactEmail" class="form-label">Email Address *</label>
+                    <input type="email" id="contactEmail" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="devicePrice" class="form-label">Price (USD) *</label>
-                    <input type="number" id="devicePrice" class="form-control" min="0" step="0.01" required>
+                    <label for="contactOrganization" class="form-label">Organization</label>
+                    <input type="text" id="contactOrganization" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="deviceDescription" class="form-label">Description</label>
-                    <textarea id="deviceDescription" class="form-control" rows="3"></textarea>
+                    <label for="contactPhone" class="form-label">Phone Number</label>
+                    <input type="tel" id="contactPhone" class="form-control">
                 </div>
-                <div class="flex gap-2">
-                    <div class="form-group flex-1">
-                        <label class="form-label">
-                            <input type="checkbox" id="deviceCertified" class="mr-2">
-                            TMDA Certified
-                        </label>
-                    </div>
-                    <div class="form-group flex-1">
-                        <label class="form-label">
-                            <input type="checkbox" id="deviceLocalSupport" class="mr-2">
-                            Local Support Available
-                        </label>
-                    </div>
+                <div class="form-group">
+                    <label for="contactMessage" class="form-label">How can we help? *</label>
+                    <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save Device</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('device')">Cancel</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <!-- Provider Modal -->
-    <div class="modal-overlay" id="providerModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 id="providerModalTitle">Add New Healthcare Provider</h3>
-                <button class="modal-close" onclick="closeModal('provider')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form id="providerForm" onsubmit="saveProvider(event)">
-                <input type="hidden" id="providerId">
-                <div class="form-group">
-                    <label for="providerName" class="form-label">Facility Name *</label>
-                    <input type="text" id="providerName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="providerType" class="form-label">Facility Type *</label>
-                    <select id="providerType" class="form-control form-select" required>
-                        <option value="">Select type</option>
-                        <option value="Hospital">Hospital</option>
-                        <option value="Clinic">Clinic</option>
-                        <option value="Referral Hospital">Referral Hospital</option>
-                        <option value="Private Hospital">Private Hospital</option>
-                        <option value="Health Center">Health Center</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="providerRegion" class="form-label">Region *</label>
-                    <select id="providerRegion" class="form-control form-select" required>
-                        <option value="">Select region</option>
-                        <option value="Dar es Salaam">Dar es Salaam</option>
-                        <option value="Kilimanjaro">Kilimanjaro</option>
-                        <option value="Mbeya">Mbeya</option>
-                        <option value="Mwanza">Mwanza</option>
-                        <option value="Tanga">Tanga</option>
-                        <option value="Morogoro">Morogoro</option>
-                        <option value="Pwani">Pwani</option>
-                        <option value="Arusha">Arusha</option>
-                        <option value="Dodoma">Dodoma</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="providerLocation" class="form-label">Location *</label>
-                    <input type="text" id="providerLocation" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="providerContact" class="form-label">Contact Person</label>
-                    <input type="text" id="providerContact" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="providerPhone" class="form-label">Phone Number</label>
-                    <input type="tel" id="providerPhone" class="form-control">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Save Provider</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('provider')">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div class="modal-overlay" id="deleteModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Confirm Deletion</h3>
-                <button class="modal-close" onclick="closeModal('delete')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="p-3">
-                <p id="deleteMessage">Are you sure you want to delete this item?</p>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('delete')">Cancel</button>
-                </div>
-            </div>
         </div>
     </div>
 
     <script>
-    // ====== API CONFIGURATION ======
-    const API_BASE_URL = 'https://techmedixlink-api-production.up.railway.app';
-    let allDevices = [];
-    let allProviders = [];
-    let currentDeleteId = null;
-    let currentDeleteType = null;
+        // ====== DOM ELEMENTS ======
+        const mainHeader = document.getElementById('mainHeader');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const contactModal = document.getElementById('contactModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const serviceTypeInput = document.getElementById('serviceType');
 
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        updateNavBadges();
-        loadAllData();
-        showSection('hero');
-        checkApiStatus();
-        
-        // Set up auto-refresh every 5 minutes
-        setInterval(() => {
-            if (!document.hidden) {
-                loadAllData();
-            }
-        }, 300000);
-    });
-
-    // Mobile menu functions
-    function toggleMobileMenu() {
-        const overlay = document.getElementById('mobileOverlay');
-        overlay.classList.toggle('active');
-    }
-
-    // Navigation functions
-    function showSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll('section[id]').forEach(section => {
-            section.classList.add('hidden');
-        });
-        
-        // Show selected section
-        document.getElementById(sectionId).classList.remove('hidden');
-        
-        // Update active nav link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        if (sectionId !== 'hero') {
-            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
-            if (activeLink) activeLink.classList.add('active');
-            
-            const mobileLink = document.querySelector(`.mobile-nav-link[onclick*="${sectionId}"]`);
-            if (mobileLink) mobileLink.classList.add('active');
-        }
-        
-        // Load data for the section if needed
-        if (sectionId === 'devices') {
-            loadDevices();
-        } else if (sectionId === 'providers') {
-            loadProviders();
-        } else if (sectionId === 'request') {
-            loadFormData();
-        } else if (sectionId === 'analytics') {
-            loadAnalytics();
-        }
-    }
-
-    // Update navigation badges
-    function updateNavBadges() {
-        document.getElementById('deviceBadge').textContent = allDevices.length || '0';
-        document.getElementById('providerBadge').textContent = allProviders.length || '0';
-        document.getElementById('mobileDeviceBadge').textContent = allDevices.length || '0';
-        document.getElementById('mobileProviderBadge').textContent = allProviders.length || '0';
-    }
-
-    // Load all data
-    async function loadAllData() {
-        try {
-            await Promise.all([loadDevices(), loadProviders()]);
-            updateDashboardStats();
-            updateNavBadges();
-            showSuccess('Data refreshed successfully');
-        } catch (error) {
-            console.error('Error loading data:', error);
-            showError('Failed to refresh data. Please check API connection.');
-        }
-    }
-
-    // Check API status
-    async function checkApiStatus() {
-        const statusElement = document.getElementById('footerStatus');
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/health`);
-            if (response.ok) {
-                const data = await response.json();
-                statusElement.textContent = 'Online';
-                statusElement.style.color = 'var(--success-green)';
+        // ====== HEADER SCROLL EFFECT ======
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                mainHeader.classList.add('header-scrolled');
             } else {
-                throw new Error('API not responding');
+                mainHeader.classList.remove('header-scrolled');
             }
-        } catch (error) {
-            console.error('API status check failed:', error);
-            statusElement.textContent = 'Offline';
-            statusElement.style.color = 'var(--error-red)';
-        }
-    }
+        });
 
-    // ====== DEVICE API FUNCTIONS ======
-    async function loadDevices() {
-        const container = document.getElementById('devicesList');
-        const recentContainer = document.getElementById('recentDevices');
-        
-        // Show loading state
-        if (container) container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading medical devices...</p></div>';
-        if (recentContainer) recentContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading recent devices...</p></div>';
-        
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/devices`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                allDevices = data.devices || [];
-                displayDevices(allDevices);
-                updateDeviceSelect(allDevices);
-                updateDashboardStats();
+        // ====== MOBILE MENU TOGGLE ======
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mainNav.contains(event.target) && !mobileMenuBtn.contains(event.target) && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // ====== SMOOTH SCROLL ======
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
                 
-                // Update recent devices
-                updateRecentDevices(allDevices.slice(0, 3));
-            } else {
-                throw new Error(data.error || 'Failed to fetch devices');
-            }
-        } catch (error) {
-            console.error('Error loading devices:', error);
-            const errorHtml = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading devices: ' + error.message + '</div>';
-            if (container) container.innerHTML = errorHtml;
-            if (recentContainer) recentContainer.innerHTML = errorHtml;
-        }
-    }
+                // Don't smooth scroll for # only
+                if (href === '#') return;
+                
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerHeight = mainHeader.offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-    async function saveDevice(event) {
-        event.preventDefault();
-        
-        const deviceData = {
-            name: document.getElementById('deviceName').value,
-            manufacturer: document.getElementById('deviceManufacturer').value,
-            device_type: document.getElementById('deviceType').value,
-            price_usd: parseFloat(document.getElementById('devicePrice').value),
-            description: document.getElementById('deviceDescription').value,
-            tz_certified: document.getElementById('deviceCertified').checked,
-            local_support: document.getElementById('deviceLocalSupport').checked
+        // ====== ANIMATED COUNTERS ======
+        function animateCounter(elementId, targetValue, suffix = '+') {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            let current = 0;
+            const increment = targetValue / 50; // Takes 50 steps
+            const duration = 2000; // 2 seconds
+            const stepTime = duration / 50;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= targetValue) {
+                    current = targetValue;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + suffix;
+            }, stepTime);
+        }
+
+        // ====== INTERSECTION OBSERVER FOR ANIMATIONS ======
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
 
-        const deviceId = document.getElementById('deviceId').value;
-        const isEdit = deviceId && deviceId !== '';
-
-        try {
-            const url = isEdit ? 
-                `${API_BASE_URL}/api/devices/${deviceId}` : 
-                `${API_BASE_URL}/api/devices`;
-            
-            const method = isEdit ? 'PUT' : 'POST';
-            
-            const response = await fetch(url, {
-                method: method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(deviceData)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to save device');
-            }
-
-            const result = await response.json();
-            
-            if (result.success) {
-                closeModal('device');
-                showSuccess(isEdit ? 'Device updated successfully' : 'Device added successfully');
-                loadDevices();
-            } else {
-                throw new Error(result.error || 'Failed to save device');
-            }
-        } catch (error) {
-            console.error('Error saving device:', error);
-            showError('Error saving device: ' + error.message);
-        }
-    }
-
-    async function deleteDevice(deviceId) {
-        if (!confirm('Are you sure you want to delete this device?')) return;
-        
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/devices/${deviceId}`, {
-                method: 'DELETE'
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to delete device');
-            }
-
-            const result = await response.json();
-            
-            if (result.success) {
-                showSuccess('Device deleted successfully');
-                loadDevices();
-            } else {
-                throw new Error(result.error || 'Failed to delete device');
-            }
-        } catch (error) {
-            console.error('Error deleting device:', error);
-            showError('Error deleting device: ' + error.message);
-        }
-    }
-
-    function editDevice(deviceId) {
-        const device = allDevices.find(d => d.id === deviceId);
-        if (!device) return;
-
-        document.getElementById('deviceModalTitle').textContent = 'Edit Medical Device';
-        document.getElementById('deviceId').value = device.id;
-        document.getElementById('deviceName').value = device.name;
-        document.getElementById('deviceManufacturer').value = device.manufacturer;
-        document.getElementById('deviceType').value = device.device_type;
-        document.getElementById('devicePrice').value = device.price_usd;
-        document.getElementById('deviceDescription').value = device.description || '';
-        document.getElementById('deviceCertified').checked = device.tz_certified || false;
-        document.getElementById('deviceLocalSupport').checked = device.local_support || false;
-
-        showModal('device');
-    }
-
-    // Display devices
-    function displayDevices(devices) {
-        const container = document.getElementById('devicesList');
-        
-        if (!devices || devices.length === 0) {
-            container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No medical devices found. Add your first device!</div>';
-            return;
-        }
-        
-        // Create mobile-friendly table
-        if (window.innerWidth <= 768) {
-            displayDevicesMobile(devices);
-        } else {
-            displayDevicesDesktop(devices);
-        }
-    }
-
-    function displayDevicesDesktop(devices) {
-        const container = document.getElementById('devicesList');
-        
-        let html = `
-            <div style="overflow-x: auto;">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Device</th>
-                            <th>Manufacturer</th>
-                            <th>Type</th>
-                            <th>Price (USD)</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-        `;
-        
-        devices.forEach(device => {
-            html += `
-                <tr>
-                    <td>
-                        <div style="font-weight: 600;">${escapeHtml(device.name)}</div>
-                        <div class="text-muted" style="font-size: 0.75rem;">${device.description ? escapeHtml(device.description.substring(0, 50)) + '...' : 'No description'}</div>
-                    </td>
-                    <td>${escapeHtml(device.manufacturer)}</td>
-                    <td><span class="badge badge-info">${escapeHtml(device.device_type)}</span></td>
-                    <td><strong>$${device.price_usd?.toLocaleString() || '0'}</strong></td>
-                    <td>
-                        ${device.tz_certified ? 
-                            '<span class="badge badge-success"><i class="fas fa-check"></i> Certified</span>' : 
-                            '<span class="badge badge-warning"><i class="fas fa-clock"></i> Pending</span>'}
-                        ${device.local_support ? 
-                            '<span class="badge badge-success mt-1" style="display: block;"><i class="fas fa-check"></i> Local Support</span>' : 
-                            '<span class="badge badge-warning mt-1" style="display: block;"><i class="fas fa-times"></i> No Support</span>'}
-                    </td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn edit-btn" onclick="editDevice('${device.id}')" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteDevice('${device.id}')" title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <button class="action-btn" onclick="requestDevice('${device.id}')" title="Request">
-                                <i class="fas fa-file-medical"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        });
-        
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
-    }
-
-    function displayDevicesMobile(devices) {
-        const container = document.getElementById('devicesList');
-        
-        let html = '<div class="mobile-cards">';
-        
-        devices.forEach(device => {
-            html += `
-                <div class="mobile-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: 1rem; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-3);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                        <div>
-                            <div style="font-weight: 600; font-size: 1rem;">${escapeHtml(device.name)}</div>
-                            <div class="text-muted" style="font-size: 0.75rem;">${escapeHtml(device.manufacturer)}</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-weight: 700; color: var(--primary-blue);">$${device.price_usd?.toLocaleString() || '0'}</div>
-                            <span class="badge badge-info">${escapeHtml(device.device_type)}</span>
-                        </div>
-                    </div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add fade-in animation
+                    entry.target.classList.add('fade-in-up');
                     
-                    <div style="margin-bottom: 0.75rem; font-size: 0.875rem; color: var(--gray-1);">
-                        ${device.description ? escapeHtml(device.description.substring(0, 100)) + '...' : 'No description'}
-                    </div>
+                    // Animate counters in hero section
+                    if (entry.target.id === 'hero') {
+                        setTimeout(() => {
+                            animateCounter('statProjects', 150);
+                            animateCounter('statClinics', 45);
+                            animateCounter('statPartners', 28);
+                            animateCounter('statImpact', 98, '%');
+                        }, 500);
+                    }
                     
-                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                        ${device.tz_certified ? 
-                            '<span class="badge badge-success"><i class="fas fa-check"></i> Certified</span>' : 
-                            '<span class="badge badge-warning"><i class="fas fa-clock"></i> Pending</span>'}
-                        ${device.local_support ? 
-                            '<span class="badge badge-success"><i class="fas fa-check"></i> Local Support</span>' : 
-                            '<span class="badge badge-warning"><i class="fas fa-times"></i> No Support</span>'}
-                    </div>
-                    
-                    <div class="action-buttons" style="justify-content: space-between;">
-                        <button class="btn btn-secondary btn-sm" onclick="editDevice('${device.id}')">
-                            <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteDevice('${device.id}')">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
-                        <button class="btn btn-primary btn-sm" onclick="requestDevice('${device.id}')">
-                            <i class="fas fa-file-medical"></i> Request
-                        </button>
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += '</div>';
-        container.innerHTML = html;
-    }
-
-    // ====== PROVIDER API FUNCTIONS ======
-    async function loadProviders() {
-        const container = document.getElementById('providersList');
-        container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading healthcare providers...</p></div>';
-        
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/providers`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                allProviders = data.providers || [];
-                displayProviders(allProviders);
-                updateProviderSelect(allProviders);
-                updateRegionFilters(allProviders);
-                updateFacilityFilters(allProviders);
-                updateDashboardStats();
-            } else {
-                throw new Error(data.error || 'Failed to fetch providers');
-            }
-        } catch (error) {
-            console.error('Error loading providers:', error);
-            container.innerHTML = '<div class="message message-error"><i class="fas fa-exclamation-circle"></i> Error loading providers: ' + error.message + '</div>';
-        }
-    }
-
-    async function saveProvider(event) {
-        event.preventDefault();
-        
-        const providerData = {
-            name: document.getElementById('providerName').value,
-            facility_type: document.getElementById('providerType').value,
-            region: document.getElementById('providerRegion').value,
-            location: document.getElementById('providerLocation').value,
-            contact_person: document.getElementById('providerContact').value,
-            phone: document.getElementById('providerPhone').value
-        };
-
-        const providerId = document.getElementById('providerId').value;
-        const isEdit = providerId && providerId !== '';
-
-        try {
-            const url = isEdit ? 
-                `${API_BASE_URL}/api/providers/${providerId}` : 
-                `${API_BASE_URL}/api/providers`;
-            
-            const method = isEdit ? 'PUT' : 'POST';
-            
-            const response = await fetch(url, {
-                method: method,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(providerData)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to save provider');
-            }
-
-            const result = await response.json();
-            
-            if (result.success) {
-                closeModal('provider');
-                showSuccess(isEdit ? 'Provider updated successfully' : 'Provider added successfully');
-                loadProviders();
-            } else {
-                throw new Error(result.error || 'Failed to save provider');
-            }
-        } catch (error) {
-            console.error('Error saving provider:', error);
-            showError('Error saving provider: ' + error.message);
-        }
-    }
-
-    async function deleteProvider(providerId) {
-        if (!confirm('Are you sure you want to delete this provider?')) return;
-        
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/providers/${providerId}`, {
-                method: 'DELETE'
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to delete provider');
-            }
-
-            const result = await response.json();
-            
-            if (result.success) {
-                showSuccess('Provider deleted successfully');
-                loadProviders();
-            } else {
-                throw new Error(result.error || 'Failed to delete provider');
-            }
-        } catch (error) {
-            console.error('Error deleting provider:', error);
-            showError('Error deleting provider: ' + error.message);
-        }
-    }
-
-    function editProvider(providerId) {
-        const provider = allProviders.find(p => p.id === providerId);
-        if (!provider) return;
-
-        document.getElementById('providerModalTitle').textContent = 'Edit Healthcare Provider';
-        document.getElementById('providerId').value = provider.id;
-        document.getElementById('providerName').value = provider.name;
-        document.getElementById('providerType').value = provider.facility_type;
-        document.getElementById('providerRegion').value = provider.region;
-        document.getElementById('providerLocation').value = provider.location;
-        document.getElementById('providerContact').value = provider.contact_person || '';
-        document.getElementById('providerPhone').value = provider.phone || '';
-
-        showModal('provider');
-    }
-
-    // Display providers
-    function displayProviders(providers) {
-        const container = document.getElementById('providersList');
-        
-        if (!providers || providers.length === 0) {
-            container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No healthcare providers found. Add your first provider!</div>';
-            return;
-        }
-        
-        // Create mobile-friendly table
-        if (window.innerWidth <= 768) {
-            displayProvidersMobile(providers);
-        } else {
-            displayProvidersDesktop(providers);
-        }
-    }
-
-    function displayProvidersDesktop(providers) {
-        const container = document.getElementById('providersList');
-        
-        let html = `
-            <div style="overflow-x: auto;">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Healthcare Facility</th>
-                            <th>Location</th>
-                            <th>Region</th>
-                            <th>Type</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-        `;
-        
-        providers.forEach(provider => {
-            html += `
-                <tr>
-                    <td>
-                        <div style="font-weight: 600;">${escapeHtml(provider.name)}</div>
-                        <div class="text-muted" style="font-size: 0.75rem;">${provider.contact_person || 'No contact person'}</div>
-                    </td>
-                    <td>${escapeHtml(provider.location)}</td>
-                    <td><span class="badge badge-info">${escapeHtml(provider.region)}</span></td>
-                    <td>${escapeHtml(provider.facility_type)}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn edit-btn" onclick="editProvider('${provider.id}')" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteProvider('${provider.id}')" title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <button class="action-btn" onclick="contactProvider('${provider.phone}')" title="Contact">
-                                <i class="fas fa-phone"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        });
-        
-        html += '</tbody></table></div>';
-        container.innerHTML = html;
-    }
-
-    function displayProvidersMobile(providers) {
-        const container = document.getElementById('providersList');
-        
-        let html = '<div class="mobile-cards">';
-        
-        providers.forEach(provider => {
-            html += `
-                <div class="mobile-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 1rem; margin-bottom: 1rem; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-3);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                        <div>
-                            <div style="font-weight: 600; font-size: 1rem;">${escapeHtml(provider.name)}</div>
-                            <div class="text-muted" style="font-size: 0.75rem;">${escapeHtml(provider.contact_person) || 'No contact person'}</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <span class="badge badge-info">${escapeHtml(provider.facility_type)}</span>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 0.75rem;">
-                        <div style="font-size: 0.875rem; color: var(--dark-2); margin-bottom: 0.25rem;">
-                            <i class="fas fa-map-marker-alt" style="color: var(--primary-blue); margin-right: 0.5rem;"></i>
-                            ${escapeHtml(provider.location)}
-                        </div>
-                        <div style="font-size: 0.875rem; color: var(--dark-2);">
-                            <i class="fas fa-globe-africa" style="color: var(--accent-teal); margin-right: 0.5rem;"></i>
-                            <span class="badge badge-info">${escapeHtml(provider.region)}</span>
-                        </div>
-                    </div>
-                    
-                    ${provider.phone ? `
-                    <div style="margin-bottom: 1rem; font-size: 0.875rem; color: var(--gray-1);">
-                        <i class="fas fa-phone" style="margin-right: 0.5rem;"></i>
-                        ${escapeHtml(provider.phone)}
-                    </div>
-                    ` : ''}
-                    
-                    <div class="action-buttons" style="justify-content: space-between;">
-                        <button class="btn btn-secondary btn-sm" onclick="editProvider('${provider.id}')">
-                            <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteProvider('${provider.id}')">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
-                        ${provider.phone ? `
-                        <button class="btn btn-primary btn-sm" onclick="contactProvider('${provider.phone}')">
-                            <i class="fas fa-phone"></i> Call
-                        </button>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += '</div>';
-        container.innerHTML = html;
-    }
-
-    // ====== REQUEST API FUNCTIONS ======
-    async function submitRequest(event) {
-        event.preventDefault();
-        
-        const form = document.getElementById('requestForm');
-        const messageDiv = document.getElementById('requestMessage');
-        
-        const requestData = {
-            provider_id: document.getElementById('providerSelect').value,
-            device_id: document.getElementById('deviceSelect').value,
-            quantity: parseInt(document.getElementById('quantity').value) || 1,
-            notes: `Urgency: ${document.getElementById('urgency').value}\n${document.getElementById('notes').value}`
-        };
-        
-        // Show loading
-        messageDiv.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Submitting your request...</p></div>';
-        messageDiv.classList.remove('hidden', 'message-success', 'message-error');
-        messageDiv.classList.add('message-info');
-        
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/requests`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to submit request');
-            }
-
-            const data = await response.json();
-            
-            if (data.success) {
-                messageDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${data.message || 'Request submitted successfully!'}`;
-                messageDiv.classList.remove('message-info');
-                messageDiv.classList.add('message-success');
-                form.reset();
-                document.getElementById('deviceDetails').innerHTML = '';
-                
-                showSuccess('Request submitted successfully! Our team will contact you shortly.');
-                
-                // Update request count
-                updateRequestCount();
-            } else {
-                messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${data.error || data.message || 'Failed to submit request'}`;
-                messageDiv.classList.remove('message-info');
-                messageDiv.classList.add('message-error');
-            }
-        } catch (error) {
-            console.error('Error submitting request:', error);
-            messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${error.message}`;
-            messageDiv.classList.remove('message-info');
-            messageDiv.classList.add('message-error');
-        }
-    }
-
-    async function updateRequestCount() {
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/stats`);
-            if (response.ok) {
-                const data = await response.json();
-                if (data.success && data.stats) {
-                    document.getElementById('heroRequests').textContent = data.stats.total_requests || 0;
+                    // Unobserve after animation
+                    observer.unobserve(entry.target);
                 }
-            }
-        } catch (error) {
-            console.error('Error updating request count:', error);
-        }
-    }
-
-    // ====== HELPER FUNCTIONS ======
-    function updateDashboardStats() {
-        // Update hero stats
-        document.getElementById('heroDevices').textContent = allDevices.length;
-        document.getElementById('heroProviders').textContent = allProviders.length;
-        
-        const certifiedCount = allDevices.filter(d => d.tz_certified).length;
-        document.getElementById('heroCertified').textContent = certifiedCount;
-        
-        // Update dashboard stats
-        document.getElementById('statDevices').textContent = allDevices.length;
-        document.getElementById('statProviders').textContent = allProviders.length;
-        document.getElementById('statCertified').textContent = certifiedCount;
-        
-        const localSupportCount = allDevices.filter(d => d.local_support).length;
-        document.getElementById('statLocalSupport').textContent = localSupportCount;
-        
-        // Update trends
-        document.getElementById('deviceTrend').textContent = `${allDevices.length} total`;
-        document.getElementById('providerTrend').textContent = `${allProviders.length} total`;
-        document.getElementById('certifiedTrend').textContent = certifiedCount > 0 ? `${Math.round((certifiedCount / allDevices.length) * 100)}% certified` : 'None certified';
-        document.getElementById('supportTrend').textContent = localSupportCount > 0 ? `${Math.round((localSupportCount / allDevices.length) * 100)}% with support` : 'No support';
-        
-        // Update analytics
-        document.getElementById('analyticsDevices').textContent = allDevices.length;
-        document.getElementById('analyticsProviders').textContent = allProviders.length;
-        document.getElementById('analyticsCertified').textContent = allDevices.length > 0 ? `${Math.round((certifiedCount / allDevices.length) * 100)}%` : '0%';
-        
-        const uniqueRegions = new Set(allProviders.map(p => p.region));
-        document.getElementById('analyticsRegions').textContent = uniqueRegions.size;
-    }
-
-    function updateRecentDevices(devices) {
-        const container = document.getElementById('recentDevices');
-        
-        if (!devices || devices.length === 0) {
-            container.innerHTML = '<div class="message message-info"><i class="fas fa-info-circle"></i> No recent devices available</div>';
-            return;
-        }
-        
-        if (window.innerWidth <= 768) {
-            let html = '<div class="mobile-cards">';
-            
-            devices.forEach(device => {
-                html += `
-                    <div class="mobile-card" style="background: var(--white); border-radius: var(--radius-md); padding: 0.75rem; margin-bottom: 0.75rem; border: 1px solid var(--gray-3);">
-                        <div style="font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem;">${escapeHtml(device.name)}</div>
-                        <div style="font-size: 0.75rem; color: var(--gray-1); margin-bottom: 0.25rem;">${escapeHtml(device.manufacturer)}</div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div style="font-weight: 600; color: var(--primary-blue);">$${device.price_usd?.toLocaleString() || '0'}</div>
-                            ${device.tz_certified ? 
-                                '<span class="badge badge-success" style="font-size: 0.625rem;">Certified</span>' : 
-                                '<span class="badge badge-warning" style="font-size: 0.625rem;">Pending</span>'}
-                        </div>
-                    </div>
-                `;
             });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // ====== CONTACT MODAL FUNCTIONS ======
+        function showContactForm(serviceType) {
+            const titles = {
+                'Advisory': 'Advisory & Strategy Consultation',
+                'Implementation': 'Complete Implementation Inquiry',
+                'Partnership': 'Strategic Partnership Discussion',
+                'General': 'Contact TechMedixLink'
+            };
             
-            html += '</div>';
-            container.innerHTML = html;
-        } else {
-            let html = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Device</th>
-                            <th>Manufacturer</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-            
-            devices.forEach(device => {
-                html += `
-                    <tr>
-                        <td><strong>${escapeHtml(device.name)}</strong></td>
-                        <td>${escapeHtml(device.manufacturer)}</td>
-                        <td>$${device.price_usd?.toLocaleString() || '0'}</td>
-                        <td>${device.tz_certified ? 
-                            '<span class="badge badge-success">Certified</span>' : 
-                            '<span class="badge badge-warning">Pending</span>'}</td>
-                    </tr>
-                `;
-            });
-            
-            html += '</tbody></table>';
-            container.innerHTML = html;
-        }
-    }
-
-    function updateDeviceSelect(devices) {
-        const select = document.getElementById('deviceSelect');
-        if (!select) return;
-        
-        select.innerHTML = '<option value="">Select medical device or technology</option>';
-        
-        devices.forEach(device => {
-            const option = document.createElement('option');
-            option.value = device.id;
-            option.textContent = `${device.name} - $${device.price_usd?.toLocaleString() || '0'} (${device.manufacturer})`;
-            option.dataset.device = JSON.stringify(device);
-            select.appendChild(option);
-        });
-        
-        // Add change listener for device details
-        select.addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const detailsDiv = document.getElementById('deviceDetails');
-            if (!detailsDiv) return;
-            
-            if (selectedOption.value) {
-                try {
-                    const device = JSON.parse(selectedOption.dataset.device);
-                    detailsDiv.innerHTML = `
-                        <div style="background: var(--light-1); padding: 0.75rem; border-radius: var(--radius-md); margin-top: 0.5rem;">
-                            <div><strong>Type:</strong> ${escapeHtml(device.device_type)}</div>
-                            <div><strong>TMDA Certified:</strong> ${device.tz_certified ? '✅ Yes' : '⏳ Pending'}</div>
-                            <div><strong>Local Support:</strong> ${device.local_support ? '✅ Available' : '❌ Not Available'}</div>
-                        </div>
-                    `;
-                } catch (error) {
-                    detailsDiv.innerHTML = '';
-                }
-            } else {
-                detailsDiv.innerHTML = '';
-            }
-        });
-    }
-
-    function updateProviderSelect(providers) {
-        const select = document.getElementById('providerSelect');
-        if (!select) return;
-        
-        select.innerHTML = '<option value="">Select your hospital or clinic</option>';
-        
-        providers.forEach(provider => {
-            const option = document.createElement('option');
-            option.value = provider.id;
-            option.textContent = `${provider.name} - ${provider.location}, ${provider.region}`;
-            select.appendChild(option);
-        });
-    }
-
-    function updateRegionFilters(providers) {
-        const select = document.getElementById('regionFilter');
-        if (!select) return;
-        
-        // Clear existing options except first
-        select.innerHTML = '<option value="all">All Regions</option>';
-        
-        const uniqueRegions = [...new Set(providers.map(p => p.region).filter(Boolean))].sort();
-        
-        uniqueRegions.forEach(region => {
-            const option = document.createElement('option');
-            option.value = region;
-            option.textContent = region;
-            select.appendChild(option);
-        });
-    }
-
-    function updateFacilityFilters(providers) {
-        const select = document.getElementById('facilityFilter');
-        if (!select) return;
-        
-        // Clear existing options except first
-        select.innerHTML = '<option value="all">All Types</option>';
-        
-        const uniqueTypes = [...new Set(providers.map(p => p.facility_type).filter(Boolean))].sort();
-        
-        uniqueTypes.forEach(type => {
-            const option = document.createElement('option');
-            option.value = type;
-            option.textContent = type;
-            select.appendChild(option);
-        });
-    }
-
-    function loadFormData() {
-        if (allDevices.length === 0) loadDevices();
-        if (allProviders.length === 0) loadProviders();
-    }
-
-    // Filter and sort functions
-    function filterDevices() {
-        const filter = document.getElementById('deviceFilter').value;
-        let filteredDevices = allDevices;
-        
-        switch(filter) {
-            case 'certified':
-                filteredDevices = allDevices.filter(d => d.tz_certified);
-                break;
-            case 'local':
-                filteredDevices = allDevices.filter(d => d.local_support);
-                break;
-        }
-        
-        displayDevices(filteredDevices);
-    }
-
-    function sortDevices() {
-        const sortBy = document.getElementById('deviceSort').value;
-        let sortedDevices = [...allDevices];
-        
-        switch(sortBy) {
-            case 'name':
-                sortedDevices.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case 'price-low':
-                sortedDevices.sort((a, b) => (a.price_usd || 0) - (b.price_usd || 0));
-                break;
-            case 'price-high':
-                sortedDevices.sort((a, b) => (b.price_usd || 0) - (a.price_usd || 0));
-                break;
-            case 'certified':
-                sortedDevices.sort((a, b) => (b.tz_certified - a.tz_certified) || a.name.localeCompare(b.name));
-                break;
-        }
-        
-        displayDevices(sortedDevices);
-    }
-
-    function resetFilters() {
-        document.getElementById('deviceFilter').value = 'all';
-        document.getElementById('deviceSort').value = 'name';
-        displayDevices(allDevices);
-    }
-
-    function filterProviders() {
-        const region = document.getElementById('regionFilter').value;
-        const facilityType = document.getElementById('facilityFilter').value;
-        let filteredProviders = allProviders;
-        
-        if (region !== 'all') {
-            filteredProviders = filteredProviders.filter(p => p.region === region);
-        }
-        
-        if (facilityType !== 'all') {
-            filteredProviders = filteredProviders.filter(p => p.facility_type === facilityType);
-        }
-        
-        displayProviders(filteredProviders);
-    }
-
-    function resetProviderFilters() {
-        document.getElementById('regionFilter').value = 'all';
-        document.getElementById('facilityFilter').value = 'all';
-        displayProviders(allProviders);
-    }
-
-    // Request specific device
-    function requestDevice(deviceId) {
-        showSection('request');
-        setTimeout(() => {
-            const select = document.getElementById('deviceSelect');
-            if (select) {
-                select.value = deviceId;
-                select.dispatchEvent(new Event('change'));
-            }
-        }, 100);
-    }
-
-    function contactProvider(phone) {
-        if (phone) {
-            window.location.href = `tel:${phone}`;
-        } else {
-            showError('No phone number available for this provider');
-        }
-    }
-
-    function resetForm() {
-        const form = document.getElementById('requestForm');
-        const messageDiv = document.getElementById('requestMessage');
-        const detailsDiv = document.getElementById('deviceDetails');
-        
-        if (form) form.reset();
-        if (messageDiv) messageDiv.classList.add('hidden');
-        if (detailsDiv) detailsDiv.innerHTML = '';
-    }
-
-    // Analytics functions
-    async function loadAnalytics() {
-        updateDashboardStats();
-        
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/analytics/regions`);
-            if (response.ok) {
-                const data = await response.json();
-                if (data.success) {
-                    updateRegionChart(data.regions || []);
-                }
-            }
-        } catch (error) {
-            console.error('Error loading analytics:', error);
-        }
-    }
-
-    function updateRegionChart(regions) {
-        const chartContainer = document.getElementById('regionChart');
-        if (!chartContainer) return;
-        
-        if (regions && regions.length > 0) {
-            let chartHTML = '<div style="padding: 1rem; width: 100%;">';
-            regions.forEach(regionData => {
-                const percentage = regionData.percentage || 0;
-                chartHTML += `
-                    <div style="margin-bottom: 0.75rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem; font-size: 0.875rem;">
-                            <span>${escapeHtml(regionData.region)}</span>
-                            <span>${regionData.provider_count} (${percentage.toFixed(1)}%)</span>
-                        </div>
-                        <div style="height: 8px; background: var(--gray-3); border-radius: var(--radius-full); overflow: hidden;">
-                            <div style="height: 100%; width: ${percentage}%; background: linear-gradient(90deg, var(--primary-blue), var(--accent-teal));"></div>
-                        </div>
-                    </div>
-                `;
-            });
-            chartHTML += '</div>';
-            chartContainer.innerHTML = chartHTML;
-        } else {
-            chartContainer.innerHTML = '<p class="text-muted">No regional data available</p>';
-        }
-    }
-
-    function refreshAnalytics() {
-        loadAnalytics();
-        showSuccess('Analytics refreshed');
-    }
-
-    // Modal functions
-    function showModal(type) {
-        const modal = document.getElementById(`${type}Modal`);
-        if (modal) {
-            modal.classList.add('active');
+            modalTitle.textContent = titles[serviceType] || 'Contact TechMedixLink';
+            serviceTypeInput.value = serviceType;
+            contactModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
-    }
 
-    function closeModal(type) {
-        const modal = document.getElementById(`${type}Modal`);
-        if (modal) {
-            modal.classList.remove('active');
+        function closeContactModal() {
+            contactModal.classList.add('hidden');
             document.body.style.overflow = '';
+            document.getElementById('contactForm').reset();
         }
-    }
 
-    // Export providers
-    function exportProviders() {
-        const dataStr = JSON.stringify(allProviders, null, 2);
-        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-        
-        const exportFileDefaultName = `techmedixlink-providers-${new Date().toISOString().split('T')[0]}.json`;
-        
-        const linkElement = document.createElement('a');
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportFileDefaultName);
-        linkElement.click();
-        
-        showSuccess('Provider list exported successfully');
-    }
-
-    // Utility functions
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    // Notification functions
-    function showSuccess(message) {
-        createToast(message, 'success');
-    }
-
-    function showError(message) {
-        createToast(message, 'error');
-    }
-
-    function createToast(message, type) {
-        const notification = document.createElement('div');
-        notification.className = `toast message message-${type}`;
-        notification.innerHTML = type === 'success' 
-            ? `<i class="fas fa-check-circle"></i> ${message}`
-            : `<i class="fas fa-exclamation-circle"></i> ${message}`;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
-
-    // Initialize load all data
-    async function initializeStats() {
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/stats`);
-            if (response.ok) {
-                const data = await response.json();
-                if (data.success && data.stats) {
-                    document.getElementById('heroRequests').textContent = data.stats.total_requests || 0;
-                }
+        // Close modal on outside click
+        contactModal.addEventListener('click', function(e) {
+            if (e.target === contactModal) {
+                closeContactModal();
             }
-        } catch (error) {
-            console.error('Error loading stats:', error);
-        }
-    }
+        });
 
-    // Call initialization
-    initializeStats();
+        // ====== FORM SUBMISSION ======
+        async function submitContactForm(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                organization: document.getElementById('contactOrganization').value,
+                phone: document.getElementById('contactPhone').value,
+                message: document.getElementById('contactMessage').value,
+                serviceType: serviceTypeInput.value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // In a real implementation, you would send this to your backend
+            console.log('Form submission:', formData);
+            
+            // Show success message
+            alert('Thank you for your inquiry! We will contact you within 24 hours.');
+            
+            // Close modal and reset form
+            closeContactModal();
+        }
+
+        // ====== NAVIGATION ACTIVE STATE ======
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNavLink);
+        window.addEventListener('load', updateActiveNavLink);
+
+        // ====== INITIALIZE ON LOAD ======
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer if needed
+            const yearElement = document.querySelector('footer p');
+            if (yearElement && yearElement.textContent.includes('2024')) {
+                yearElement.textContent = yearElement.textContent.replace('2024', new Date().getFullYear());
+            }
+            
+            // Add animation delay to cards
+            document.querySelectorAll('.solution-card, .advisory-card, .package-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
     </script>
 </body>
 </html>
