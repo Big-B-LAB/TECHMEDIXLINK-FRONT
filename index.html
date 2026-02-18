@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>TechMedixLink | Connecting Care with Innovation</title>
     
-    <!-- Tailwind CSS via CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts - Inter -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Supabase Client -->
+    <!-- Supabase Client (load once) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
@@ -67,6 +67,7 @@
             letter-spacing: 0.05em;
             padding: 0.75rem 1rem;
             border-bottom: 1px solid #e2e8f0;
+            text-align: left;
         }
         
         .data-table td {
@@ -139,12 +140,15 @@
 </head>
 <body class="bg-slate-50 text-slate-700 antialiased">
 
-    <!-- Initialize Supabase -->
+    <!-- Initialize Supabase - FIXED -->
     <script>
+        // Supabase configuration
         const SUPABASE_URL = 'https://sseoocgkfyncrncgtkpz.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzZW9vY2drZnluY3JuY2d0a3B6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0MjU5NDIsImV4cCI6MjA4NDAwMTk0Mn0.CraMHSx3rRkZAgLseOjVZBGepDeCb5xz4XcMq84stU4';
         
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Initialize Supabase client - FIXED: use createClient correctly
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         console.log('✅ Supabase initialized');
     </script>
@@ -373,7 +377,6 @@
                     </div>
                 </div>
                 <div class="p-6" id="recentDevices">
-                    <!-- Populated by JavaScript -->
                     <div class="flex flex-col items-center justify-center py-8 text-slate-400">
                         <div class="w-12 h-12 border-4 border-slate-200 border-t-[#0066cc] rounded-full animate-spin mb-4"></div>
                         <p class="text-sm">Loading recent devices...</p>
@@ -464,7 +467,7 @@
                         </div>
                         <div class="flex items-end">
                             <button onclick="resetFilters()" class="px-4 py-2 border border-slate-200 text-slate-600 text-sm rounded-lg hover:bg-slate-50 transition flex items-center gap-2">
-                                <i class="fas fa-redo"></i>
+                                <i class="fas fa-redo-alt"></i>
                                 Reset
                             </button>
                         </div>
@@ -473,7 +476,6 @@
 
                 <!-- Devices List -->
                 <div class="p-6" id="devicesList">
-                    <!-- Populated by JavaScript -->
                     <div class="flex flex-col items-center justify-center py-12 text-slate-400">
                         <div class="w-12 h-12 border-4 border-slate-200 border-t-[#0066cc] rounded-full animate-spin mb-4"></div>
                         <p class="text-sm">Loading medical devices...</p>
@@ -526,7 +528,7 @@
                         </div>
                         <div class="flex items-end">
                             <button onclick="resetProviderFilters()" class="px-4 py-2 border border-slate-200 text-slate-600 text-sm rounded-lg hover:bg-slate-50 transition flex items-center gap-2">
-                                <i class="fas fa-redo"></i>
+                                <i class="fas fa-redo-alt"></i>
                                 Reset
                             </button>
                         </div>
@@ -535,7 +537,6 @@
 
                 <!-- Providers List -->
                 <div class="p-6" id="providersList">
-                    <!-- Populated by JavaScript -->
                     <div class="flex flex-col items-center justify-center py-12 text-slate-400">
                         <div class="w-12 h-12 border-4 border-slate-200 border-t-[#0066cc] rounded-full animate-spin mb-4"></div>
                         <p class="text-sm">Loading healthcare providers...</p>
@@ -556,12 +557,10 @@
                         <p class="text-sm text-slate-500">Submit your request for medical equipment or technology consultation</p>
                     </div>
 
-                    <!-- Request Message -->
                     <div id="requestMessage" class="hidden mb-6 p-4 rounded-lg flex items-center gap-3"></div>
 
                     <form id="requestForm" onsubmit="submitRequest(event)">
                         <div class="space-y-6">
-                            <!-- Provider Select -->
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-2">
                                     <i class="fas fa-hospital text-[#0066cc] mr-2"></i>
@@ -572,7 +571,6 @@
                                 </select>
                             </div>
 
-                            <!-- Device Select -->
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-2">
                                     <i class="fas fa-stethoscope text-[#0066cc] mr-2"></i>
@@ -584,7 +582,6 @@
                                 <div id="deviceDetails" class="mt-3"></div>
                             </div>
 
-                            <!-- Quantity -->
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-2">
                                     <i class="fas fa-boxes text-[#0066cc] mr-2"></i>
@@ -593,7 +590,6 @@
                                 <input type="number" id="quantity" min="1" max="100" value="1" required class="w-full px-4 py-3 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#0066cc] focus:ring-1 focus:ring-[#0066cc]">
                             </div>
 
-                            <!-- Urgency -->
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-2">
                                     <i class="fas fa-clock text-[#0066cc] mr-2"></i>
@@ -606,7 +602,6 @@
                                 </select>
                             </div>
 
-                            <!-- Notes -->
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-2">
                                     <i class="fas fa-notes-medical text-[#0066cc] mr-2"></i>
@@ -615,7 +610,6 @@
                                 <textarea id="notes" rows="4" placeholder="Please provide specific requirements, installation needs, training requirements, or any other details..." class="w-full px-4 py-3 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#0066cc] focus:ring-1 focus:ring-[#0066cc]"></textarea>
                             </div>
 
-                            <!-- Note -->
                             <div class="bg-blue-50 p-4 rounded-lg">
                                 <p class="text-sm text-slate-600">
                                     <i class="fas fa-info-circle text-[#0066cc] mr-2"></i>
@@ -623,14 +617,13 @@
                                 </p>
                             </div>
 
-                            <!-- Buttons -->
                             <div class="flex gap-4">
                                 <button type="submit" class="flex-1 px-6 py-3 bg-[#0066cc] text-white font-medium rounded-lg hover:bg-[#004d99] transition flex items-center justify-center gap-2">
                                     <i class="fas fa-paper-plane"></i>
                                     Submit Request
                                 </button>
                                 <button type="button" onclick="resetForm()" class="px-6 py-3 bg-white border border-slate-200 text-slate-600 font-medium rounded-lg hover:bg-slate-50 transition flex items-center justify-center gap-2">
-                                    <i class="fas fa-redo"></i>
+                                    <i class="fas fa-redo-alt"></i>
                                     Reset
                                 </button>
                             </div>
@@ -661,7 +654,6 @@
                     </div>
                 </div>
                 <div class="p-6">
-                    <!-- Stats Cards -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                         <div class="bg-slate-50 p-4 rounded-lg">
                             <div class="text-2xl font-bold text-slate-800" id="analyticsDevices">0</div>
@@ -681,7 +673,6 @@
                         </div>
                     </div>
 
-                    <!-- Regional Distribution -->
                     <div>
                         <h4 class="font-semibold text-slate-700 mb-4">Regional Distribution</h4>
                         <div id="regionChart" class="bg-slate-50 p-4 rounded-lg min-h-[200px] flex items-center justify-center">
@@ -925,6 +916,7 @@
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="fixed top-20 right-4 z-50"></div>
 
+    <!-- Main JavaScript - FIXED -->
     <script>
         // ====== STATE MANAGEMENT ======
         let allDevices = [];
@@ -953,9 +945,10 @@
             });
             
             // Show selected section
-            document.getElementById(sectionId).classList.remove('hidden');
+            const section = document.getElementById(sectionId);
+            if (section) section.classList.remove('hidden');
             
-            // Update active nav links
+            // Update active nav links (optional)
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('bg-white/20');
             });
@@ -967,14 +960,17 @@
             if (sectionId === 'analytics') loadAnalytics();
             
             // Close mobile menu if open
-            document.getElementById('mobileMenu')?.classList.add('hidden');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) mobileMenu.classList.add('hidden');
         }
 
         // ====== SUPABASE CONNECTION ======
         async function checkSupabaseConnection() {
             const statusEl = document.getElementById('footerStatus');
+            if (!statusEl) return;
+            
             try {
-                const { data, error } = await supabase.from('devices').select('count', { count: 'exact', head: true });
+                const { data, error } = await supabaseClient.from('devices').select('count', { count: 'exact', head: true });
                 if (error) throw error;
                 statusEl.textContent = 'Connected';
                 statusEl.className = 'text-green-400';
@@ -989,6 +985,8 @@
         // ====== NOTIFICATIONS ======
         function showToast(message, type = 'success') {
             const container = document.getElementById('toastContainer');
+            if (!container) return;
+            
             const toast = document.createElement('div');
             
             const bgColor = type === 'success' ? 'bg-green-50 border-green-200 text-green-700' :
@@ -1025,6 +1023,7 @@
                 await Promise.all([loadDevices(), loadProviders()]);
                 updateDashboardStats();
                 updateNavBadges();
+                showToast('Data refreshed successfully');
             } catch (error) {
                 console.error('Error loading data:', error);
                 showToast('Failed to load data', 'error');
@@ -1032,10 +1031,15 @@
         }
 
         function updateNavBadges() {
-            document.getElementById('deviceBadge').textContent = allDevices.length;
-            document.getElementById('providerBadge').textContent = allProviders.length;
-            document.getElementById('mobileDeviceBadge').textContent = allDevices.length;
-            document.getElementById('mobileProviderBadge').textContent = allProviders.length;
+            const deviceBadge = document.getElementById('deviceBadge');
+            const providerBadge = document.getElementById('providerBadge');
+            const mobileDeviceBadge = document.getElementById('mobileDeviceBadge');
+            const mobileProviderBadge = document.getElementById('mobileProviderBadge');
+            
+            if (deviceBadge) deviceBadge.textContent = allDevices.length;
+            if (providerBadge) providerBadge.textContent = allProviders.length;
+            if (mobileDeviceBadge) mobileDeviceBadge.textContent = allDevices.length;
+            if (mobileProviderBadge) mobileProviderBadge.textContent = allProviders.length;
         }
 
         // ====== DEVICE FUNCTIONS ======
@@ -1044,7 +1048,7 @@
             const recentContainer = document.getElementById('recentDevices');
             
             try {
-                const { data: devices, error } = await supabase
+                const { data: devices, error } = await supabaseClient
                     .from('devices')
                     .select('*')
                     .order('created_at', { ascending: false });
@@ -1072,8 +1076,8 @@
                 name: document.getElementById('deviceName').value,
                 manufacturer: document.getElementById('deviceManufacturer').value,
                 device_type: document.getElementById('deviceType').value,
-                price_usd: parseFloat(document.getElementById('devicePrice').value),
-                description: document.getElementById('deviceDescription').value,
+                price_usd: parseFloat(document.getElementById('devicePrice').value) || 0,
+                description: document.getElementById('deviceDescription').value || null,
                 tz_certified: document.getElementById('deviceCertified').checked,
                 local_support: document.getElementById('deviceLocalSupport').checked,
                 created_at: new Date().toISOString()
@@ -1083,24 +1087,19 @@
             const isEdit = deviceId && deviceId !== '';
 
             try {
-                let result;
-                
                 if (isEdit) {
-                    const { data, error } = await supabase
+                    const { error } = await supabaseClient
                         .from('devices')
                         .update(deviceData)
                         .eq('id', deviceId);
                     
                     if (error) throw error;
-                    result = data;
                 } else {
-                    const { data, error } = await supabase
+                    const { error } = await supabaseClient
                         .from('devices')
-                        .insert([deviceData])
-                        .select();
+                        .insert([deviceData]);
                     
                     if (error) throw error;
-                    result = data;
                 }
 
                 closeModal('device');
@@ -1116,34 +1115,9 @@
         async function deleteDevice(deviceId) {
             currentDeleteId = deviceId;
             currentDeleteType = 'device';
-            document.getElementById('deleteMessage').textContent = 'Are you sure you want to delete this device?';
+            const deleteMsg = document.getElementById('deleteMessage');
+            if (deleteMsg) deleteMsg.textContent = 'Are you sure you want to delete this device?';
             showModal('delete');
-        }
-
-        async function confirmDelete() {
-            if (!currentDeleteId || !currentDeleteType) return;
-
-            try {
-                const { error } = await supabase
-                    .from(currentDeleteType === 'device' ? 'devices' : 'providers')
-                    .delete()
-                    .eq('id', currentDeleteId);
-
-                if (error) throw error;
-
-                showToast(`${currentDeleteType === 'device' ? 'Device' : 'Provider'} deleted successfully`);
-                closeModal('delete');
-                
-                if (currentDeleteType === 'device') {
-                    loadDevices();
-                } else {
-                    loadProviders();
-                }
-                
-            } catch (error) {
-                console.error('Error deleting:', error);
-                showToast('Error deleting item: ' + error.message, 'error');
-            }
         }
 
         function editDevice(deviceId) {
@@ -1166,9 +1140,10 @@
         // ====== PROVIDER FUNCTIONS ======
         async function loadProviders() {
             const container = document.getElementById('providersList');
+            if (!container) return;
             
             try {
-                const { data: providers, error } = await supabase
+                const { data: providers, error } = await supabaseClient
                     .from('providers')
                     .select('*')
                     .order('name', { ascending: true });
@@ -1205,24 +1180,19 @@
             const isEdit = providerId && providerId !== '';
 
             try {
-                let result;
-                
                 if (isEdit) {
-                    const { data, error } = await supabase
+                    const { error } = await supabaseClient
                         .from('providers')
                         .update(providerData)
                         .eq('id', providerId);
                     
                     if (error) throw error;
-                    result = data;
                 } else {
-                    const { data, error } = await supabase
+                    const { error } = await supabaseClient
                         .from('providers')
-                        .insert([providerData])
-                        .select();
+                        .insert([providerData]);
                     
                     if (error) throw error;
-                    result = data;
                 }
 
                 closeModal('provider');
@@ -1238,7 +1208,8 @@
         async function deleteProvider(providerId) {
             currentDeleteId = providerId;
             currentDeleteType = 'provider';
-            document.getElementById('deleteMessage').textContent = 'Are you sure you want to delete this provider?';
+            const deleteMsg = document.getElementById('deleteMessage');
+            if (deleteMsg) deleteMsg.textContent = 'Are you sure you want to delete this provider?';
             showModal('delete');
         }
 
@@ -1258,9 +1229,36 @@
             showModal('provider');
         }
 
+        async function confirmDelete() {
+            if (!currentDeleteId || !currentDeleteType) return;
+
+            try {
+                const { error } = await supabaseClient
+                    .from(currentDeleteType === 'device' ? 'devices' : 'providers')
+                    .delete()
+                    .eq('id', currentDeleteId);
+
+                if (error) throw error;
+
+                showToast(`${currentDeleteType === 'device' ? 'Device' : 'Provider'} deleted successfully`);
+                closeModal('delete');
+                
+                if (currentDeleteType === 'device') {
+                    loadDevices();
+                } else {
+                    loadProviders();
+                }
+                
+            } catch (error) {
+                console.error('Error deleting:', error);
+                showToast('Error deleting item: ' + error.message, 'error');
+            }
+        }
+
         // ====== DISPLAY FUNCTIONS ======
         function displayDevices(devices) {
             const container = document.getElementById('devicesList');
+            if (!container) return;
             
             if (!devices || devices.length === 0) {
                 container.innerHTML = '<div class="flex items-center justify-center p-8 text-slate-400"><i class="fas fa-info-circle mr-2"></i>No medical devices found. Add your first device!</div>';
@@ -1276,6 +1274,7 @@
 
         function displayDevicesDesktop(devices) {
             const container = document.getElementById('devicesList');
+            if (!container) return;
             
             let html = `
                 <div class="overflow-x-auto">
@@ -1336,6 +1335,7 @@
 
         function displayDevicesMobile(devices) {
             const container = document.getElementById('devicesList');
+            if (!container) return;
             
             let html = '';
             
@@ -1357,7 +1357,7 @@
                             ${device.description ? escapeHtml(device.description.substring(0, 100)) + '...' : ''}
                         </div>
                         
-                        <div class="flex gap-1 mb-3">
+                        <div class="flex gap-1 mb-3 flex-wrap">
                             ${device.tz_certified ? 
                                 '<span class="px-2 py-0.5 bg-green-50 text-green-600 text-xs rounded-full"><i class="fas fa-check mr-1"></i>Certified</span>' : 
                                 '<span class="px-2 py-0.5 bg-yellow-50 text-yellow-600 text-xs rounded-full"><i class="fas fa-clock mr-1"></i>Pending</span>'}
@@ -1389,6 +1389,7 @@
 
         function displayProviders(providers) {
             const container = document.getElementById('providersList');
+            if (!container) return;
             
             if (!providers || providers.length === 0) {
                 container.innerHTML = '<div class="flex items-center justify-center p-8 text-slate-400"><i class="fas fa-info-circle mr-2"></i>No healthcare providers found. Add your first provider!</div>';
@@ -1404,6 +1405,7 @@
 
         function displayProvidersDesktop(providers) {
             const container = document.getElementById('providersList');
+            if (!container) return;
             
             let html = `
                 <div class="overflow-x-auto">
@@ -1460,6 +1462,7 @@
 
         function displayProvidersMobile(providers) {
             const container = document.getElementById('providersList');
+            if (!container) return;
             
             let html = '';
             
@@ -1520,13 +1523,14 @@
             
             const messageDiv = document.getElementById('requestMessage');
             const form = document.getElementById('requestForm');
+            if (!messageDiv || !form) return;
             
             const requestData = {
                 provider_id: document.getElementById('providerSelect').value,
                 device_id: document.getElementById('deviceSelect').value,
                 quantity: parseInt(document.getElementById('quantity').value) || 1,
                 urgency: document.getElementById('urgency').value,
-                notes: document.getElementById('notes').value,
+                notes: document.getElementById('notes').value || null,
                 status: 'submitted',
                 created_at: new Date().toISOString()
             };
@@ -1537,10 +1541,9 @@
             messageDiv.classList.remove('hidden');
             
             try {
-                const { data, error } = await supabase
+                const { error } = await supabaseClient
                     .from('requests')
-                    .insert([requestData])
-                    .select();
+                    .insert([requestData]);
 
                 if (error) throw error;
 
@@ -1548,7 +1551,8 @@
                 messageDiv.innerHTML = '<i class="fas fa-check-circle"></i><span>Request submitted successfully! Our team will contact you shortly.</span>';
                 
                 form.reset();
-                document.getElementById('deviceDetails').innerHTML = '';
+                const deviceDetails = document.getElementById('deviceDetails');
+                if (deviceDetails) deviceDetails.innerHTML = '';
                 
                 showToast('Request submitted successfully!');
                 
@@ -1564,12 +1568,13 @@
 
         async function updateRequestCount() {
             try {
-                const { count, error } = await supabase
+                const { count, error } = await supabaseClient
                     .from('requests')
                     .select('*', { count: 'exact', head: true });
 
                 if (!error) {
-                    document.getElementById('heroRequests').textContent = count || 0;
+                    const heroRequests = document.getElementById('heroRequests');
+                    if (heroRequests) heroRequests.textContent = count || 0;
                 }
             } catch (error) {
                 console.error('Error updating request count:', error);
@@ -1595,6 +1600,7 @@
             select.onchange = function() {
                 const selectedOption = this.options[this.selectedIndex];
                 const detailsDiv = document.getElementById('deviceDetails');
+                if (!detailsDiv) return;
                 
                 if (selectedOption.value) {
                     try {
@@ -1670,7 +1676,10 @@
             const detailsDiv = document.getElementById('deviceDetails');
             
             if (form) form.reset();
-            if (messageDiv) messageDiv.classList.add('hidden');
+            if (messageDiv) {
+                messageDiv.classList.add('hidden');
+                messageDiv.innerHTML = '';
+            }
             if (detailsDiv) detailsDiv.innerHTML = '';
         }
 
@@ -1688,18 +1697,12 @@
                     break;
             }
             
-            // Apply current sort
-            const sortBy = document.getElementById('deviceSort').value;
-            applyDeviceSort(filtered, sortBy);
+            displayDevices(filtered);
         }
 
         function sortDevices() {
             const sortBy = document.getElementById('deviceSort').value;
-            applyDeviceSort([...allDevices], sortBy);
-        }
-
-        function applyDeviceSort(devices, sortBy) {
-            let sorted = [...devices];
+            let sorted = [...allDevices];
             
             switch(sortBy) {
                 case 'name':
@@ -1720,8 +1723,10 @@
         }
 
         function resetFilters() {
-            document.getElementById('deviceFilter').value = 'all';
-            document.getElementById('deviceSort').value = 'name';
+            const filterSelect = document.getElementById('deviceFilter');
+            const sortSelect = document.getElementById('deviceSort');
+            if (filterSelect) filterSelect.value = 'all';
+            if (sortSelect) sortSelect.value = 'name';
             displayDevices(allDevices);
         }
 
@@ -1739,45 +1744,66 @@
         }
 
         function resetProviderFilters() {
-            document.getElementById('regionFilter').value = 'all';
-            document.getElementById('facilityFilter').value = 'all';
+            const regionFilter = document.getElementById('regionFilter');
+            const facilityFilter = document.getElementById('facilityFilter');
+            if (regionFilter) regionFilter.value = 'all';
+            if (facilityFilter) facilityFilter.value = 'all';
             displayProviders(allProviders);
         }
 
         // ====== ANALYTICS FUNCTIONS ======
         function updateDashboardStats() {
             // Hero stats
-            document.getElementById('heroDevices').textContent = allDevices.length;
-            document.getElementById('heroProviders').textContent = allProviders.length;
+            const heroDevices = document.getElementById('heroDevices');
+            const heroProviders = document.getElementById('heroProviders');
+            const heroCertified = document.getElementById('heroCertified');
+            
+            if (heroDevices) heroDevices.textContent = allDevices.length;
+            if (heroProviders) heroProviders.textContent = allProviders.length;
             
             const certifiedCount = allDevices.filter(d => d.tz_certified).length;
-            document.getElementById('heroCertified').textContent = certifiedCount;
+            if (heroCertified) heroCertified.textContent = certifiedCount;
             
             // Dashboard stats
-            document.getElementById('statDevices').textContent = allDevices.length;
-            document.getElementById('statProviders').textContent = allProviders.length;
-            document.getElementById('statCertified').textContent = certifiedCount;
+            const statDevices = document.getElementById('statDevices');
+            const statProviders = document.getElementById('statProviders');
+            const statCertified = document.getElementById('statCertified');
+            const statLocalSupport = document.getElementById('statLocalSupport');
+            
+            if (statDevices) statDevices.textContent = allDevices.length;
+            if (statProviders) statProviders.textContent = allProviders.length;
+            if (statCertified) statCertified.textContent = certifiedCount;
             
             const localSupportCount = allDevices.filter(d => d.local_support).length;
-            document.getElementById('statLocalSupport').textContent = localSupportCount;
+            if (statLocalSupport) statLocalSupport.textContent = localSupportCount;
             
             // Trends
-            document.getElementById('deviceTrend')?.classList.remove('trend-up');
-            document.getElementById('deviceTrend').textContent = `${allDevices.length} total`;
-            document.getElementById('providerTrend').textContent = `${allProviders.length} total`;
+            const deviceTrend = document.getElementById('deviceTrend');
+            const providerTrend = document.getElementById('providerTrend');
+            
+            if (deviceTrend) deviceTrend.textContent = `${allDevices.length} total`;
+            if (providerTrend) providerTrend.textContent = `${allProviders.length} total`;
             
             // Analytics
-            document.getElementById('analyticsDevices').textContent = allDevices.length;
-            document.getElementById('analyticsProviders').textContent = allProviders.length;
-            document.getElementById('analyticsCertified').textContent = allDevices.length > 0 ? 
-                `${Math.round((certifiedCount / allDevices.length) * 100)}%` : '0%';
+            const analyticsDevices = document.getElementById('analyticsDevices');
+            const analyticsProviders = document.getElementById('analyticsProviders');
+            const analyticsCertified = document.getElementById('analyticsCertified');
+            const analyticsRegions = document.getElementById('analyticsRegions');
+            
+            if (analyticsDevices) analyticsDevices.textContent = allDevices.length;
+            if (analyticsProviders) analyticsProviders.textContent = allProviders.length;
+            if (analyticsCertified) {
+                analyticsCertified.textContent = allDevices.length > 0 ? 
+                    `${Math.round((certifiedCount / allDevices.length) * 100)}%` : '0%';
+            }
             
             const uniqueRegions = new Set(allProviders.map(p => p.region));
-            document.getElementById('analyticsRegions').textContent = uniqueRegions.size;
+            if (analyticsRegions) analyticsRegions.textContent = uniqueRegions.size;
         }
 
         function updateRecentDevices(devices) {
             const container = document.getElementById('recentDevices');
+            if (!container) return;
             
             if (!devices || devices.length === 0) {
                 container.innerHTML = '<div class="flex items-center justify-center p-4 text-slate-400"><i class="fas fa-info-circle mr-2"></i>No recent devices</div>';
@@ -1849,7 +1875,7 @@
                 let html = '<div class="space-y-3 w-full">';
                 
                 regions.sort((a, b) => b.count - a.count).forEach(region => {
-                    const percentage = (region.count / total) * 100;
+                    const percentage = total > 0 ? (region.count / total) * 100 : 0;
                     html += `
                         <div>
                             <div class="flex justify-between text-xs mb-1">
@@ -1884,13 +1910,23 @@
                 document.body.style.overflow = 'hidden';
                 
                 // Reset form if adding new
-                if (type === 'device' && document.getElementById('deviceModalTitle').textContent === 'Add New Medical Device') {
-                    document.getElementById('deviceForm').reset();
-                    document.getElementById('deviceId').value = '';
+                if (type === 'device') {
+                    const titleEl = document.getElementById('deviceModalTitle');
+                    if (titleEl && titleEl.textContent === 'Add New Medical Device') {
+                        const form = document.getElementById('deviceForm');
+                        if (form) form.reset();
+                        const deviceId = document.getElementById('deviceId');
+                        if (deviceId) deviceId.value = '';
+                    }
                 }
-                if (type === 'provider' && document.getElementById('providerModalTitle').textContent === 'Add New Healthcare Provider') {
-                    document.getElementById('providerForm').reset();
-                    document.getElementById('providerId').value = '';
+                if (type === 'provider') {
+                    const titleEl = document.getElementById('providerModalTitle');
+                    if (titleEl && titleEl.textContent === 'Add New Healthcare Provider') {
+                        const form = document.getElementById('providerForm');
+                        if (form) form.reset();
+                        const providerId = document.getElementById('providerId');
+                        if (providerId) providerId.value = '';
+                    }
                 }
             }
         }
@@ -1943,14 +1979,6 @@
             }, 100);
         }
 
-        function contactProvider(phone) {
-            if (phone) {
-                window.location.href = `tel:${phone}`;
-            } else {
-                showToast('No phone number available', 'error');
-            }
-        }
-
         // Initialize stats
         updateRequestCount();
 
@@ -1965,10 +1993,13 @@
 
         // Handle window resize for responsive displays
         window.addEventListener('resize', function() {
-            if (!document.getElementById('devices').classList.contains('hidden')) {
+            const devicesSection = document.getElementById('devices');
+            const providersSection = document.getElementById('providers');
+            
+            if (devicesSection && !devicesSection.classList.contains('hidden')) {
                 displayDevices(allDevices);
             }
-            if (!document.getElementById('providers').classList.contains('hidden')) {
+            if (providersSection && !providersSection.classList.contains('hidden')) {
                 displayProviders(allProviders);
             }
         });
